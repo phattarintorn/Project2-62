@@ -28,4 +28,4 @@
     <a target="_blank" href="https://github.com/"><img src="../images/github.png" width="18px"></a>
   </div>
 </div>
-    Copyright © Information of Technology 2017 made by Phat
+    Copyright © Information of Technology 2017
