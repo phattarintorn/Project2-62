@@ -1,0 +1,20 @@
+﻿Admin
+
+ID: a00001
+Password: 1234
+
+Professor(อาจารย์) 
+
+ID: toooo3
+Password: 1234
+
+Personal(เจ้าหน้าที่) 
+
+ID: poooo2
+Password: 1234
+
+
+Student(นักศึกษา) *จะสมัครใหม่หรือใช้อันข้างล่างก็ได้ค่ะ
+
+ID: B5873548
+Password: 1234
