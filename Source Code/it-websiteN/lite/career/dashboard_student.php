@@ -1,174 +1,175 @@
-<?php
-include("db/db.php");
-?>
+<?php include("db/db.php"); ?>
 <div class="row">
- <div class="col-lg-4">
-  <div class="col-md-12"> 
-    <div class="alert  alert-success alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <center>
-        <br>
-        <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
-        <?php
-        $sql = "SELECT COUNT(`q_id`) as c_id FROM `question` WHERE `status_using` = '0' GROUP BY `q_group`";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) 
-        { 
-          $c_id = 0;
-          while($row = $result->fetch_assoc()) 
-          {
-            $c_id = $c_id +1;
-          }
-        } 
-        ?>
-        <h1>
-          <?php echo $c_id ?>
-        </h1>
-        <hr>
-        <a href="career-advice.php?career=tables_q">
-          <i class="mdi mdi-message-bulleted"></i> ทำแบบสอบถาม
-        </a>  
-        <?php 
-        ?>
-      </center>
-    </div> 
-  </div>  
-</div> 
-
-<div class="col-lg-4">
-  <?php
-  $_SESSION_id = $_SESSION["id"];
-
-  $sql = "SELECT COUNT(`form_id`) AS count FROM test_form WHERE `user_id` = '$_SESSION_id'  GROUP BY `form_date`";
-  $result = $conn->query($sql);
-  if ($result->num_rows > 0) 
-  {  
-    $count = 0; 
-    ?> 
+  <div class="col-lg-4">
     <div class="col-md-12"> 
-      <div class="alert  alert-warning alert-dismissible fade show" role="alert">
+      <div class="alert  alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
         <center>
           <br>
-          <h3><span class="badge badge-pill badge-warning">แบบสอบถาม <u>ทำแล้ว</u></span></h3>
+          <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
           <?php
-          while($row = $result->fetch_assoc()) 
-          {
-            $count = $count +1;
-          }
+          $num = 0;
+
+          $sql = "SELECT COUNT(*) FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = '0' GROUP BY QUESTION_GROUP";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) 
+          { 
+            // $num = 0;
+            while($row = $result->fetch_assoc()) 
+            {
+              $num = $num + 1;
+            }
+          } 
           ?>
           <h1>
-            <?php echo $count ?>
+            <?php echo $num ?>
           </h1>
-          <hr> 
-          <a href="career-advice.php?career=tables_history">
-            <i class="mdi mdi-bulletin-board"></i> ดูประวัติดูประวัติ
-          </a>  
+          <hr>
+          <a href="career-advice.php?career=tables_q">
+            <i class="mdi mdi-message-bulleted"></i> ทำแบบสอบถาม
+          </a>
         </center>
       </div> 
     </div>  
-    <?php  
-  } 
-  ?>
-</div> 
-<div class="col-lg-4">
-  <?php
-  $_SESSION_id = $_SESSION["id"];
+  </div> 
+  <div class="col-lg-4">
+    <?php
+    // echo $_SESSION["USER_ID"];
+    
+    //$_SESSION_ID = $_SESSION["๊USER_ID"];
 
-  $sql = "SELECT * FROM `question` WHERE `status_using`=0 AND choose_no != ''  GROUP BY `q_group` DESC LIMIT 1";
+    $sql = "SELECT COUNT(*) FROM MAPPING_STUDENT_LOG WHERE STUDENT_ID = " . $_SESSION['USER_ID'] . " GROUP BY CREATE_DATE";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) 
+    {  
+      $count = 0; 
+      ?> 
+      <div class="col-md-12"> 
+        <div class="alert  alert-warning alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <center>
+            <br>
+            <h3><span class="badge badge-pill badge-warning">แบบสอบถามทำแล้ว</span></h3>
+            <?php
+            while($row = $result->fetch_assoc()) 
+            {
+              $count = $count +1;
+            }
+            ?>
+            <h1>
+              <?php echo $count ?>
+            </h1>
+            <hr> 
+            <a href="career-advice.php?career=tables_history">
+              <i class="mdi mdi-bulletin-board"></i> ดูประวัติการทำแบบสอบถาม
+            </a>  
+          </center>
+        </div> 
+      </div>  
+      <?php  
+    } 
+    ?>
+  </div> 
+  <div class="col-lg-4">
+    <?php
+    $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP DESC LIMIT 1";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) 
+    {  
+      $count = 0; 
+      ?> 
+      <div class="col-md-12"> 
+        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <center>
+            <br>
+            <h3><span class="badge badge-pill badge-danger">แบบสอบถามแนะนำ</span></h3>
+            <?php
+            while($row = $result->fetch_assoc()) 
+            {
+              $q_group = $row["QUESTION_GROUP"];
+              $q_part = $row["QUESTION_PART"];
+              $q_date = $row["CREATE_DATE"];
+            }
+            ?>
+            <h3>
+              <?php echo $q_part ?>
+            </h3>
+            <small>สร้างเมื่อ <?php echo $q_date ?></small>
+            <hr> 
+            <a title="ทำแบบทดสอบ" href="career-advice.php?career=check_formtest&q_group=<?php echo $q_group; ?>">
+              <i class="mdi mdi-message-bulleted"></i> ทำแบบสอบถาม
+            </a> 
+          </center>
+        </div> 
+      </div>  
+      <?php  
+    } 
+    ?>
+  </div> 
+</div> 
+<?php
+  include("db/db.php");
+
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  } 
+
+  // $_SESSION_ID = $_SESSION["USER_ID"];
+
+  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT WHERE USER_ID = " . $_SESSION['USER_ID'] . " AND QUESTION_TYPE = 'ด้านทักษะ' GROUP BY CAREER_ID , QUESTION_TYPE ORDER BY RAW DESC";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) 
+  { 
+    $i = 0;
+    $sum_rawS = 0;
+
+    while($row = $result->fetch_assoc()) 
+    {
+      $i = $i +1;  
+      if ($i <= "5") {
+        $sum_rawS = $sum_rawS  + $row['RAW'];
+      }
+    } 
+    // echo '$sum_rawS '. $sum_rawS.'<br>';
+  }
+?>
+
+<?php
+  include("db/db.php");
+
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  } 
+  // $_SESSION_id = $_SESSION["id"];
+
+  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT WHERE USER_ID = " . $_SESSION['USER_ID'] . " AND QUESTION_TYPE = 'ด้านทักษะ' GROUP BY CAREER_ID , QUESTION_TYPE ORDER BY raw DESC";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) 
-  {  
-    $count = 0; 
-    ?> 
-    <div class="col-md-12"> 
-      <div class="alert  alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <center>
-          <br>
-          <h3><span class="badge badge-pill badge-danger">แบบสอบถาม <u>แนะนำ</u></span></h3>
-          <?php
-          while($row = $result->fetch_assoc()) 
-          {
-            $q_side = $row["q_side"];
-            $q_day = $row["q_day"];
-            $q_group = $row["q_group"];
-          }
-          ?>
-          <h3>
-            <?php echo $q_side ?>
-          </h3>
-          <small>สร้างเมื่อ <?php echo $q_day ?></small>
-          <hr> 
-          <a title="ทำแบบทดสอบ" href="career-advice.php?career=check_formtest&q_group=<?php echo $q_group; ?>">
-            <i class="mdi mdi-message-bulleted"></i> ทำแบบสอบถาม
-          </a> 
-        </center>
-      </div> 
-    </div>  
-    <?php  
-  } 
-  ?>
-</div> 
-</div> 
+  { 
+    $i = 0;
+    $sum_rawP = 0;
 
-<?php
-include("db/db.php");
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} 
-$_SESSION_id = $_SESSION["id"];
-
-$sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$_SESSION_id' AND `side` = 'ด้านทักษะ' GROUP BY `career`,`side` ORDER BY raw DESC";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) 
-{ 
-  $i = 0;
-  $sum_rawS = 0;
-
-  while($row = $result->fetch_assoc()) 
-  {
-    $i = $i +1;  
-    if ($i <= "5") {
-      $sum_rawS = $sum_rawS  + $row['raw'];
+    while($row = $result->fetch_assoc()) 
+    {
+      $i = $i +1;  
+      if ($i <= "5") {
+        $sum_rawP = $sum_rawP  + $row['raw'];
+      }
     }
-  } 
-  // echo '$sum_rawS '. $sum_rawS.'<br>';
-}
-?>
-
-<?php
-include("db/db.php");
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} 
-$_SESSION_id = $_SESSION["id"];
-
-$sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$_SESSION_id' AND `side` = 'ด้านจิตวิทยา' GROUP BY `career`,`side` ORDER BY raw DESC";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) 
-{ 
-  $i = 0;
-  $sum_rawP = 0;
-
-  while($row = $result->fetch_assoc()) 
-  {
-    $i = $i +1;  
-    if ($i <= "5") {
-      $sum_rawP = $sum_rawP  + $row['raw'];
-    }
+    // echo '$sum_rawP'. $sum_rawP.'<br>';
   }
-  // echo '$sum_rawP'. $sum_rawP.'<br>';
-}
 ?>
+
 <div class="col-md-12">
   <div class="card">
 

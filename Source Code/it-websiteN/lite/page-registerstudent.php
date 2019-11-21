@@ -1,6 +1,5 @@
 <html>
 <head>
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +10,6 @@
 
 </head>
 <body>
-
   <header class="topbar">
     <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
       <div class="navbar-header">
@@ -36,21 +34,15 @@
                 <center class="m-t-6 ">
                   <h4 class="card-title m-t-15"><h2>สมัครสมาชิกนักศึกษา</h2></h4><hr><br>
                 </center></class="card-title"></center>
-                <!-- <form name="form-login" method="post" action="check_login.php" id="login"> -->
                   <form action="../lite/page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสนักศึกษา">person</i></span>
-                      <input id="user_id" type="text" class="form-control" name="user_id"  placeholder="รหัสนักศึกษา " required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสนักศึกษา " required maxlength="8">
                     </div>
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสผ่าน">lock</i></span>
                       <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน" required maxlength="10">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="อีเมล">email</i></span>
-                      <input id="email" type="text" class="form-control" name="email" placeholder="อีเมล" required>
                     </div>
                     <br>
                     <div class="input-group">
@@ -65,71 +57,82 @@
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="เพศ">wc</i></span>
-                      <select id="sex" name="sex" required class="form-control"  size="">
+                      <select id="gender" name="gender" required class="form-control"  size="">
                         <option value="" >--กรุณาเลือกเพศ--</option>
-                        <option value="ชาย"><h5>ชาย</h5></option>
-                        <option value="หญิง"><h5>หญิง</h5></option>
+                        <option value="M"><h5>ชาย</h5></option>
+                        <option value="F"><h5>หญิง</h5></option>
                       </select>
                     </div>
                     <br> 
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="หลักสูตร">assignment</i></span>
-                      <select id="course" name="course" required class="form-control"  size="">
+                      <select id="branch" name="branch" required class="form-control"  size="">
                         <option value="" >--กรุณาเลือกหลักสูตร--</option>
-                        <option value="BIDA"><h5>BIDA</h5></option>
-                        <option value="ES"><h5>ES</h5></option>
-                        <option value="IC"><h5>IC</h5></option>
-                        <option value="IS"><h5>IS</h5></option>
-                      </select>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>
-                      <select id="advisors" name="advisors" required class="form-control"  size="">
-                        <option value="" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
                         <?php
                         include("db/db.php"); 
-
-
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         }
-                        $sql = "SELECT * FROM `customer` WHERE `status` = 'professor'";
+                        $sql = "SELECT * FROM `M_BRANCH`";
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) 
                         {  
                           while($row = $result->fetch_assoc()) 
                           {   
                             ?>
-
-                            <option value="<?php echo $row["firstname"].' '.$row["lastname"];?>"><?php echo $row["firstname"].' '.$row["lastname"];?></option>  
+                            <option value="<?php echo $row["BRANCH_ID"];?>"><?php echo ("[ " . $row["BRANCH_INITIAL"] . " ] " . $row["BRANCH_NAME"]);?></option>  
                             <?php
                           }
                         }   
                         ?>
                       </select>
                     </div>
-                    <br> 
+                    <br>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="เกรดเฉลี่ยรวม">school</i></span>
-                      <input id="gpa" type="text" class="form-control" name="gpa" placeholder="เกรดเฉลี่ยรวม" required>
+                      <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>
+                      <select id="advisor" name="advisor" required class="form-control"  size="">
+                        <option value="A" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
+                        <?php
+                        include("db/db.php"); 
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT * FROM `M_USER` WHERE `USER_STATUS` = 'PROFESSOR'";
+                        $result = $conn->query($sql);
+                        if ($result->num_rows > 0) 
+                        {  
+                          while($row = $result->fetch_assoc()) 
+                          {   
+                            ?>
+                            <option value="<?php echo $row["USER_ID"];?>"><?php echo $row["USER_FIRSTNAME"].' '.$row["USER_LASTNAME"];?></option>  
+                            <?php
+                          }
+                        }   
+                        ?>
+                      </select>
                     </div>
                     <br>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="เกรดเฉลี่ยรวม">school</i></span>
+                      <span class="input-group-addon"><i class="material-icons" title="อีเมล">email</i></span>
+                      <input id="email" type="text" class="form-control" name="email" placeholder="อีเมล" required>
+                    </div>
+                    <br> 
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons" title="GPA">school</i></span>
+                      <input id="gpa" type="text" class="form-control" name="gpa" placeholder="เกรดเฉลี่ยเทอมล่าสุด" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons" title="GPAX">school</i></span>
                       <input id="gpax" type="text" class="form-control" name="gpax" placeholder="เกรดเฉลี่ยรวม" required>
                     </div>
                     <br>
 
                     <div class="text-center">
                      <button class="btn btn-info">สมัครสมาชิก</button></a> 
-                     <!--       <a href="page-register.php"><button class="btn btn-danger">สมัครสมาชิก</button></a>  -->
-
-                     <input type="hidden" name="status" value="student" >
-
-
+                     <input type="hidden" name="status" value="STUDENT" >
                      <div class="register-link m-t-15 text-center">
-                      <p> <center>Already have account ? <a href="page-login.php">ลงชื่อเข้าใช้ระบบ</a></p></center>
+                      <p> <center>มีบัญชีผู้ใช้อยู่แล้ว? <a href="page-login.php">เข้าสู่ระบบ</a></p></center>
                     </div>
                   </div>
                 </div>

@@ -16,45 +16,6 @@
           </a> 
         </li>
       </ul>
-      <!-- ============================================================== -->
-      <!-- User profile and search -->
-      <!-- ============================================================== -->
-      <ul class="navbar-nav my-lg-0">
-        <!-- ============================================================== -->
-        <!-- Profile -->
-        <!-- ============================================================== -->
-        <!-- <li id="profileNavbar" class="nav-item dropdown show">
-          <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <img id="userImageProfile"  src="../assets/images/users/user.png" class="profile-pic m-r-0" /> 
-            <?php
-              if (isset($_SESSION["USER_USERNAME"])) {
-                echo $_SESSION["USER_USERNAME"];
-                echo '<a href="page-logout.php" title="ออกจากระบบ"><i class="fa fa-power-off">&nbsp;&nbsp;</i></a>';
-              } else {
-                echo '<a href="page-login.php">';
-                echo " กรุณาเข้าสู่ระบบ ";
-                echo '</a>';
-              }
-            ?>
-          </a>
-          <div hidden class="dropdown-menu dropdown-menu-right scale-up show">
-            <ul class="dropdown-user">
-              <li>
-                <div class="dw-user-box">
-                  <div class="u-img"><img id="userImage" src="../assets/images/users/user.png" alt="user"></div>
-                  <div class="u-text">
-                    <h4 id="userProfile">ชื่อ - นามสกุล</h4>
-                    <p class="text-muted" id="emailUser">อีเมลล์</p>
-                    <a href="pages-profile.php" class="btn btn-rounded btn-danger btn-sm">โปรไฟล์</a>
-                  </div>
-                </div>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li id="btLogout"><a href="#"><i class="fa fa-power-off"></i> ออกจากระบบ</a></li>
-            </ul>
-          </div>
-        </li> -->
-      </ul>
     </div>
   </nav>
 </header>

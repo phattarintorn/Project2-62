@@ -1,53 +1,51 @@
+<html>
+<head>
+	<script src="jquery-3.3.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+</head>
+<body>
 <?php
-session_start(); 
+	session_start(); 
 
-$user_id = $_POST["user_id"];
-$password = $_POST["password"];
+	$username = $_POST["username"];
+	$password = $_POST["password"];
 
-//DB
-include("db/db.php"); 
+	//DB
+	include("db/db.php"); 
 
-$sql = "SELECT * FROM `customer` WHERE 
-`user_id` ='$user_id' and 
-`password` ='$password' ";  
+	$sql = "SELECT * FROM `M_USER` WHERE `USER_USERNAME` ='$username' and `USER_PASSWORD` ='$password' ";  
 
-$query = mysqli_query($conn, $sql);
-$result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+	$query = mysqli_query($conn, $sql);
+	$result = mysqli_fetch_array($query, MYSQLI_ASSOC);
+	
+	if (!$result) {                                                          
+		echo ("<script = 'javascript'>alert('Username หรือ Password อาจจะผิดกรุณา Login ใหม่อีกครั้ง')
+			window.location.href='page-login.php';</script>");
+	} else {
+		// var_dump($result);
+		$_SESSION["USER_ID"] = $result['USER_ID'];
+		$_SESSION["USER_USERNAME"] = $result['USER_USERNAME'];
+		$_SESSION["USER_FIRSTNAME"] = $result['USER_FIRSTNAME'];
+		$_SESSION["USER_STATUS"] = $result['USER_STATUS'];
 
+		session_write_close();
 
-if (!$result) 
-{                                                          
-	echo ("<script = 'javascript'>alert('Username หรือ Password อาจจะผิดกรุณา Login ใหม่อีกครั้ง')
-		window.location.href='page-login.php';</script>");
+		echo ("	<script>
+				alert('ยินดีต้อนรับ " . $result['USER_FIRSTNAME'] . "');
+				</script>");
 
-} 
-else 
-{
-	$_SESSION["id"] = $result['id'];
-	$_SESSION["user_id"] = $result['user_id'];
-	$_SESSION["status"] = $result['status'];
-	$_SESSION["firstname"] = $result['firstname'];
-
-	session_write_close();
-
-	if($result['status'] == 'admin') 
-	{     
-		echo ("<script = 'javascript'>alert('ยินดีต้อนรับแอดมิน')
-			window.location.href='career-advice.php';</script>");
-
-	} elseif($result['status'] == 'professor') {
-		echo ("<script = 'javascript'>alert('ยินดีต้อนรับอาจารย์')
-			window.location.href='career-advice.php';</script>");
-
-	}elseif($result['status'] == 'personnel') {
-		echo ("<script = 'javascript'>alert('ยินดีต้อนรับเจ้าหน้าที่')
-			window.location.href='career-advice.php';</script>");
-
-	}else{
-		echo ("<script = 'javascript'>alert('ยินดีต้อนรับนักศึกษา')
-			window.location.href='career-advice.php';</script>");     
+		if ($result['USER_STATUS'] == 'ADMIN') {     
+			echo ("<script = 'javascript'>window.location.href='career-advice.php';</script>");
+		} elseif ($result['USER_STATUS'] == 'PROFESSOR') {
+			echo ("<script = 'javascript'>window.location.href='career-advice.php';</script>");
+		} elseif ($result['USER_STATUS'] == 'PERSONNEL') {
+			echo ("<script = 'javascript'>window.location.href='career-advice.php';</script>");
+		} elseif ($result['USER_STATUS'] == 'STUDENT') {
+			echo ("<script = 'javascript'>window.location.href='career-advice.php';</script>");     
+		}
 	}
-}
 
-mysqli_close($conn);
+	mysqli_close($conn);
 ?>
+</body>
+</html>

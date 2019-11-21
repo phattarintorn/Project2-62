@@ -1,11 +1,11 @@
- 
-<?php  include("db/db.php"); ?>
+<?php include("db/db.php"); ?>
+
 <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
 <div class="content mt-3">
   <div class="animated fadeIn">
     <div class="row">
-
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
@@ -13,7 +13,7 @@
           </div>
           <div class="card-body">
             <?php
-            if ($_SESSION["status"] == "personnel") {
+            if ($_SESSION["USER_STATUS"] == "PERSONNEL") {
               ?>
               <table id="bootstrap-data-table" class="table table-striped table-bordered">
                 <thead>
@@ -60,35 +60,39 @@
             ?>
 
             <?php
-            if ($_SESSION["status"] == "student") {
+            if ($_SESSION["USER_STATUS"] == "STUDENT") {
               ?>
               <table id="bootstrap-data-table" class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th><center>วันที่สร้างแบบทดสอบ</center></th>
-                    <th><center>กลุ่มแบบทดสอบ</center></th> 
-                    <th><center>หัวข้อ</center></th>
-                    <th><center>รูปแบบ</center></th> 
-                    <th></th>
+                    <th width = "30%"><center>วันที่สร้างแบบทดสอบ</center></th>
+                    <th width = "20%"><center>กลุ่มแบบทดสอบ</center></th> 
+                    <th width = "20%"><center>หัวข้อ</center></th>
+                    <th width = "20%"><center>รูปแบบ</center></th> 
+                    <th width = "10%"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM `question` WHERE `status_using`=0 AND choose_no != ''  GROUP BY `q_group` DESC"; 
+                  $sql = "SELECT Q.QUESTION_GROUP, Q.QUESTION_PART, Q.CREATE_DATE, Q.QUESTION_TYPE FROM MAPPING_QUESTION AS M 
+                    LEFT JOIN M_GROUP_QUESTION AS Q ON M.QUESTION_ID = Q.QUESTION_ID
+                    WHERE Q.QUESTION_STATUS = 0  AND QUESTION_CHOOSE != '' GROUP BY Q.QUESTION_GROUP DESC"; 
                   $result = $conn->query($sql);
+
                   if ($result->num_rows > 0) 
                   { 
                     while($row = $result->fetch_assoc()) 
                     { 
                       echo "<tr>"; 
-                      echo '<td><center>' . $row['q_day'] . '</center></td>';
-                      echo '<td><center>' . $row['q_group'] . '</center></td>';
-                      echo '<td><center>' . $row['q_side'] . '</center></td>';
-                      echo '<td><center>'; 
-                      include("checkQtype.php"); 
-                      echo '</center></td>';
+                      echo '<td><center>' . $row['CREATE_DATE'] . '</center></td>';
+                      echo '<td><center>' . $row['QUESTION_GROUP'] . '</center></td>';
+                      echo '<td><center>' . $row['QUESTION_PART'] . '</center></td>';
+                      echo '<td><center>' . $row['TYPE_NAME'] . '</center></td>';
+                      // echo '<td><center>'; 
+                      // include("checkQtype.php"); 
+                      // echo '</center></td>';
                       echo '<td><center>
-                      <a title="ทำแบบทดสอบ"  class="btn-link ti-write" href="career-advice.php?career=check_formtest&q_group='.$row['q_group'].'"></a>
+                      <a title="ทำแบบทดสอบ"  class="btn-link ti-write" href="career-advice.php?career=check_formtest&q_group='.$row['QUESTION_GROUP'].'"></a>
                       </center></td>'; 
                       echo "</tr>"; 
                     }   
@@ -116,4 +120,3 @@
 <script src="assets/js/lib/data-table/buttons.print.min.js"></script>
 <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="assets/js/lib/data-table/datatables-init.js"></script>
- 
