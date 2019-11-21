@@ -28,5 +28,5 @@
     <a target="_blank" href="https://github.com/"><img src="../images/github.png" width="18px"></a>
   </div>
 </div>
-    Copyright © Information of Technology 2017
+    Copyright © Information of Technology 2017-2019
     </footer>
