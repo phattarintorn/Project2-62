@@ -1,19 +1,15 @@
 <?php
-//DB
 include("db/db.php"); 
-
 
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 } 
 
-if (isset($_SESSION["id"])) {
-	$sql = "SELECT * FROM `customer` WHERE `id`=".$_SESSION["id"];
+if (isset($_SESSION["USER_ID"])) {
+	$sql = "SELECT * FROM M_USER WHERE USER_ID = ".$_SESSION["USER_ID"];
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) 
-	{ 
-		
-
+	{
 		while($row = $result->fetch_assoc()) 
 		{
 			?>
@@ -22,21 +18,19 @@ if (isset($_SESSION["id"])) {
 					<div class="card-header">
 						<strong>ข้อมูลผู้ใช้</strong>
 					</div>
-
 					<div class="card-body card-block"><br>
-						<form action="career-advice.php?career=edituser_profile" method="post" enctype="multipart/form-data" class="form-horizontal" id="user_profile">
-							
+						<form action="career-advice.php?career=edituser_profile" method="post" enctype="multipart/form-data" class="form-horizontal" id="user_profile">					
 							<?php
-							if (isset($row["status"])) {
-								if ($row["status"] == "admin") {
+							if (isset($row["USER_STATUS"])) {
+								if ($row["USER_STATUS"] == "ADMIN") {
 									echo '
-									<input type="hidden" id="id" name="id" value="'.$row["id"].'">
+									<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 									<div class="row form-group">
 									<div class="col col-md-3">
 									<label for="text-input" class=" form-control-label">รหัสแอดมิน:</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["user_id"].'
+									'.$row["USER_USERNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -44,7 +38,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">ชื่อ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["firstname"].'
+									'.$row["USER_FIRSTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -52,7 +46,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">นามสกุล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["lastname"].'
+									'.$row["USER_LASTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -60,7 +54,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">อีเมล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["email"].'
+									'.$row["USER_EMAIL"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -68,7 +62,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เพศ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["sex"].'
+									'.$row["USER_GENDER"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -76,19 +70,19 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">สถานะ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["status"].'
+									'.$row["USER_STATUS"].'
 									</div>
 									</div>
 									';
-								}elseif ($row["status"] == "professor") {
+								} elseif ($row["USER_STATUS"] == "PROFESSOR") {
 									echo '
-									<input type="hidden" id="id" name="id" value="'.$row["id"].'">
+									<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 									<div class="row form-group">
 									<div class="col col-md-3">
 									<label for="text-input" class=" form-control-label">รหัสอาจารย์:</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["user_id"].'
+									'.$row["USER_USERNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -96,7 +90,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">ชื่อ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["firstname"].'
+									'.$row["USER_FIRSTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -104,7 +98,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">นามสกุล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["lastname"].'
+									'.$row["USER_LASTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -112,7 +106,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">อีเมล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["email"].'
+									'.$row["USER_EMAIL"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -120,7 +114,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เพศ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["sex"].'
+									'.$row["USER_GENDER"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -128,19 +122,19 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">สถานะ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["status"].'
+									'.$row["USER_STATUS"].'
 									</div>
 									</div>
 									';
-								}elseif ($row["status"] == "personnel") {
+								} elseif ($row["USER_STATUS"] == "PERSONNEL") {
 									echo '
-									<input type="hidden" id="id" name="id" value="'.$row["id"].'">
+									<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 									<div class="row form-group">
 									<div class="col col-md-3">
 									<label for="text-input" class=" form-control-label">รหัสเจ้าหน้าที่:</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["user_id"].'
+									'.$row["USER_USERNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -148,7 +142,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">ชื่อ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["firstname"].'
+									'.$row["USER_FIRSTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -156,7 +150,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">นามสกุล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["lastname"].'
+									'.$row["USER_LASTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -164,7 +158,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">อีเมล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["email"].'
+									'.$row["USER_EMAIL"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -172,7 +166,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เพศ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["sex"].'
+									'.$row["USER_GENDER"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -180,19 +174,19 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">สถานะ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["status"].'
+									'.$row["USER_STATUS"].'
 									</div>
 									</div>
 									';
-								}else{
+								} elseif ($row["USER_STATUS"] == "STUDENT") {
 									echo '
-									<input type="hidden" id="id" name="id" value="'.$row["id"].'">
+									<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 									<div class="row form-group">
 									<div class="col col-md-3">
 									<label for="text-input" class=" form-control-label">รหัสนักศึกษา:</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["user_id"].'
+									'.$row["USER_USERNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -200,7 +194,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">ชื่อ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["firstname"].'
+									'.$row["USER_FIRSTNAME"].'
 									</div>
 									</div>
 
@@ -209,7 +203,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">นามสกุล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["lastname"].'
+									'.$row["USER_LASTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -217,7 +211,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">อีเมล</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["email"].'
+									'.$row["USER_EMAIL"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -225,7 +219,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เพศ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["sex"].'
+									'.$row["USER_GENDER"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -233,7 +227,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["advisors"].'
+									'.$row["USER_FIRSTNAME"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -241,7 +235,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["gpa"].'
+									'.$row["USER_GPA"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -249,7 +243,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">เกรดเฉลี่ยร่วม</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["gpax"].'
+									'.$row["USER_GPAX"].'
 									</div>
 									</div>
 									<div class="row form-group">
@@ -257,7 +251,7 @@ if (isset($_SESSION["id"])) {
 									<label for="text-input" class=" form-control-label">สถานะ</label>
 									</div>
 									<div class="col col-md-5">
-									'.$row["status"].'
+									'.$row["USER_STATUS"].'
 									</div>
 									</div>
 									';
@@ -271,16 +265,13 @@ if (isset($_SESSION["id"])) {
 								<button class="btn btn-danger">ยกเลิก</i></button></a>
 							</a>
 						</center><br><br>
-						
 					</center>
 				</center><br><br>
 			</div>
 		</div>
 	</div>
-
-
 	<?php
-}
+	}
 }
 
 // close database connection

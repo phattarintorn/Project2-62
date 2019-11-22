@@ -125,7 +125,11 @@
 
   // $_SESSION_ID = $_SESSION["USER_ID"];
 
-  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT WHERE USER_ID = " . $_SESSION['USER_ID'] . " AND QUESTION_TYPE = 'ด้านทักษะ' GROUP BY CAREER_ID , QUESTION_TYPE ORDER BY RAW DESC";
+  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT AS R
+        LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+        WHERE R.STUDENT_ID = " . $_SESSION['USER_ID'] . " AND Q.QUESTION_TYPE = 'ด้านทักษะ' 
+        GROUP BY R.CAREER_ID , Q.QUESTION_TYPE ORDER BY RAW DESC";
+
   $result = $conn->query($sql);
 
   if ($result->num_rows > 0) 
@@ -152,7 +156,10 @@
   } 
   // $_SESSION_id = $_SESSION["id"];
 
-  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT WHERE USER_ID = " . $_SESSION['USER_ID'] . " AND QUESTION_TYPE = 'ด้านทักษะ' GROUP BY CAREER_ID , QUESTION_TYPE ORDER BY raw DESC";
+  $sql = "SELECT SUM(RAW_SCORE) AS RAW FROM MAPPING_STUDENT_REPORT AS R
+        LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+        WHERE R.STUDENT_ID = " . $_SESSION['USER_ID'] . " AND Q.QUESTION_TYPE = 'ด้านจิตวิทยา' 
+        GROUP BY R.CAREER_ID , Q.QUESTION_TYPE ORDER BY RAW DESC";
   $result = $conn->query($sql);
   if ($result->num_rows > 0) 
   { 
@@ -190,17 +197,20 @@
             if ($conn->connect_error) {
               die("Connection failed: " . $conn->connect_error);
             } 
-            $_SESSION_id = $_SESSION["id"];
+            // $_SESSION_id = $_SESSION["id"];
 
-            //$sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$_SESSION_id' AND `side` = 'ด้านทักษะ' GROUP BY `career`,`side` ORDER BY raw DESC";
-            $sql = "SELECT SUM(sum_form.raw_score) AS raw,sum_form.career AS career,data_career.career_character AS datachar ,sum_form.side AS side,sum_form.type AS type FROM `sum_form`,`data_career` WHERE sum_form.user_id = '$_SESSION_id' AND sum_form.side = 'ด้านทักษะ' AND sum_form.career=data_career.career_name GROUP BY sum_form.career,sum_form.side ORDER BY raw DESC";
+            $sql = "SELECT SUM(R.RAW_SCORE) AS RAW, C.CAREER_NAME AS CAREER, C.CAREER_IMAGE AS IMAGE,
+              Q.QUESTION_TYPE AS TYPE FROM MAPPING_STUDENT_REPORT AS R
+              LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+              LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
+              WHERE R.STUDENT_ID = ".$_SESSION['USER_ID']." AND Q.QUESTION_TYPE = 'ด้านทักษะ'
+              GROUP BY CAREER, TYPE ORDER BY RAW DESC";
             $result = $conn->query($sql);
+
             if ($result->num_rows > 0) 
             { 
               $i = 0;
               $sumMax = 0;
-              $side = $row["side"];
-              $type = $row["type"];
               echo '
               <div class="card">
               <div class="card-header">
@@ -221,8 +231,8 @@
                 echo "<tr>";
                 if ($i <= "5") {
                  echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["datachar"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
-                 $Max_scoreS = ($row['raw'] / $sum_rawS)*100;
+                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["IMAGE"].'" title="'.$row["CAREER"].'"><br>'.$row['CAREER'].'</center></td>';
+                 $Max_scoreS = ($row['RAW'] / $sum_rawS)*100;
                  echo '<td><br><br><h3>' .number_format($Max_scoreS, 2, '.', ' '). '</h3></td>';
                }
              }
@@ -247,11 +257,16 @@
           if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
           } 
-          $_SESSION_id = $_SESSION["id"];
+          // $_SESSION_id = $_SESSION["id"];
 
-          $sql = "SELECT SUM(sum_form.raw_score) AS raw,sum_form.career AS career,data_career.career_character AS datachar ,sum_form.side AS side,sum_form.type AS type FROM `sum_form`,`data_career` WHERE sum_form.user_id = '$_SESSION_id' AND sum_form.side = 'ด้านจิตวิทยา' AND sum_form.career=data_career.career_name GROUP BY sum_form.career,sum_form.side ORDER BY raw DESC";
-
+          $sql = "SELECT SUM(R.RAW_SCORE) AS RAW, C.CAREER_NAME AS CAREER, C.CAREER_IMAGE AS IMAGE,
+            Q.QUESTION_TYPE AS TYPE FROM MAPPING_STUDENT_REPORT AS R
+            LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+            LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
+            WHERE R.STUDENT_ID = ".$_SESSION['USER_ID']." AND Q.QUESTION_TYPE = 'ด้านจิตวิทยา'
+            GROUP BY CAREER, TYPE ORDER BY RAW DESC";
           $result = $conn->query($sql);
+
           if ($result->num_rows > 0) 
           { 
             $i = 0;
@@ -277,8 +292,8 @@
                 echo "<tr>";
                 if ($i <= "5") {
                  echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["datachar"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
-                 $Max_scoreP = ($row['raw'] / $sum_rawP)*100;
+                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["IMAGE"].'" title="'.$row["CAREER"].'"><br>'.$row['CAREER'].'</center></td>';
+                 $Max_scoreP = ($row['RAW'] / $sum_rawP)*100;
                  echo '<td><br><br><h3>' .number_format($Max_scoreP, 2, '.', ' '). '</h3></td>';
                }
            }
