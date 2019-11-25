@@ -30,22 +30,25 @@
               </thead>
               <tbody>
                 <?php
-                $firstname = $_SESSION["firstname"];
-                if ($_SESSION["status"] == "professor") { 
-                  $sql = "SELECT * FROM `customer` WHERE `status`='student' AND`advisors` LIKE '%".$firstname."%' ";
+                $advisor_id = $_SESSION["USER_ID"];
+                if ($_SESSION["USER_STATUS"] == "PROFESSOR") { 
+                  $sql = "SELECT * FROM m_user 
+                  LEFT JOIN mapping_student_data
+                  ON m_user.USER_ID = mapping_student_data.STUDENT_ID
+                  WHERE m_user.USER_STATUS = 'STUDENT' AND mapping_student_data.ADVISOR_ID = $advisor_id";
+                  
                   $result = $conn->query($sql);
-
                   if ($result->num_rows > 0) 
                   { 
                     while($row = $result->fetch_assoc()) 
                     { 
                       echo "<tr>";
-                      echo '<td>'.$row['user_id'].'</td>';
-                      echo '<td>'.$row['firstname'].' '.$row['lastname'].'</td>';
-                      echo '<td>'.$row['gpa'].'</td>';
-                      echo '<td>'.$row['gpax'].'</td>';
+                      echo '<td>'.$row['USER_USERNAME'].'</td>';
+                      echo '<td>'.$row['USER_FIRSTNAME'].' '.$row['USER_LASTNAME'].'</td>';
+                      echo '<td>'.$row['USER_GPA'].'</td>';
+                      echo '<td>'.$row['USER_GPAX'].'</td>';
                       echo '<td align="center">
-                      <a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=student_professor_view&id='.$row['id'].'"></a>
+                      <a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=student_professor_view&id='.$row['USER_ID'].'"></a>
                       </td>';
 
                       echo "</tr>"; 

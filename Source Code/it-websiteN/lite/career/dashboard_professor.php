@@ -16,7 +16,10 @@ include("db/db.php");
           <span aria-hidden="true" title="ปิด">&times;</span>
         </button>
         <?php
-        $sql = "SELECT COUNT(`q_id`) as c_id FROM `question` WHERE `status_using` = '0' GROUP BY `q_group`";
+        $sql = "SELECT COUNT(QUESTION_ID)
+        FROM M_GROUP_QUESTION 
+        WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
+
         $result = $conn->query($sql);
         if ($result->num_rows > 0) 
         { 
@@ -36,10 +39,13 @@ include("db/db.php");
 
   <div class="col-lg-12">
     <?php
-    $_SESSION_id = $_SESSION["id"];
-    $firstname = $_SESSION["firstname"];
-
-    $sql = "SELECT SUM(sum_form.raw_score) AS raw, sum_form.career AS career ,sum_form.side AS side , sum_form.type  AS type ,sum_form.user_id AS user_id , customer.advisors AS adv FROM sum_form,customer WHERE customer.status = 'student' AND customer.advisors LIKE '%".$firstname."%'";
+    $advisor_id = $_SESSION["USER_ID"];
+    $sql = "SELECT SUM(MAPPING_STUDENT_REPORT.RAW_SCORE), 
+    MAPPING_STUDENT_REPORT.CAREER_ID,
+    MAPPING_STUDENT_REPORT.STUDENT_ID, 
+    M_USER.USER_ID
+    FROM MAPPING_STUDENT_REPORT,M_USER WHERE M_USER.USER_STATUS = 'STUDENT'";
+    
     $result = $conn->query($sql);
     if ($result->num_rows > 0) 
     {  
@@ -51,10 +57,12 @@ include("db/db.php");
             <span aria-hidden="true" title="ปิด">&times;</span>
           </button>
           <?php
+          
           while($row = $result->fetch_assoc()) 
           {
             $count = $count +1;
           }
+          
           ?>
           <span>มี</span>
           <span class="badge badge-pill badge-warning"><?php echo $count ?></span>
