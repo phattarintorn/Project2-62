@@ -13,7 +13,14 @@
         </tr>
     </thead>
     <?php
-    $sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$id' AND `side` = 'ด้านจิตวิทยา' GROUP BY `career`,`side` ORDER BY raw DESC";
+    $sql = "SELECT SUM(RAW_SCORE) AS raw,
+    m_career.CAREER_NAME AS career,
+    m_question.QUESTION_PART AS part
+    FROM MAPPING_STUDENT_REPORT AS m_report
+    LEFT JOIN M_GROUP_QUESTION AS m_question ON m_report.QUESTION_ID	= m_question.QUESTION_ID	
+    LEFT JOIN M_CAREER AS m_career ON m_report.CAREER_ID = m_career.CAREER_ID
+    LEFT JOIN M_USER AS m_user ON m_report.STUDENT_ID = m_user.USER_ID
+    WHERE m_user.USER_ID = $id AND m_question.QUESTION_ID = 2 GROUP BY career ORDER BY raw DESC";
     $result = $conn->query($sql); 
     $i =0 ;
     $sumMax =0 ;

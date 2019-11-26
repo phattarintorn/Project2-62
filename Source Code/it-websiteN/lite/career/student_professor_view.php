@@ -8,7 +8,7 @@ if ($conn->connect_error) {
 } 
 $id = $_REQUEST['id'];
 
-$sql = "SELECT * FROM `customer` WHERE `id`=".$id;
+$sql = "SELECT * FROM M_USER WHERE USER_ID =".$id;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
 { 
@@ -20,7 +20,7 @@ if ($result->num_rows > 0)
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <strong>ข้อมูลนักศึกษา : <?php echo $row["firstname"].' '.$row["lastname"]; ?> </strong>
+          <strong>ข้อมูลนักศึกษา : <?php echo $row["USER_FIRSTNAME"].' '.$row["USER_LASTNAME"]; ?> </strong>
         </div>
 
         <div class="card-body card-block">
@@ -32,15 +32,15 @@ if ($result->num_rows > 0)
               <label for="text-input" class=" form-control-label">สถานะ</label>
             </div>
             <div class="col col-md-4">
-              <?php echo $row["status"]; ?>
+              <?php echo $row["USER_STATUS"]; ?>
             </div> -->
 
             <div class="col col-md-2">
               <label for="text-input" class=" form-control-label">รหัสนักศึกษา : </label>
             </div>
             <div class="col col-md-3">
-              <?php echo $row["user_id"]; ?>
-              <input type="hidden" name="user_id" class="form-control" value="<?php echo $row["user_id"]; ?>">
+              <?php echo $row["USER_USERNAME"]; ?>
+              <input type="hidden" name="USER_USERNAME" class="form-control" value="<?php echo $row["USER_USERNAME"]; ?>">
             </div> 
           </div>
 
@@ -51,16 +51,30 @@ if ($result->num_rows > 0)
               <label for="text-input" class=" form-control-label">ชื่อ : </label>
             </div>
             <div class="col col-md-4">
-              <?php echo $row["firstname"]; ?>
+              <?php echo $row["USER_FIRSTNAME"]; ?>
             </div> 
+
+          </div>
+          <div class="row form-group">
+            <div class="col col-md-1">
+            </div>
             <div class="col col-md-2">
               <label for="text-input" class=" form-control-label">นามสกุล : </label>
             </div>
             <div class="col col-md-3">
-              <?php echo $row["lastname"]; ?>
+              <?php echo $row["USER_LASTNAME"]; ?>
             </div>
           </div>
-
+          <div class="row form-group">
+            <div class="col col-md-1">
+            </div>
+            <div class="col col-md-2">
+              <label for="text-input" class=" form-control-label">เบอร์โทร : </label>
+            </div>
+            <div class="col col-md-4">
+              <?php echo $row["USER_TEL"]; ?>
+            </div>
+          </div>
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
@@ -68,28 +82,9 @@ if ($result->num_rows > 0)
               <label for="text-input" class=" form-control-label">อีเมล : </label>
             </div>
             <div class="col col-md-4">
-              <?php echo $row["email"]; ?>
-            </div>
-            <div class="col col-md-2">
-              <label for="text-input" class=" form-control-label">เพศ : </label>
-            </div>
-            <div class="col col-md-3">
-              <?php echo $row["sex"]; ?>
+              <?php echo $row["USER_EMAIL"]; ?>
             </div>
           </div>
-
-          <div class="row form-group">
-            <div class="col col-md-1">
-            </div>
-            <div class="col col-md-3">
-              <label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา : </label>
-            </div>
-            <div class="col col-md-4">
-              <?php echo $row["advisors"]; ?>
-            </div>
-          </div>
-
-
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
@@ -97,7 +92,7 @@ if ($result->num_rows > 0)
               <label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม : </label>
             </div>
             <div class="col col-md-4">
-              <?php echo $row["gpa"]; ?>
+              <?php echo $row["USER_GPA"]; ?>
             </div>
           </div>
 
@@ -108,7 +103,7 @@ if ($result->num_rows > 0)
               <label for="text-input" class=" form-control-label">เกรดเฉลี่ยร่วม : </label>
             </div>
             <div class="col col-md-4">
-              <?php echo $row["gpax"]; ?>
+              <?php echo $row["USER_GPAX"]; ?>
             </div>
           </div>
         </div>
@@ -130,7 +125,15 @@ if ($conn->connect_error) {
 
 $id = $_REQUEST['id'];
 
-$sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$id' AND `side` = 'ด้านทักษะ' GROUP BY `career`,`side` ORDER BY raw DESC";
+$sql = "SELECT SUM(RAW_SCORE) AS raw,
+m_career.CAREER_NAME AS career,
+m_question.QUESTION_PART AS part
+FROM MAPPING_STUDENT_REPORT AS m_report
+LEFT JOIN M_GROUP_QUESTION AS m_question ON m_report.QUESTION_ID	= m_question.QUESTION_ID	
+LEFT JOIN M_CAREER AS m_career ON m_report.CAREER_ID = m_career.CAREER_ID
+LEFT JOIN M_USER AS m_user ON m_report.STUDENT_ID = m_user.USER_ID
+WHERE m_user.USER_ID = $id AND m_question.QUESTION_ID = 1 GROUP BY career ORDER BY raw DESC";
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
 { 
@@ -155,7 +158,15 @@ if ($conn->connect_error) {
 } 
 $id = $_REQUEST['id'];
 
-$sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$id' AND `side` = 'ด้านจิตวิทยา' GROUP BY `career`,`side` ORDER BY raw DESC";
+$sql = "SELECT SUM(RAW_SCORE) AS raw,
+m_career.CAREER_NAME AS career,
+m_question.QUESTION_PART AS part
+FROM MAPPING_STUDENT_REPORT AS m_report
+LEFT JOIN M_GROUP_QUESTION AS m_question ON m_report.QUESTION_ID	= m_question.QUESTION_ID	
+LEFT JOIN M_CAREER AS m_career ON m_report.CAREER_ID = m_career.CAREER_ID
+LEFT JOIN M_USER AS m_user ON m_report.STUDENT_ID = m_user.USER_ID
+WHERE m_user.USER_ID = $id AND m_question.QUESTION_ID = 2 GROUP BY career ORDER BY raw DESC";
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
 { 
@@ -194,14 +205,23 @@ if ($result->num_rows > 0)
             } 
             $id = $_REQUEST['id'];
 
-            $sql = "SELECT SUM(sum_form.raw_score) AS raw,sum_form.career AS career,data_career.career_character AS datachar ,sum_form.side AS side,sum_form.type AS type FROM `sum_form`,`data_career` WHERE sum_form.user_id = '$id' AND sum_form.side = 'ด้านทักษะ' AND sum_form.career=data_career.career_name GROUP BY sum_form.career,sum_form.side ORDER BY raw DESC";
+            $sql = "SELECT SUM(RAW_SCORE) AS raw,
+            m_career.CAREER_NAME AS career,
+            m_career.CAREER_IMAGE AS img,
+            m_question.QUESTION_PART AS part
+            FROM MAPPING_STUDENT_REPORT AS m_report
+            LEFT JOIN M_GROUP_QUESTION AS m_question ON m_report.QUESTION_ID	= m_question.QUESTION_ID	
+            LEFT JOIN M_CAREER AS m_career ON m_report.CAREER_ID = m_career.CAREER_ID
+            LEFT JOIN M_USER AS m_user ON m_report.STUDENT_ID = m_user.USER_ID
+            WHERE m_user.USER_ID = $id AND m_question.QUESTION_ID = 1 GROUP BY career ORDER BY raw DESC";
+            
             $result = $conn->query($sql);
             if ($result->num_rows > 0) 
             { 
               $i = 0;
               $sumMax = 0;
-              $side = $row["side"];
-              $type = $row["type"];
+              // $side = $row["part"];
+              // $type = $row["type"];
               echo '
               <div class="card">
               <div class="card-header">
@@ -222,7 +242,7 @@ if ($result->num_rows > 0)
                 echo "<tr>";
                 if ($i <= "5") {
                  echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["datachar"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
+                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["img"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
                  $Max_scoreS = ($row['raw'] / $sum_rawS)*100;
                  echo '<td><br><br><h3>' .number_format($Max_scoreS, 2, '.', ' '). '</h3></td>';
                }
@@ -260,7 +280,15 @@ if ($result->num_rows > 0)
             die("Connection failed: " . $conn->connect_error);
           } 
           $id = $_REQUEST['id'];
-          $sql = "SELECT SUM(sum_form.raw_score) AS raw,sum_form.career AS career,data_career.career_character AS datachar ,sum_form.side AS side,sum_form.type AS type FROM `sum_form`,`data_career` WHERE sum_form.user_id = '$id' AND sum_form.side = 'ด้านจิตวิทยา' AND sum_form.career=data_career.career_name GROUP BY sum_form.career,sum_form.side ORDER BY raw DESC";
+          $sql = "SELECT SUM(RAW_SCORE) AS raw,
+          m_career.CAREER_NAME AS career,
+          m_career.CAREER_IMAGE AS img,
+          m_question.QUESTION_PART AS part
+          FROM MAPPING_STUDENT_REPORT AS m_report
+          LEFT JOIN M_GROUP_QUESTION AS m_question ON m_report.QUESTION_ID	= m_question.QUESTION_ID	
+          LEFT JOIN M_CAREER AS m_career ON m_report.CAREER_ID = m_career.CAREER_ID
+          LEFT JOIN M_USER AS m_user ON m_report.STUDENT_ID = m_user.USER_ID
+          WHERE m_user.USER_ID = $id AND m_question.QUESTION_ID = 2 GROUP BY career ORDER BY raw DESC";
           
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
@@ -288,7 +316,7 @@ if ($result->num_rows > 0)
               echo "<tr>";
               if ($i <= "5") {
                echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-               echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["datachar"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
+               echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["img"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
                $Max_scoreS = ($row['raw'] / $sum_rawP)*100;
                echo '<td><br><br><h3>' .number_format($Max_scoreS, 2, '.', ' '). '</h3></td>';
              }

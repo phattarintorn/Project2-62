@@ -12,7 +12,7 @@
         <br>  
         <div class="col-lg-12">
           <?php
-          $sql = "SELECT COUNT(`id`) as id,`user_id`,`firstname`,`lastname`,`status`,`loginstatus`,`lastupdate`,`sex`,`course`,`advisors`,`gpa`,`gpax` FROM `customer`";
+          $sql = "SELECT COUNT(USER_ID) as id FROM M_USER";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           { 
@@ -40,7 +40,7 @@
       <?php  
       include("db/db_dashboard_admin.php"); 
      //ดึงฐานข้อมูล
-      $query = "SELECT status, count(*) as number FROM customer GROUP BY status";  
+      $query = "SELECT USER_STATUS, count(*) as number FROM M_USER GROUP BY USER_STATUS";  
       $result = mysqli_query($connect, $query);  
       ?>   
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
@@ -55,7 +55,7 @@
           <?php  
           while($row = mysqli_fetch_array($result))  
           {  
-           echo "['".$row["status"]."', ".$row["number"]."],";  
+           echo "['".$row["USER_STATUS"]."', ".$row["number"]."],";  
          }  
          ?>  
          ]);  
