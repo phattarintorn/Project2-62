@@ -79,8 +79,8 @@ function AddQ(topics,selObj,restore){ //v3.0
 									<div class="col-md-5">
 										<select class="form-control" name="q_type<?php echo $i;?>" required>	
 											<option></option>
-											<option value="Q1">ถามระดับความคิดเห็น</option>
-											<option value="Q2">ถามเปรียบเทียบ</option>
+											<option value="ความคิดเห็น">ถามระดับความคิดเห็น</option>
+											<option value="เปรียบเทียบ">ถามเปรียบเทียบ</option>
 											<!-- <option value="Q3">เลือกเพียงหนึ่งคำตอบ</option> -->
 											<!-- <option value="Q4">เลือกหลายคำตอบ</option> -->
 										</select> 
@@ -111,7 +111,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 										<input type="number" class="form-control" name="q_no<?php echo $i;?>" placeholder="จำนวนข้อคำถาม" min="3" max="50" required> 
 									</div>
 								</div>
-								<input type="hidden" class="form-control" name="choose_no<?php echo $i;?>" value="">  
+								<!-- <input type="hidden" class="form-control" name="choose_no<?php echo $i;?>" value="">   -->
 
 								<!-- <div class="row form-group">
 									<div class="col-md-2">
@@ -132,7 +132,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 									die("Connection failed: " . $conn->connect_error);
 								} 
 
-								$sql = "SELECT * FROM `question` WHERE `q_id` ORDER BY `question`.`q_group` DESC";
+								$sql = "SELECT * FROM m_group_question WHERE QUESTION_ID ORDER BY QUESTION_GROUP DESC";
 
 								$result = mysqli_query($conn, $sql);
 
@@ -140,7 +140,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 									$row = mysqli_fetch_assoc($result)
 									?>
 									<?php 
-									$q_group = $row["q_group"];
+									$q_group = $row["QUESTION_GROUP"];
 									$q_group++;
 									if (!isset($q_group)) {
 										echo "0";

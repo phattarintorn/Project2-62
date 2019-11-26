@@ -25,7 +25,7 @@
 		<th rowspan="3"><center>ข้อ</center></th>
 		<th rowspan="3"><center>เกณฑ์</center></th>
 		<th colspan="5"><center>ระดับความคิดเห็น</center></th>
-		<?php $choose_no = $row['choose_no']; ?>
+		<?php $choose_no = $row['QUESTION_CHOOSE']; ?>
 		<tr align="center">
 			<?php
 			for ($level = 1; $level <= 5 ; $level++) { 
@@ -36,7 +36,7 @@
 
 	</thead>
 	<tbody>
-		<?php $q_no = $row['q_no'];
+		<?php $q_no = $row['QUESTION_CHOISE'];
 		for ($q1 = 1; $q1 <= $q_no ; $q1++) { 
 			echo '<tr>';
 			echo '<td align="center">'.$q1.'</td>'; 
@@ -56,6 +56,6 @@
 		?>
 	</tbody>
 </table> 
-<?php $q_id = $row['q_id']; ?>
+<?php $q_id = $row['QUESTION_ID']; ?>
 <input type="hidden" id="q_idq1" name="q_idq1" value="<?php echo $q_id?>">
 <input type="hidden" id="q_noq1" name="q_noq1" value="<?php echo $q_no?>">

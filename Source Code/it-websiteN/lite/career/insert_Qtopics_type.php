@@ -1,13 +1,13 @@
 <?php
 include("db/db.php"); 
-$q_day = $_REQUEST['q_day'];
-
+// $q_day = $_REQUEST['q_day'];
+$last_id = $_REQUEST['q_id'];
 // $q_group = $_REQUEST["q_group"];
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM `question` WHERE `q_day` = '$q_day'"; 
+$sql = "SELECT * FROM `m_group_question` WHERE QUESTION_ID = '$last_id'"; 
 $result = $conn->query($sql);
 ?>
 <div class="col-md-12">
@@ -17,38 +17,37 @@ $result = $conn->query($sql);
 		{  
 			while($row = $result->fetch_assoc()) 
 			{ 
-				if ($row["choose_no"] == "") {
+				if ($row["QUESTION_CHOISE"] !== "") {
 					// echo $row["choose_no"];
 					?>
 					<?php //echo $row["q_id"]; ?>
 					<hr>
 					<?php 
-					$q_id = $row['q_id'];
-					$q_type = $row['q_type'];
-					$q_group = $row['q_group'];
-
-					if ($q_type == "Q1") { 
-
+					$q_id = $row['QUESTION_ID'];
+					$q_type = $row['QUESTION_TYPE'];
+					$q_group = $row['QUESTION_GROUP'];
+					printf($q_type);
+					if ($q_type == "ความคิดเห็น") { 
 						echo '<br>';
 						include("insert_q1.php");
 					}
-					if ($q_type == "Q2") {
+					if ($q_type == "เปรียบเทียบ") {
 						echo '<br>';
 						include("insert_q2.php");
 					}
-					if ($q_type == "Q3") {
-						echo '<br>';
-						include("insert_q3.php");
-					}
-					if ($q_type == "Q4") {
-						echo '<br>';
-						include("insert_q4.php");
-					}
+					// if ($q_type == "Q3") {
+					// 	echo '<br>';
+					// 	include("insert_q3.php");
+					// }
+					// if ($q_type == "Q4") {
+					// 	echo '<br>';
+					// 	include("insert_q4.php");
+					// }
 				}else{
 
 				}
 				// echo $q_group;
-				echo '<input type="hidden" id="q_group"  name="q_group" value="'.$row["q_group"].'">';
+				echo '<input type="hidden" id="q_group"  name="q_group" value="'.$row["QUESTION_GROUP"].'">';
 			}
 		}
 

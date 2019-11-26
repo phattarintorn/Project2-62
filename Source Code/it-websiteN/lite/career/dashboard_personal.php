@@ -1,9 +1,12 @@
 <?php
 include("db/db.php");
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} 
+$conn->query("SET NAMES UTF8");
+// if ($conn->connect_error) {
+//   die("Connection failed: " . $conn->connect_error);
+// } 
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
 ?>
 <div class="col-md-12">
   <div class="card">
@@ -19,7 +22,8 @@ if ($conn->connect_error) {
         <div class="row">
           <div class="col-lg-6">
             <?php
-            $sql = "SELECT COUNT(`id`) as id,`user_id`,`firstname`,`lastname`,`status`,`loginstatus`,`lastupdate`,`sex`,`course`,`advisors`,`gpa`,`gpax` FROM `customer`";
+            
+            $sql = "SELECT COUNT(`USER_ID`) as id FROM `m_user`";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) 
             { 
@@ -57,7 +61,7 @@ if ($conn->connect_error) {
                   <p><h3><span class="badge badge-pill badge-success">จำนวนแบบสอบถามในระบบ</span></h3></p>
                   <p><h3>แบบสอบถามทั้งหมด</h3></p>
                   <?php
-                  $sql = "SELECT COUNT(`q_id`) as c_id FROM `question` GROUP BY `q_group`";
+                  $sql = "SELECT COUNT(`QUESTION_ID`) as c_id FROM `m_group_question` GROUP BY `QUESTION_GROUP`";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) 
                   { 
@@ -86,8 +90,11 @@ if ($conn->connect_error) {
 
           <div class="col-lg-6">
             <?php
-            $sql = "SELECT COUNT(`form_id`) AS count FROM test_form GROUP BY `form_date`";
+            $sql = "SELECT COUNT(Mq.QUESTION_ID) AS count FROM mapping_student_log AS Mlog
+            LEFT JOIN MAPPING_QUESTION AS Mq ON Mlog.MAPPING_QUESTION_ID = Mq.MAPPING_QUESTION_ID 
+            WHERE QUESTION_STATUS = '0'  GROUP BY CREATE_DATE ";
             $result = $conn->query($sql);
+            printf($sql);
             if ($result->num_rows > 0) 
             {  
               $count = 0; 
@@ -146,7 +153,7 @@ if ($conn->connect_error) {
 
         <div class="col-lg-6">
           <?php
-          $sql = "SELECT COUNT(`form_id`) AS count FROM test_form WHERE `form_side` ='ด้านทักษะ' GROUP BY `form_date`";
+          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_TYPE` ='Q1' ";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           {  
@@ -198,7 +205,7 @@ if ($conn->connect_error) {
 
         <div class="col-lg-6">
           <?php
-          $sql = "SELECT COUNT(`form_id`) AS count FROM test_form WHERE `form_side` ='ด้านจิตวิทยา' GROUP BY `form_date`";
+          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_TYPE` ='Q2' ";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           {  
@@ -250,7 +257,7 @@ if ($conn->connect_error) {
 
         <div class="col-lg-6">
           <?php
-          $sql = "SELECT COUNT(`career_id`) as `career_id` FROM `data_career`";
+          $sql = "SELECT COUNT(`career_id`) as `career_id` FROM `m_career`";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           { 
