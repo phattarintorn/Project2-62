@@ -90,11 +90,11 @@ if (!$conn) {
 
           <div class="col-lg-6">
             <?php
-            $sql = "SELECT COUNT(Mq.QUESTION_ID) AS count FROM mapping_student_log AS Mlog
-            LEFT JOIN MAPPING_QUESTION AS Mq ON Mlog.MAPPING_QUESTION_ID = Mq.MAPPING_QUESTION_ID 
-            WHERE QUESTION_STATUS = '0'  GROUP BY CREATE_DATE ";
+            // $sql = "SELECT COUNT(Mq.QUESTION_ID),Mq.QUESTION_STATUS AS count FROM mapping_student_log AS Mlog
+            // LEFT JOIN MAPPING_QUESTION AS Mq ON Mlog.MAPPING_QUESTION_ID = Mq.MAPPING_QUESTION_ID 
+            // WHERE QUESTION_STATUS = '0'  GROUP BY CREATE_DATE ";
+            $sql = "SELECT COUNT(QUESTION_ID) AS count FROM m_group_question";
             $result = $conn->query($sql);
-            printf($sql);
             if ($result->num_rows > 0) 
             {  
               $count = 0; 
@@ -112,13 +112,15 @@ if (!$conn) {
                       <?php
                       while($row = $result->fetch_assoc()) 
                       {
-                        $count = $count +1;
+                        // $count = $count +1;
+                        $count = $row["count"];
                       }
                       ?>
                       <h1>
                         <?php 
                         if (isset($count)) {
                           echo $count;
+                    
                         }
                         ?> 
                       </h1> 
