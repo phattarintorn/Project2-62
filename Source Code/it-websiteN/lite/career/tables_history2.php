@@ -33,49 +33,46 @@ $q_group = $_REQUEST['q_group'];
               </thead>
               <tbody>
                 <?php
-
-                $sql = "SELECT * FROM `test_form` WHERE `tested_status` = 0 AND `form_group` = '$q_group' GROUP BY `form_date`,`form_type`"; 
+                $sql = "SELECT L.STUDENT_ID, L.CREATE_DATE, G.QUESTION_GROUP, G.QUESTION_PART, G.QUESTION_TYPE, 
+                G.QUESTION_GROUP, G.QUESTION_ID FROM MAPPING_STUDENT_LOG AS L
+                LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+                LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+                WHERE G.QUESTION_STATUS = 0 AND G.QUESTION_GROUP = $q_group GROUP BY L.CREATE_DATE, G.QUESTION_TYPE"; //`form_date`
 
                 $result = $conn->query($sql);
-                if ($result->num_rows > 0) 
-                { 
-                  while($row = $result->fetch_assoc()) 
-                  {  
-                    if ($row["user_id"] == $_SESSION["id"]) {
-                      echo '<tr>';
-                      echo '<td align="center">';
-                      echo $row["form_date"];  
-                      echo '</td>';
 
-                      echo '<td align="center">';
-                      echo $row["form_group"];  
-                      echo '</td>';
-                      
-                      echo '<td align="center">';
-                      echo $row["form_side"];  
-                      echo '</td>';
+                  if ($result->num_rows > 0) { 
+                    while($row = $result->fetch_assoc()) 
+                    {  
+                      if ($row["STUDENT_ID"] == $_SESSION["USER_ID"]) {
+                        echo '<tr>';
+                        echo '<td align="center">';
+                        echo $row["CREATE_DATE"];  
+                        echo '</td>';
 
-                      echo '<td align="center">';
-                      if ($row["form_type"] == "Q1") { 
-                        echo "ถามระดับความคิดเห็น";
-                      }elseif ($row["form_type"]  == "Q2") { 
-                        echo "ถามเปรียบเทียบ";
-                      }else{} 
-                      echo '</td>';
+                        echo '<td align="center">';
+                        echo $row["QUESTION_GROUP"];  
+                        echo '</td>';
+                        
+                        echo '<td align="center">';
+                        echo $row["QUESTION_PART"];  
+                        echo '</td>';
+
+                        echo '<td align="center">';
+                        echo $row["QUESTION_TYPE"]; 
+                        echo '</td>';
 
 
-                      echo '<td align="center">';
-                      echo '<a title="ดูประวัติ"  class="btn-link ti-write" href="career-advice.php?career=check_form&q_group='.$row['form_group'].'"></a>';  
-                      echo '</td>';
-                      echo '<td align="center">'; 
-                      echo '<a title="ดูรายงาน"  class="btn-link ti-book" href="career-advice.php?career=action&q_id='.$row['q_id'].'&form_date='.$row['form_date'].'&form_type='.$row['form_type'].'&form_side='.$row['form_side'].'"></a>';  
-                      echo '</td>';
-                      echo '</tr>';
-                    }
-                  }    
-                }
-
-
+                        echo '<td align="center">';
+                        echo '<a title="ดูประวัติ"  class="btn-link ti-write" href="career-advice.php?career=check_form&QUESTION_GROUP='.$row['QUESTION_GROUP'].'&QUESTION_TYPE='.$row['QUESTION_TYPE'].'"></a>';  
+                        echo '</td>';
+                        echo '<td align="center">'; 
+                        echo '<a title="ดูรายงาน"  class="btn-link ti-book" href="career-advice.php?career=action&q_id='.$row['QUESTION_ID'].'&form_date='.$row['CREATE_DATE'].'&form_type='.$row['QUESTION_TYPE'].'&form_side='.$row['QUESTION_PART'].'"></a>';  
+                        echo '</td>';
+                        echo '</tr>';
+                      }
+                    }    
+                  }
                 ?>
               </tbody>
             </table>

@@ -12,30 +12,29 @@
 
 					if (isset($_REQUEST['q_id']) && !isset($_REQUEST['q_id2'])) {
 						$q_id = $_REQUEST['q_id'];
-						$_SESSION_id = $_SESSION["id"];
+						$_SESSION_id = $_SESSION["USER_ID"];
 						$form_date = $_REQUEST['form_date']; 
 						$form_type = $_REQUEST['form_type']; 
 						$form_side = $_REQUEST['form_side']; 
 
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'Q1') {
+						if ($form_side == 'ด้านทักษะ' && $form_type == 'ความคิดเห็น') {
 							include("career/dashboard_skiilQ1.php");   //ได้แล้ว 
 						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'Q1') {
+						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
 							include("career/dashboard_psychologyQ1.php"); //ได้แล้ว 
 						}
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'Q2') {
+						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
 							include("career/dashboard_skiilQ2.php");   
 						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'Q2') {
+						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
 							include("career/dashboard_psychologyQ2.php"); //ได้แล้ว 
 						}
-
 					} 
 
 					if (isset($_REQUEST['q_id']) && isset($_REQUEST['q_id2'])) {
 						$q_id = $_REQUEST['q_id'];
 						$q_id2 = $_REQUEST['q_id2'];
-						$_SESSION_id = $_SESSION["id"];
+						$_SESSION_id = $_SESSION["USER_ID"];
 						$form_date = $_REQUEST['form_date']; 
 						$form_type = $_REQUEST['form_type']; 
 						$form_type2 = $_REQUEST['form_type2']; 
@@ -43,30 +42,29 @@
 						$form_side2 = $_REQUEST['form_side2']; 
 
 
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'Q1') {
+						if ($form_side == 'ด้านทักษะ' && $form_type == 'ความคิดเห็น') {
 							include("career/dashboard_skiilQ1.php");   //ได้แล้ว 
 						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'Q1') {
+						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
 							include("career/dashboard_psychologyQ1.php"); //ได้แล้ว 
 						}
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'Q2') {
+						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
 							include("career/dashboard_skiilQ2.php");   
 						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'Q2') {
+						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
 							include("career/dashboard_psychologyQ2.php"); //ได้แล้ว 
 						}
 						//--------------------------------------------------------//
-						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'Q1') {
+						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'ความคิดเห็น') {
 							include("career/dashboard_skiilQ1_2.php");   //ได้แล้ว 
 						}
-						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'Q1') {
+						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'ความคิดเห็น') {
 							include("career/dashboard_psychologyQ1_2.php"); //ได้แล้ว 
-
 						}
-						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'Q2') {
+						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'เปรียบเทียบ') {
 							include("career/dashboard_skiilQ2_2.php");   
 						}
-						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'Q2') {
+						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'เปรียบเทียบ') {
 							include("career/dashboard_psychologyQ2_2.php"); //ได้แล้ว 
 						}
 					} 

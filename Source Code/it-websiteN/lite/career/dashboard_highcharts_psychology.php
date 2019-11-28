@@ -13,7 +13,13 @@
         </tr>
     </thead>
     <?php
-    $sql = "SELECT * FROM `sum_form`,data_career WHERE sum_form.career = data_career.career_name AND `user_id`= '$_SESSION_id' AND `date` = '$form_date' AND `type` = '$form_type' AND `side` = '$form_side' ORDER BY `sum_form`.`degree` ASC";
+    // $sql = "SELECT * FROM `sum_form`,data_career WHERE sum_form.career = data_career.career_name AND `user_id`= '$_SESSION_id' AND `date` = '$form_date' AND `type` = '$form_type' AND `side` = '$form_side' ORDER BY `sum_form`.`degree` ASC";
+    $sql = "SELECT * FROM MAPPING_STUDENT_REPORT AS R
+        LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
+        LEFT JOIN M_GROUP_QUESTION AS G ON R.QUESTION_ID = G.QUESTION_ID
+        WHERE R.STUDENT_ID = " . $_SESSION['USER_ID'] . " AND R.CREATE_DATE = '$form_date' 
+        AND G.QUESTION_PART = '$form_side' AND G.QUESTION_TYPE = '$form_type'
+        ORDER BY R.MAPPING_STUDENT_REPORT_ID";
     $result = $conn->query($sql); 
     $i =0 ;
     $sumMax =0 ;
@@ -28,10 +34,9 @@
                 if ($i <= 5) {
                     ?>
                     <tr>
-                        <!-- <th><?php //echo $row['degree']; ?></th> -->
-                        <th><?php echo 'อันดับ '.$row['degree'].' '.$row['career']; ?></th>
-                        <?php $sumMax = $row['raw_score'] + $sumMax ; 
-                        $Max_score = ($row['raw_score'] / $row['top_score'] ) *100; ?>
+                        <th><?php echo 'อันดับ '.$i.' '.$row['CAREER_NAME']; ?></th>
+                        <?php $sumMax = $row['RAW_SCORE'] + $sumMax ; 
+                        $Max_score = ($row['RAW_SCORE'] / $row['TOP_SCORE'] ) *100; ?>
                         <td><?php echo ' '.number_format($Max_score, 2, '.', ' '); ?></td>
                     </tr>
                     <?php

@@ -13,7 +13,14 @@
         </tr>
     </thead>
     <?php
-    $sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$_SESSION_id' AND `side` = 'ด้านทักษะ' GROUP BY `career`,`side` ORDER BY raw DESC";
+    // $sql = "SELECT SUM(raw_score) AS raw,`career`,`side`,`type` FROM `sum_form` WHERE `user_id` = '$_SESSION_id' AND `side` = 'ด้านทักษะ' GROUP BY `career`,`side` ORDER BY raw DESC";
+    
+    $sql = "SELECT SUM(R.RAW_SCORE) AS RAW, C.CAREER_NAME, G.QUESTION_PART FROM MAPPING_STUDENT_REPORT AS R
+    LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
+    LEFT JOIN M_GROUP_QUESTION AS G ON R.QUESTION_ID = G.QUESTION_ID
+    WHERE STUDENT_ID = " . $_SESSION['USER_ID'] . " AND G.QUESTION_PART = 'ด้านทักษะ' 
+    GROUP BY C.CAREER_NAME, G.QUESTION_PART ORDER BY RAW DESC";
+    
     $result = $conn->query($sql); 
     $i =0 ;
     $sumMax =0 ;
@@ -29,9 +36,8 @@
                     ?>
                     <tr>
                         <!-- <th><?php //echo $row['degree']; ?></th> -->
-                        <th><?php echo 'อันดับ '.$i.' '.$row['career']; ?></th> 
-
-                        <?php $Max_scoreS = ($row['raw'] / $sum_rawS)*100; ?>
+                        <th><?php echo 'อันดับ '.$i.' '.$row['CAREER_NAME']; ?></th> 
+                        <?php $Max_scoreS = ($row['RAW'] / $sum_rawS)*100; ?>
                         <td><?php echo number_format($Max_scoreS, 2, '.', ' ') ?></td>
                     </tr>
                     <?php

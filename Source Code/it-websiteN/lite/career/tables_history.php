@@ -45,26 +45,27 @@
                     </tr>
                     </thead>
                     <tbody>';
-                    // $sql = "SELECT * FROM `test_form` WHERE `tested_status` = 0 GROUP BY `form_group`"; 
+                    // $sql = "SELECT * FROM `test_form` WHERE `tested_status` = 0 GROUP BY `form_group`";
+
                     $sql = "SELECT * FROM MAPPING_STUDENT_LOG AS L
                       LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
                       LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
                       WHERE G.QUESTION_STATUS = 0 GROUP BY G.QUESTION_GROUP"; 
 
-// $sql = "SELECT * FROM `question` WHERE `status_using`=0 ORDER BY `question`.`q_day` DESC"; 
+                    // $sql = "SELECT * FROM `question` WHERE `status_using`=0 ORDER BY `question`.`q_day` DESC"; 
 
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) 
                     { 
                       while($row = $result->fetch_assoc()) 
                       {  
-                        if ($row["USER_USERNAME"] == $_SESSION["USER_USERNAME"]) {
+                        if ($row["STUDENT_ID"] == $_SESSION["USER_ID"]) {
                           echo '<tr>';
                           echo '<td align="center">';
                           echo $row["QUESTION_GROUP"];  
                           echo '</td>';
                           echo '<td align="center">';
-                          echo $row["QUESTION_TYPE"];  
+                          echo $row["QUESTION_PART"];  
                           echo '</td>';
                           echo '<td align="center">';
                           echo $row["UPDATE_DATE"];  
@@ -72,7 +73,6 @@
                           echo '</td>';
                           echo '<td align="center">';
                           echo '<a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=tables_history2&q_group='.$row['QUESTION_GROUP'].'"></a>'; 
-                          // echo '<a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=tables_history2&q_group='.$row['form_group'].'&form_type='.$row['form_type'].'"></a>';  
                           echo '</td>';
                           echo '</tr>';
                         }

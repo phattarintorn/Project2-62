@@ -76,7 +76,8 @@
                   <?php
                   $sql = "SELECT Q.QUESTION_GROUP, Q.QUESTION_PART, Q.CREATE_DATE, Q.QUESTION_TYPE FROM MAPPING_QUESTION AS M 
                     LEFT JOIN M_GROUP_QUESTION AS Q ON M.QUESTION_ID = Q.QUESTION_ID
-                    WHERE Q.QUESTION_STATUS = 0  AND QUESTION_CHOOSE != '' GROUP BY Q.QUESTION_GROUP DESC"; 
+                    WHERE Q.QUESTION_STATUS = 0  AND QUESTION_CHOOSE != '' GROUP BY Q.QUESTION_GROUP DESC";
+                  
                   $result = $conn->query($sql);
 
                   if ($result->num_rows > 0) 
@@ -87,12 +88,9 @@
                       echo '<td><center>' . $row['CREATE_DATE'] . '</center></td>';
                       echo '<td><center>' . $row['QUESTION_GROUP'] . '</center></td>';
                       echo '<td><center>' . $row['QUESTION_PART'] . '</center></td>';
-                      echo '<td><center>' . $row['TYPE_NAME'] . '</center></td>';
-                      // echo '<td><center>'; 
-                      // include("checkQtype.php"); 
-                      // echo '</center></td>';
+                      echo '<td><center>' . $row['QUESTION_TYPE'] . '</center></td>';
                       echo '<td><center>
-                      <a title="ทำแบบทดสอบ"  class="btn-link ti-write" href="career-advice.php?career=check_formtest&q_group='.$row['QUESTION_GROUP'].'"></a>
+                      <a title="ทำแบบทดสอบ"  class="btn-link ti-write" href="career-advice.php?career=check_formtest&QUESTION_GROUP='.$row['QUESTION_GROUP'].'"></a>
                       </center></td>'; 
                       echo "</tr>"; 
                     }   

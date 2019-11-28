@@ -42,30 +42,37 @@
               </thead>
               <tbody>
                 <?php
-                $sql = "SELECT * FROM `question`,`test_form` WHERE question.q_id = test_form.q_id AND question.status_using= 0 AND test_form.tested_status =0 AND test_form.form_type = question.q_type AND test_form.form_type = 'Q1'   AND test_form.form_group = '$q_group' AND test_form.user_id=".$_SESSION["id"]; 
+
+                $sql = "SELECT * FROM MAPPING_STUDENT_LOG AS L
+                  LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+                  LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+                  WHERE G.QUESTION_STATUS = 0 AND G.QUESTION_TYPE = 'ความคิดเห็น'
+                  AND G.QUESTION_GROUP = $QUESTION_GROUP AND L.STUDENT_ID = " . $_SESSION['USER_ID'] ; 
+
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) 
                 { 
                   $i=0;
                   while($row = $result->fetch_assoc()) 
-                  {  
-                    if ($row["form_id"] != "") {
+                  {
+                    if ($row["MAPPING_STUDENT_LOG_ID"] != "") {
                       $i = $i + 1;
                       echo '<tr>';
                       echo '<td align="center">';
-                      echo $row["criterion_no_form"];
+                      // echo $row["criterion_no_form"];
+                      echo $i;
                       echo '</td>';
                       ?>
-                      <input type="hidden" id="user_idq1" name="user_idq1" value="<?php echo $_SESSION["id"] ?>"> 
-                      <input type="hidden" id="q_idq1" name="q_idq1" value="<?php echo $row["q_id"] ?>"> 
-                      <td width="70%" style="padding-left: 5px;"><?php echo $row['criterion_form']?></td>
+                      <input type="hidden" id="user_idq1" name="user_idq1" value="<?php echo $_SESSION["USER_ID"] ?>"> 
+                      <input type="hidden" id="q_idq1" name="q_idq1" value="<?php echo $row["QUESTION_ID"] ?>"> 
+                      <td width="70%" style="padding-left: 5px;"><?php echo $row['QUESTION_DETAIL_1']?></td>
                       <!-- <tr> -->
                         <td width="5%" align="center">
                           <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_1" disabled value="1" 
                           <?php 
-                          if (isset($row["choice_form"])) {
-                            if ($row["choice_form"] == 1) {
+                          if (isset($row["QUESTION_SELECTED"])) {
+                            if ($row["QUESTION_SELECTED"] == 1) {
                               echo "checked";
                             }
                           }  
@@ -77,8 +84,8 @@
                         <td width="5%" align="center">
                           <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_2" disabled value="2"
                           <?php 
-                          if (isset($row["choice_form"])) {
-                            if ($row["choice_form"] == 2) {
+                          if (isset($row["QUESTION_SELECTED"])) {
+                            if ($row["QUESTION_SELECTED"] == 2) {
                               echo "checked";
                             }
                           }  
@@ -89,8 +96,8 @@
                         <td width="5%" align="center">
                           <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_3" disabled value="3"
                           <?php 
-                          if (isset($row["choice_form"])) {
-                            if ($row["choice_form"] == 3) {
+                          if (isset($row["QUESTION_SELECTED"])) {
+                            if ($row["QUESTION_SELECTED"] == 3) {
                               echo "checked";
                             }
                           }  
@@ -101,8 +108,8 @@
                         <td width="5%" align="center">
                           <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_4" disabled value="4"
                           <?php 
-                          if (isset($row["choice_form"])) {
-                            if ($row["choice_form"] == 4) {
+                          if (isset($row["QUESTION_SELECTED"])) {
+                            if ($row["QUESTION_SELECTED"] == 4) {
                               echo "checked";
                             }
                           }  
@@ -113,8 +120,8 @@
                         <td width="5%" align="center">
                           <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_5" disabled value="5"
                           <?php 
-                          if (isset($row["choice_form"])) {
-                            if ($row["choice_form"] == 5) {
+                          if (isset($row["QUESTION_SELECTED"])) {
+                            if ($row["QUESTION_SELECTED"] == 5) {
                               echo "checked";
                             }
                           }  
