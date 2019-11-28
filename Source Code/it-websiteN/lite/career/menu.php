@@ -69,7 +69,7 @@
             </a>  
           </div>
           <?php
-        }else{
+        } else {
           ?>
           <div align="left">
           <a href="page-login.php">
