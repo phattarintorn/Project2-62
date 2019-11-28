@@ -9,7 +9,7 @@
  	die("Connection failed: " . mysqli_connect_error());
  }
 
- $sql = "UPDATE `question` SET `status_using`='" . $status_using ."' WHERE q_group=" . $q_group;
+ $sql = "UPDATE m_group_question SET QUESTION_STATUS ='" . $status_using ."' WHERE QUESTION_GROUP=" . $q_group;
 
  if (mysqli_query($conn, $sql)) {
  	echo ("<script> window.location.href='career-advice.php?career=tables_q';</script>");

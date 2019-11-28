@@ -16,12 +16,12 @@ if (isset($_POST["q_idq1"])) {
 			$q1_detail = $_POST["q1_detail$q1"];
 			// echo $q1_detail;
 
-			$sql = "UPDATE `question` SET `choose_no`='".$choose_nonq1."' WHERE q_id=".$q_idq1;
-			mysqli_query($conn, $sql);
+			// $sql = "UPDATE `question` SET `choose_no`='".$choose_nonq1."' WHERE q_id=".$q_idq1;
+			// mysqli_query($conn, $sql);
 
-			$sql = "INSERT INTO `q1`(`q_id`,`q1_no`,`q1_detail`) 
+			$sql = "INSERT INTO mapping_question(QUESTION_ID,QUESTION_NO,QUESTION_DETAIL_1) 
 			VALUES ('".$q_idq1."','".$q1."','".$q1_detail."')";
-
+			
 			if (mysqli_query($conn, $sql)) {
 				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
 					window.location.href='career-advice.php?career=check_Qresult&q_group=".$q_group."';</script>");
@@ -36,7 +36,6 @@ if (isset($_POST["q_idq2"])) {
 	$q_idq2 = $_POST["q_idq2"];
 	$q_noq2 = $_POST["q_noq2"];
 	$choose_nonq2 =  2;
-
 	// echo $q_idq2.'<br>';
 	// echo $q_noq2.'<br>';
 	for ($q2=1; $q2 <= $q_noq2 ; $q2++) { 
@@ -44,13 +43,12 @@ if (isset($_POST["q_idq2"])) {
 			$q2_detail = $_POST["q2_detail$q2"];
 			$q2_detail2 = $_POST["q2_detail2$q2"];
 			// echo $q2_detail; 
-			
 			// echo $q2_detail2;
 
-			$sql = "UPDATE `question` SET `choose_no`='".$choose_nonq2."' WHERE q_id=".$q_idq2;
-			mysqli_query($conn, $sql);
+			// $sql = "UPDATE `question` SET `choose_no`='".$choose_nonq2."' WHERE q_id=".$q_idq2;
+			// mysqli_query($conn, $sql);
 
-			$sql = "INSERT INTO `q2`(`q_id`,`q2_no`,`q2_detail`,`q2_detail2`) 
+			$sql = "INSERT INTO mapping_question(QUESTION_ID,QUESTION_NO,QUESTION_DETAIL_1,QUESTION_DETAIL_2) 
 			VALUES ('".$q_idq2."','".$q2."','".$q2_detail."','".$q2_detail2."')";
 
 			if (mysqli_query($conn, $sql)) {

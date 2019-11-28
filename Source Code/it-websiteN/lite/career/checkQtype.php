@@ -1,18 +1,11 @@
 <?php
-	$q_type = $row['q_type'];
+	$q_type = $row['QUESTION_TYPE'];
 
-	if ($q_type == "Q1") { 
+	if ($q_type == "ความคิดเห็น") { 
 		echo "ถามระดับความคิดเห็น";
 
-	}elseif ($q_type == "Q2") { 
+	}elseif ($q_type == "เปรียบเทียบ") { 
 		echo "ถามเปรียบเทียบ";
-
-	}elseif ($q_type == "Q3") { 
-		echo "เลือกเพียงหนึ่งคำตอบ";
-
-
-	}elseif ($q_type == "Q4") { 
-		echo "เลือกหลายคำตอบ";
 
 	}else{
 	} 

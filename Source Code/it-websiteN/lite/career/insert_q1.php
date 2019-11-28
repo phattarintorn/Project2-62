@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 
 		<center>
-			<strong><h5>หัวข้อ : <?php echo $row["topics"] ?></h5></strong>
+			<strong><h5>หัวข้อ : <?php echo $row["QUESTION_PART"] ?></h5></strong>
 		</center>
 	</div>
 	<div class="col-md-2"> 
@@ -36,7 +36,8 @@
 
 	</thead>
 	<tbody>
-		<?php $q_no = $row['QUESTION_CHOISE'];
+		<?php 
+		$q_no = $row['QUESTION_CHOICE'];
 		for ($q1 = 1; $q1 <= $q_no ; $q1++) { 
 			echo '<tr>';
 			echo '<td align="center">'.$q1.'</td>'; 

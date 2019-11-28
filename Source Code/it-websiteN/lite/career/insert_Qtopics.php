@@ -34,16 +34,16 @@ for($i=1; $i<$line; $i++)
 		}
 		 
 
-		$sql = "INSERT INTO m_group_question(QUESTION_GROUP,QUESTION_CHOISE,QUESTION_PART,QUESTION_TYPE,QUESTION_CHOOSE,CREATE_DATE,CREATE_BY,UPDATE_DATE,UPDATE_BY) 
+		$sql = "INSERT INTO m_group_question(QUESTION_GROUP,QUESTION_CHOICE,QUESTION_PART,QUESTION_TYPE,QUESTION_CHOOSE,CREATE_DATE,CREATE_BY,UPDATE_DATE,UPDATE_BY) 
 		VALUES ('".$q_group."','".$q_choise."','".$q_part."','".$q_type."','".$choose_no."','".$q_day."','".$session_name."','".$q_day."','".$session_name."')";
 
 		if (mysqli_query($conn, $sql)) {
 			$last_id = $conn->insert_id;
-			// echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-			// 	window.location.href='career-advice.php?career=insert_Qtopics_type&q_day=".$q_day."';</script>");
+			echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+				window.location.href='career-advice.php?career=insert_Qtopics_type&q_day=".$q_day."';</script>");
 
-				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=insert_Qtopics_type&q_id=".$last_id."';</script>");
+				// echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+				// window.location.href='career-advice.php?career=insert_Qtopics_type&q_id=".$last_id."';</script>");
 		} else {
 			echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php';</script>");
 		}

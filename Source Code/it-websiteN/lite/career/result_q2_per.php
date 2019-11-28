@@ -1,6 +1,6 @@
 <div class="row form-group">
 	<div class="col-md-12">
-		<center><strong><h3><?php echo $row["q_side"] ?></h3></strong></center>
+		<center><strong><h3><?php echo $row["QUESTION_PART"] ?></h3></strong></center>
 	</div>
 	<div class="col-md-2">
 		<center><u>คำชี้แจง</u></center>  
@@ -18,7 +18,7 @@
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-header">
-			<strong class="card-title"><?php echo $row["q_side"] ?></strong>
+			<strong class="card-title"><?php echo $row["QUESTION_PART"] ?></strong>
 		</div>
 
 		<div class="card-body">
@@ -29,7 +29,8 @@
 				</thead>
 				<tbody>
 					<?php
-					$sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND question.q_group =".$q_group;
+					// $sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND question.q_group =".$q_group;
+					$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 					$result = $conn->query($sql);
 					if ($result->num_rows > 0) 
 					{ 
@@ -39,20 +40,20 @@
 							$i = $i + 1;
 							echo '<tr>';
 
-							echo '<td align="center" width="10%">ข้อ  ' .$row["q2_no"].'</td>';
+							echo '<td align="center" width="10%">ข้อ  ' .$row["QUESTION_NO"].'</td>';
 							?>
 							<td width="5%" align="center">
 								<input type="radio" name="choice7<?php echo $i ?>" id="choice7<?php echo $i ?>_1" value="1" disabled/>
 								<label for="choice7<?php echo $i ?>_1"></label>
 							</td>
-							<td width="40%" style="padding-left: 5px;"><?php echo $row['q2_detail']?></td>
+							<td width="40%" style="padding-left: 5px;"><?php echo $row['QUESTION_DETAIL_1']?></td>
 
 
 							<td width="5%" align="center">
 								<input type="radio" name="choice7<?php echo $i ?>" id="choice7<?php echo $i ?>_2" value="2" disabled/>
 								<label for="choice7<?php echo $i ?>_2"></label>
 							</td> 
-							<td width="40%" style="padding-left: 5px;"><?php echo $row['q2_detail2']?></td>
+							<td width="40%" style="padding-left: 5px;"><?php echo $row['QUESTION_DETAIL_2']?></td>
 
 							<?php
 							echo '</tr>';

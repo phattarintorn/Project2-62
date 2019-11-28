@@ -26,29 +26,29 @@
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT * FROM question WHERE choose_no != '' GROUP BY `q_group`"; 
+                  $sql = "SELECT * FROM m_group_question WHERE QUESTION_CHOICE != '' GROUP BY QUESTION_GROUP"; 
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) 
                   { 
                     while($row = $result->fetch_assoc()) 
                     { 
                       echo "<tr>";
-                      echo '<td><center>'.$row['q_day'].'</center></td>';
-                      echo '<td><center>'.$row['q_group'].'</center></td>';
+                      echo '<td><center>'.$row['CREATE_DATE'].'</center></td>';
+                      echo '<td><center>'.$row['QUESTION_GROUP'].'</center></td>';
                       echo '<td>'; 
                       include("checkQstatus_using.php"); 
                       echo '</td>';
                       echo '<td><center>
-                      <a title="รายละเอียดแบบสอบถาม" class="btn-link ti-clipboard" href="career-advice.php?career=check_Qresult3&q_group='.$row['q_group'].'"> </a>
+                      <a title="รายละเอียดแบบสอบถาม" class="btn-link ti-clipboard" href="career-advice.php?career=check_Qresult3&q_group='.$row['QUESTION_GROUP'].'"> </a>
 
-                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=in_Qgroup&q_group='.$row['q_group'].'"> </a>';
+                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=in_Qgroup&q_group='.$row['QUESTION_GROUP'].'"> </a>';
 
-                      if ($row["status_using"]=="0") { 
+                      if ($row["QUESTION_STATUS"]=="0") { 
                         echo '<input type="hidden" name="status_using" value="1">';
-                        echo '<a title="ปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_using&q_group='.$row['q_group'].'&status_using=1"> </a> ';
+                        echo '<a title="ปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_using&q_group='.$row['QUESTION_GROUP'].'&status_using=1"> </a> ';
                       }else{
                         echo '<input type="hidden" name="status_using" value="0">';
-                        echo '<a title="เปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_using&q_group='.$row['q_group'].'&status_using=0"> </a> ';
+                        echo '<a title="เปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_using&q_group='.$row['QUESTION_GROUP'].'&status_using=0"> </a> ';
                       }
                       echo "</tr>"; 
                     }   

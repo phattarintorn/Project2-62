@@ -1,6 +1,6 @@
 <div class="row form-group">
 	<div class="col-md-12">
-		<center><strong><h3><?php echo $row["q_side"] ?></h3></strong></center>
+		<center><strong><h3><?php echo $row["QUESTION_PART"] ?></h3></strong></center>
 	</div>
 	<div class="col-md-2">
 		<center><u>คำชี้แจง</u></center>  
@@ -23,7 +23,7 @@
 					<th rowspan="3"><center>เกณฑ์</center></th>
 					<th colspan="5"><center>ระดับความคิดเห็น</center></th>
 
-					<?php $choose_no = $row['choose_no']; ?>
+					
 					<tr align="center">
 						<?php
 						for ($level = 1; $level <= 5 ; $level++) { 
@@ -35,7 +35,8 @@
 				<tbody>
 					<?php 
 
-					$sql = "SELECT * FROM question,q1 WHERE question.q_id = q1.q_id AND question.q_group =".$q_group;
+					// $sql = "SELECT * FROM question,q1 WHERE question.q_id = q1.q_id AND question.q_group =".$q_group;
+					$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 					$result = $conn->query($sql);
 					if ($result->num_rows > 0) 
 					{ 
@@ -45,11 +46,11 @@
 							$i = $i + 1;
 							echo '<tr>';
 							echo '<td align="center">';
-							echo $row["q1_no"];
+							echo $row["QUESTION_NO"];
 							echo '</td>'; 
 
 							?>
-							<td width="70%" style="padding-left: 5px;"><?php echo $row['q1_detail']?></td>
+							<td width="70%" style="padding-left: 5px;"><?php echo $row['QUESTION_DETAIL_1']?></td>
 							<td width="5%" align="center">
 								<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_1" value="1" disabled/>
 								<label for="choice<?php echo $i ?>_1"></label>

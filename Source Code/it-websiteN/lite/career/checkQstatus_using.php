@@ -1,5 +1,5 @@
 <?php
-$status_using = $row['status_using'];
+$status_using = $row['QUESTION_STATUS'];
 
 if ($status_using == "0") { 
 	echo "เปิดใช้";

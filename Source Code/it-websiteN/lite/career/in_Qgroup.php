@@ -10,7 +10,8 @@ if ($conn->connect_error) {
 
 $q_group = $_REQUEST['q_group'];
 
-$sql = "SELECT * FROM `question` WHERE `q_group`=".$q_group;
+$sql = "SELECT * FROM `m_group_question` WHERE `QUESTION_GROUP`=".$q_group;
+
 $result = $conn->query($sql);
 
 ?>
@@ -41,9 +42,9 @@ $result = $conn->query($sql);
 						{
 
 							echo "<tr>";
-							echo '<td><center>' . $row['q_group'] . '</center></td>';
-							echo '<td><center>' . $row['q_day'] . '</center></td>';
-							echo '<td><center>' . $row['q_side'] . '</center></td>';
+							echo '<td><center>' . $row['QUESTION_GROUP'] . '</center></td>';
+							echo '<td><center>' . $row['CREATE_DATE'] . '</center></td>';
+							echo '<td><center>' . $row['QUESTION_PART'] . '</center></td>';
 							echo '<td><center>'; 
 							include("checkQtype.php"); 
 							echo '</td>';
@@ -52,7 +53,7 @@ $result = $conn->query($sql);
 							include("checkQstatus_using.php"); 
 							echo '</td>';
 							echo '<td><center>
-							<a title="แก้ไข"  class="btn-link ti-write" href="career-advice.php?career=in_Q&id='.$row['q_id'].'"></a>
+							<a title="แก้ไข"  class="btn-link ti-write" href="career-advice.php?career=in_Q&id='.$row['QUESTION_ID'].'"></a>
 							';
 
 							echo '</center></td>';

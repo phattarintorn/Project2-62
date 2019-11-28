@@ -2,7 +2,7 @@
 	<div class="col-md-12">
 
 		<center>
-			<strong><h5>หัวข้อ : <?php echo $row["q_side"] ?></h5></strong>
+			<strong><h5>หัวข้อ : <?php echo $row["QUESTION_PART"] ?></h5></strong>
 		</center>
 	</div>
 	<div class="col-md-2"> 
@@ -24,21 +24,18 @@
 <div class="col-md-12">
 	<div class="card">
 		<div class="card-header">
-			<strong class="card-title"><?php echo $row["q_side"] ?></strong>
+			<strong class="card-title"><?php echo $row["QUESTION_PART"] ?></strong>
 		</div>
 
 		<div class="card-body">
 			<table class="table table-striped" style="width:100%">
 				<thead>
-
 					<input type="hidden"  id="choose_nonq2" name="choose_nonq1" class="form-contro2" value="2">
-
-
 				</thead>
 				<tbody>
 
 					<?php
-					$q_no = $row['q_no'];
+					$q_no = $row['QUESTION_CHOICE'];
 					// $choose_no = $row['choose_no'];
 					
 
@@ -46,30 +43,27 @@
 						echo '<tr>';
 						echo '<td align="center">ข้อ  '.$q2.'</td>';
 						echo '<input type="hidden" id="q2'.$q2.'" name="q2'.$q2.'" value="'.$q2.'">';
-
-
 						echo '<td align="right">
-						<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_1" value="1" disabled/>
-						<label for="choice<?php echo $i ?>_1"></label>
-						</td>';
+							<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_1" value="1" disabled/>
+							<label for="choice<?php echo $i ?>_1"></label>
+							</td>';
 						echo '<td align="center">
-						<input type="text" id="q2_detail'.$q2.'" name="q2_detail'.$q2.'" class="form-control" value="" required>
-						</td>';
+							<input type="text" id="q2_detail'.$q2.'" name="q2_detail'.$q2.'" class="form-control" value="" required>
+							</td>';
 						echo '<td align="right">
-						<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_2" value="2" disabled/>
-						<label for="choice<?php echo $i ?>_2"></label>
-						</td>';
+							<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_2" value="2" disabled/>
+							<label for="choice<?php echo $i ?>_2"></label>
+							</td>';
 						echo '<td align="center">
-						<input type="text" id="q2_detail2'.$q2.'" name="q2_detail2'.$q2.'" class="form-control" value="" required>
-						</td>';
+							<input type="text" id="q2_detail2'.$q2.'" name="q2_detail2'.$q2.'" class="form-control" value="" required>
+							</td>';
 						echo '</tr>';
-
 					}
 					?>
 
 				</tbody>
 			</table>
-			<?php $q_id = $row['q_id']; ?>
+			<?php $q_id = $row['QUESTION_ID']; ?>
 			<input type="hidden" name="q_idq2" value="<?php echo $q_id?>">
 			<input type="hidden" name="q_noq2" value="<?php echo $q_no?>">
 

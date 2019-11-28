@@ -16,29 +16,29 @@
 	}
 
 	$q_group = $_REQUEST['q_group']; 
-	$sql = "SELECT * FROM question WHERE question.q_id AND question.q_group =".$q_group;
+	$sql = "SELECT * FROM m_group_question AS Mq WHERE Mq.QUESTION_ID AND Mq.QUESTION_GROUP =".$q_group;
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) 
 	{ 
 		while($row = $result->fetch_assoc()) 
 		{ 
-			$q_type = $row["q_type"];
+			$q_type = $row["QUESTION_TYPE"];
 
-			if ($q_type == "Q1") {
+			if ($q_type == "ความคิดเห็น") {
 				include("result_q1_per.php");
 			} 					
 		}
 	}
 	echo "<hr><br>";
 	$q_group = $_REQUEST['q_group']; 
-	$sql = "SELECT * FROM question WHERE question.q_id AND question.q_group =".$q_group;
+	$sql = "SELECT * FROM m_group_question AS Mq WHERE Mq.QUESTION_ID AND Mq.QUESTION_GROUP =".$q_group;
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) 
 	{ 
 		while($row = $result->fetch_assoc()) 
 		{ 
-			$q_type = $row["q_type"];
-			if ($q_type == "Q2") { 
+			$q_type = $row["QUESTION_TYPE"];
+			if ($q_type == "เปรียบเทียบ") { 
 				include("result_q2_per.php");  
 			} 					
 		}

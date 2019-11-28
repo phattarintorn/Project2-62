@@ -1,13 +1,13 @@
 <?php
 include("db/db.php"); 
-// $q_day = $_REQUEST['q_day'];
-$last_id = $_REQUEST['q_id'];
+$q_day = $_REQUEST['q_day'];
+// $last_id = $_REQUEST['q_id'];
 // $q_group = $_REQUEST["q_group"];
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT * FROM `m_group_question` WHERE QUESTION_ID = '$last_id'"; 
+$sql = "SELECT * FROM `m_group_question` WHERE CREATE_DATE = '$q_day'"; 
 $result = $conn->query($sql);
 ?>
 <div class="col-md-12">
@@ -17,7 +17,7 @@ $result = $conn->query($sql);
 		{  
 			while($row = $result->fetch_assoc()) 
 			{ 
-				if ($row["QUESTION_CHOISE"] !== "") {
+				if ($row["QUESTION_CHOICE"] !== "") {
 					// echo $row["choose_no"];
 					?>
 					<?php //echo $row["q_id"]; ?>

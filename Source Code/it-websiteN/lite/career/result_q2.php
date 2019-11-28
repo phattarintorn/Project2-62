@@ -1,7 +1,7 @@
 
 <div class="row form-group">
 	<div class="col-md-12">
-		<center><strong><h3>แบบสอบถาม <?php echo $row["q_side"] ?></h3></strong></center>
+		<center><strong><h3>แบบสอบถาม <?php echo $row["QUESTION_PART"] ?></h3></strong></center>
 	</div> 
 </div>
 
@@ -29,705 +29,791 @@
 						<th rowspan="3"><center>คำถาม</center></th>
 					</thead>
 					<tbody>
-						<?php  
-						$sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND question.q_group =".$q_group;
+						<?php 
+						
+						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 
 						{ 
 							$i = 0;
+							
 							while($row = $result->fetch_assoc()) 
 							{  
 								$i = $i + 1;
-								
+								$question_no = $row["QUESTION_NO"];	
+								$question_num = $question_no;
 								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "1") {  
+								if ($row["CAREER_ID_1"] != "") {
+									if ($row["QUESTION_NO"] == $question_no) {  
 										echo '<td align="center">';
-										echo $row["q2_no"];
+										echo $row["QUESTION_NO"];
 										echo '</td>';  
 										echo ' 
 										<td width="10%" align="center">
-										<input type="checkbox" name="choice1" id="choice1" value="1" disabled/>
-										<label for="choice1" ></label></br> ';
+										<input type="checkbox" name="q2_choice'.$i.'" id="q2_choice'.$i.'" value="'.$i.'" disabled/>
+										<label for="q2_choice'.$i.'" ></label></br> ';
 										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
+										echo $row["QUESTION_DETAIL_1"];
+										echo '</td>'; 
+										
+										
 									} 
 								}else{  
 									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+									<input type="hidden" name="q2_group" value="'.$row["QUESTION_GROUP"].'">
+									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
+									<input type="hidden" name="q_no" value="'.$row["QUESTION_NO"].'">
+									<input type="hidden" name="q_no'.$i.'" value="'.$row["QUESTION_NO"].'">
+									<input type="hidden" name="career_1" value="career_1">'
+									;
 
-									if ($row["q2_no"] == "1") {  
+									if ($row["QUESTION_NO"] == $question_no) {
+										
 										echo '<td align="center">';
-										echo $row["q2_no"];
+										echo $row["QUESTION_NO"];
 										echo '</td>';  
 										echo ' 
 										<td width="10%" align="center">
-										<input type="checkbox" name="choice1" id="choice1" value="1"/>
-										<label for="choice1" ></label></br> ';
+										<input type="checkbox" name="q2_choice'.$i.'" id="q2_choice'.$i.'" value="'.$i.'"/>
+										<label for="q2_choice'.$i.'" ></label></br> ';
 										echo '<td align="left">';
-										echo $row["q2_detail"];
+										echo $row["QUESTION_DETAIL_1"];
 										echo '</td>';  
+										
+										 
 									} 
 								}
+								$i = $i + 1;
 								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "1") {
+								if ($row["CAREER_ID_2"] != "") {
+									if ($row["QUESTION_NO"] == $question_no) {
+										
 										echo ' 
 										<td width="10%" align="center">
-										<input type="checkbox" name="choice2" id="choice2" value="2" disabled/>
-										<label for="choice2" ></label></br> ';
+										<input type="checkbox" name="q2_choice'.$i.'" id="q2_choice'.$i.'" value="'.$i .'" disabled/>
+										<label for="q2_choice'.$i .'" ></label></br> ';
 										echo '<td align="left">';
-										echo $row["q2_detail2"];
+										echo $row["QUESTION_DETAIL_2"];
 										echo '</td>';  
+										$question_num++;
+										
 									} 
 								}else{  
 									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+									<input type="hidden" name="q2_group" value="'.$row["QUESTION_GROUP"].'">
+									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
+									<input type="hidden" name="q_no" value="'.$row["QUESTION_NO"].'">
+									<input type="hidden" name="q_no'.$i.'" value="'.$row["QUESTION_NO"].'">
+									<input type="hidden" name="career_2" value="career_2">';
 
-									if ($row["q2_no"] == "1") {  
+
+									if ($row["QUESTION_NO"] == $question_no) {  
+										
 										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice2" id="choice2" value="2" />
-										<label for="choice2" ></label></br> ';
+										<input type="checkbox" name="q2_choice'.$i.'" id="q2_choice'.$i .'" value="'.$i.'" />
+										<label for="q2_choice'.$i.'" ></label></br> ';
 										echo '<td align="left">';
-										echo $row["q2_detail2"];
+										echo $row["QUESTION_DETAIL_2"];
 										echo '</td>';  
+										$question_num++;
+										
 									} 
 								}
 								//------------c2 end
 								echo '</tr>'; 
 								//------------num end 1 
 
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "2") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice3" id="choice3" value="1" disabled/>
-										<label for="choice3" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "2") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice3" id="choice3" value="1"/>
-										<label for="choice3" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "2") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice4" id="choice4" value="2" disabled/>
-										<label for="choice4" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "2") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice4" id="choice4" value="2" />
-										<label for="choice4" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 2
-
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "3") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice5" id="choice5" value="1" disabled/>
-										<label for="choice5" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "3") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice5" id="choice5" value="1"/>
-										<label for="choice5" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "3") {
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice6" id="choice6" value="2" disabled/>
-										<label for="choice6" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "3") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice6" id="choice6" value="2" />
-										<label for="choice6" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 3
-
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "4") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice7" id="choice7" value="1" disabled/>
-										<label for="choice7" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "4") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice7" id="choice7" value="1"/>
-										<label for="choice7" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "4") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice8" id="choice8" value="2" disabled/>
-										<label for="choice8" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "4") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice8" id="choice8" value="2" />
-										<label for="choice8" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 4 
-
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "5") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice9" id="choice9" value="1" disabled/>
-										<label for="choice9" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "5") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice9" id="choice9" value="1"/>
-										<label for="choice9" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "5") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice10" id="choice10" value="2" disabled/>
-										<label for="choice10" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "5") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice10" id="choice10" value="2" />
-										<label for="choice10" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 5
-
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "6") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice11" id="choice11" value="1" disabled/>
-										<label for="choice11" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "6") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice11" id="choice11" value="1"/>
-										<label for="choice11" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "6") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice12" id="choice12" value="2" disabled/>
-										<label for="choice12" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "6") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice12" id="choice12" value="2" />
-										<label for="choice12" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 6
-
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "7") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice13" id="choice13" value="1" disabled/>
-										<label for="choice13" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "7") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice13" id="choice13" value="1"/>
-										<label for="choice13" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "7") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice14" id="choice14" value="2" disabled/>
-										<label for="choice14" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
-
-									if ($row["q2_no"] == "7") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice14" id="choice14" value="2" />
-										<label for="choice14" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 7
 								
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "8") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice15" id="choice15" value="1" disabled/>
-										<label for="choice15" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "1") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice1" id="choice1" value="1" disabled/>
+								// 		<label for="choice1" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "8") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice15" id="choice15" value="1"/>
-										<label for="choice15" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "8") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice16" id="choice16" value="2" disabled/>
-										<label for="choice16" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// 	if ($row["q2_no"] == "1") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice1" id="choice1" value="1"/>
+								// 		<label for="choice1" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "1") {
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice2" id="choice2" value="2" disabled/>
+								// 		<label for="choice2" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "8") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice16" id="choice16" value="2" />
-										<label for="choice16" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 8
+								// 	if ($row["q2_no"] == "1") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice2" id="choice2" value="2" />
+								// 		<label for="choice2" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 1 
 
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "9") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice17" id="choice17" value="1" disabled/>
-										<label for="choice17" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "2") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice3" id="choice3" value="1" disabled/>
+								// 		<label for="choice3" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "9") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice17" id="choice17" value="1"/>
-										<label for="choice17" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "9") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice18" id="choice18" value="2" disabled/>
-										<label for="choice18" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// 	if ($row["q2_no"] == "2") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice3" id="choice3" value="1"/>
+								// 		<label for="choice3" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "2") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice4" id="choice4" value="2" disabled/>
+								// 		<label for="choice4" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "9") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice18" id="choice18" value="2" />
-										<label for="choice18" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 9 
+								// 	if ($row["q2_no"] == "2") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice4" id="choice4" value="2" />
+								// 		<label for="choice4" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 2
 
-								echo '<tr>'; 
-								if ($row["career"] != "") {
-									if ($row["q2_no"] == "10") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice19" id="choice19" value="1" disabled/>
-										<label for="choice19" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "3") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice5" id="choice5" value="1" disabled/>
+								// 		<label for="choice5" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "10") {  
-										echo '<td align="center">';
-										echo $row["q2_no"];
-										echo '</td>';  
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice19" id="choice19" value="1"/>
-										<label for="choice19" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail"];
-										echo '</td>';  
-									} 
-								}
-								//------------c1 end
-								if ($row["career2"] != "") {
-									if ($row["q2_no"] == "10") { 
-										echo ' 
-										<td width="10%" align="center">
-										<input type="checkbox" name="choice20" id="choice20" value="2" disabled/>
-										<label for="choice20" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}else{  
-									echo '
-									<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
-									<input type="hidden" name="q_id" value="'.$row["q_id"].'">
-									<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-									<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
-									<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+								// 	if ($row["q2_no"] == "3") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice5" id="choice5" value="1"/>
+								// 		<label for="choice5" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "3") {
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice6" id="choice6" value="2" disabled/>
+								// 		<label for="choice6" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
 
-									if ($row["q2_no"] == "10") {  
-										echo '<td width="10%" align="center">
-										<input type="checkbox" name="choice20" id="choice20" value="2" />
-										<label for="choice20" ></label></br> ';
-										echo '<td align="left">';
-										echo $row["q2_detail2"];
-										echo '</td>';  
-									} 
-								}
-								//------------c2 end
-								echo '</tr>'; 
-								//------------num end 10
+								// 	if ($row["q2_no"] == "3") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice6" id="choice6" value="2" />
+								// 		<label for="choice6" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 3
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "4") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice7" id="choice7" value="1" disabled/>
+								// 		<label for="choice7" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "4") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice7" id="choice7" value="1"/>
+								// 		<label for="choice7" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "4") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice8" id="choice8" value="2" disabled/>
+								// 		<label for="choice8" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "4") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice8" id="choice8" value="2" />
+								// 		<label for="choice8" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 4 
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "5") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice9" id="choice9" value="1" disabled/>
+								// 		<label for="choice9" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "5") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice9" id="choice9" value="1"/>
+								// 		<label for="choice9" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "5") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice10" id="choice10" value="2" disabled/>
+								// 		<label for="choice10" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "5") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice10" id="choice10" value="2" />
+								// 		<label for="choice10" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 5
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "6") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice11" id="choice11" value="1" disabled/>
+								// 		<label for="choice11" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "6") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice11" id="choice11" value="1"/>
+								// 		<label for="choice11" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "6") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice12" id="choice12" value="2" disabled/>
+								// 		<label for="choice12" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "6") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice12" id="choice12" value="2" />
+								// 		<label for="choice12" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 6
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "7") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice13" id="choice13" value="1" disabled/>
+								// 		<label for="choice13" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "7") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice13" id="choice13" value="1"/>
+								// 		<label for="choice13" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "7") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice14" id="choice14" value="2" disabled/>
+								// 		<label for="choice14" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "7") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice14" id="choice14" value="2" />
+								// 		<label for="choice14" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 7
+								
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "8") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice15" id="choice15" value="1" disabled/>
+								// 		<label for="choice15" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "8") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice15" id="choice15" value="1"/>
+								// 		<label for="choice15" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "8") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice16" id="choice16" value="2" disabled/>
+								// 		<label for="choice16" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "8") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice16" id="choice16" value="2" />
+								// 		<label for="choice16" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 8
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "9") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice17" id="choice17" value="1" disabled/>
+								// 		<label for="choice17" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "9") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice17" id="choice17" value="1"/>
+								// 		<label for="choice17" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "9") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice18" id="choice18" value="2" disabled/>
+								// 		<label for="choice18" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "9") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice18" id="choice18" value="2" />
+								// 		<label for="choice18" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 9 
+
+								// echo '<tr>'; 
+								// if ($row["career"] != "") {
+								// 	if ($row["q2_no"] == "10") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice19" id="choice19" value="1" disabled/>
+								// 		<label for="choice19" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "10") {  
+								// 		echo '<td align="center">';
+								// 		echo $row["q2_no"];
+								// 		echo '</td>';  
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice19" id="choice19" value="1"/>
+								// 		<label for="choice19" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c1 end
+								// if ($row["career2"] != "") {
+								// 	if ($row["q2_no"] == "10") { 
+								// 		echo ' 
+								// 		<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice20" id="choice20" value="2" disabled/>
+								// 		<label for="choice20" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }else{  
+								// 	echo '
+								// 	<input type="hidden" name="q2_group" value="'.$row["q_group"].'">
+								// 	<input type="hidden" name="q_id" value="'.$row["q_id"].'">
+								// 	<input type="hidden" name="q2_id" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q2_id'.$i.'" value="'.$row["q2_id"].'">
+								// 	<input type="hidden" name="q_no" value="'.$row["q_no"].'"> 
+								// 	<input type="hidden" name="q2_no'.$i.'" value="'.$row["q2_no"].'">';
+
+								// 	if ($row["q2_no"] == "10") {  
+								// 		echo '<td width="10%" align="center">
+								// 		<input type="checkbox" name="choice20" id="choice20" value="2" />
+								// 		<label for="choice20" ></label></br> ';
+								// 		echo '<td align="left">';
+								// 		echo $row["q2_detail2"];
+								// 		echo '</td>';  
+								// 	} 
+								// }
+								// //------------c2 end
+								// echo '</tr>'; 
+								// //------------num end 10
 
 								
 							}
@@ -749,14 +835,14 @@
 							<select class="form-control" name="career" required=""> 
 								<option></option>
 								<?php  
-								$sql = "SELECT * FROM `data_career` WHERE `career_id`";
+								$sql = "SELECT * FROM m_career ";
 								$result = $conn->query($sql);
 								if ($result->num_rows > 0) 
 								{  
 									while($row = $result->fetch_assoc()) 
 									{  
 										?>
-										<option value="<?php echo $row["career_name"];?>"><?php echo $row["career_name"];?></option>  
+										<option value="<?php echo $row["CAREER_ID"];?>"><?php echo $row["CAREER_NAME"];?></option>  
 										<?php
 									}
 								} 

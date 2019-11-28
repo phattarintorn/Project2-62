@@ -1,7 +1,7 @@
  
 <div class="row form-group">
 	<div class="col-md-12">
-		<center><strong><h3><?php echo $row["topics"] ?></h3></strong></center>
+		<center><strong><h3></h3></strong></center>
 	</div>
 	<div class="col-md-2">
 		<br>
@@ -32,7 +32,8 @@
 					</thead>
 					<tbody>
 						<?php
-						$sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND q2.q_id =".$row["q_id"];
+						// $sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND q2.q_id =".$row["q_id"];
+						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE Mq.QUESTION_ID = '".$q_id."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 
 						{ 
@@ -42,12 +43,12 @@
 							{  
 								$i = $i + 1;
 								echo '
-								<input type="hidden" id="q_id2'.$i.'"  name="q_id2'.$i.'" value="'.$row["q_id"].'">
-								<input type="hidden" id="q2_id'.$i.'"  name="q2_id'.$i.'" value="'.$row["q2_id"].'">
-								<input type="hidden" id="q_noq2"  name="q_noq2" value="'.$row["q_no"].'"> 
+								<input type="hidden" id="q_id2'.$i.'"  name="q_id2'.$i.'" value="'.$row["QUESTION_ID"].'">
+								<input type="hidden" id="q2_id'.$i.'"  name="q2_id'.$i.'" value="'.$row["QUESTION_ID"].'">
+								<input type="hidden" id="q_noq2"  name="q_noq2" value="'.$row["QUESTION_NO"].'"> 
 								';
 								echo '<tr>'; 
-								echo '<td align="center" width="10%">ข้อ  '.$row["q2_no"].'</td>';
+								echo '<td align="center" width="10%">ข้อ  '.$row["QUESTION_NO"].'</td>';
 								?>
 
 
@@ -57,18 +58,18 @@
 									<label for="choice<?php echo $i ?>_1"></label>
 								</td>
 								<td align="center">
-									<input type="text" id="q2_detail<?php echo $i ?>" name="q2_detail<?php echo $i ?>" class="form-control" value="<?php echo $row['q2_detail'] ?>">
+									<input type="text" id="q2_detail<?php echo $i ?>" name="q2_detail<?php echo $i ?>" class="form-control" value="<?php echo $row['QUESTION_DETAIL_1'] ?>">
 								</td>
 								<td align="right">
 									<input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_2" value="2" disabled/>
 									<label for="choice<?php echo $i ?>_2"></label>
 								</td>
 								<td align="center">
-									<input type="text" id="q2_detail2<?php echo $i ?>" name="q2_detail2<?php echo $i ?>" class="form-control" value="<?php echo $row['q2_detail2'] ?>">
+									<input type="text" id="q2_detail2<?php echo $i ?>" name="q2_detail2<?php echo $i ?>" class="form-control" value="<?php echo $row['QUESTION_DETAIL_2'] ?>">
 								</td>
 								<?php
 								echo '</tr>';
-								$q_group = $row["q_group"] ;
+								$q_group = $row["QUESTION_GROUP"] ;
 
 							}
 						}
