@@ -16,22 +16,26 @@ include("db/db.php");
           <span aria-hidden="true" title="ปิด">&times;</span>
         </button>
         <?php
-        $sql = "SELECT COUNT(QUESTION_ID)
+        $sql = "SELECT COUNT(QUESTION_ID) AS Question
         FROM M_GROUP_QUESTION 
         WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
 
         $result = $conn->query($sql);
+
         if ($result->num_rows > 0) 
         { 
-          $c_id = 0;
           while($row = $result->fetch_assoc()) 
           {
-            $c_id = $c_id +1;
+            $q = $row['Question'];
           }
+        }
+        else
+        {
+          
         } 
         ?>
         <span>มี</span>
-        <span class="badge badge-pill badge-success"><?php echo $c_id ?></span> 
+        <span class="badge badge-pill badge-success"><?php echo $q ?></span> 
         <span>แบบสอบถามในระบบ</span>
       </div> 
     </div>  

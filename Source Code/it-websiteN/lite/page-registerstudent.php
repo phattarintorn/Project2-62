@@ -59,8 +59,8 @@
                       <span class="input-group-addon"><i class="material-icons" title="เพศ">wc</i></span>
                       <select id="gender" name="gender" required class="form-control"  size="">
                         <option value="" >--กรุณาเลือกเพศ--</option>
-                        <option value="M"><h5>ชาย</h5></option>
-                        <option value="F"><h5>หญิง</h5></option>
+                        <option value="Male"><h5>ชาย</h5></option>
+                        <option value="Female"><h5>หญิง</h5></option>
                       </select>
                     </div>
                     <br> 
@@ -91,7 +91,7 @@
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>
                       <select id="advisor" name="advisor" required class="form-control"  size="">
-                        <option value="A" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
+                        <option value="" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
                         <?php
                         include("db/db.php"); 
                         if ($conn->connect_error) {
@@ -113,10 +113,15 @@
                     </div>
                     <br>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="อีเมล">email</i></span>
+                      <span class="input-group-addon"><i class="material-icons">email</i></span>
                       <input id="email" type="text" class="form-control" name="email" placeholder="อีเมล" required>
                     </div>
-                    <br> 
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons">call</i></span>
+                      <input id="tel" type="text" class="form-control" name="tel" placeholder="หมายเลขโทรศัพท์" required>
+                    </div>
+                    <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="GPA">school</i></span>
                       <input id="gpa" type="text" class="form-control" name="gpa" placeholder="เกรดเฉลี่ยเทอมล่าสุด" required>

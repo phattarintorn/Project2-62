@@ -34,23 +34,18 @@
             <div class="row text-center">
               <div class="col-12 ">
                 <center class="m-t-6 ">
-                  <h4 class="card-title m-t-15"><h2>สมัครสมาชิกอาจารย์</h2></h4><hr><br>
+                  <h4 class="card-title m-t-15"><h2>เพิ่มบัญชีบุคลากร</h2></h4><hr><br>
                 </center></class="card-title"></center>
                 <!-- <form name="form-login" method="post" action="check_login.php" id="login"> -->
                   <form action="page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons">person</i></span>
-                      <input id="user_id" type="text" class="form-control" name="user_id"  placeholder="รหัสอาจารย์ " required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสอาจารย์ " required maxlength="8">
                     </div>
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons">lock</i></span>
                       <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน" required maxlength="10">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons">email</i></span>
-                      <input id="email" type="text" class="form-control" name="email" placeholder="อีเมล" required>
                     </div>
                     <br>
                     <div class="input-group">
@@ -64,12 +59,21 @@
                     </div>
                     <br>
                     <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons">email</i></span>
+                      <input id="email" type="text" class="form-control" name="email" placeholder="อีเมล" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons">call</i></span>
+                      <input id="tel" type="text" class="form-control" name="tel" placeholder="หมายเลขโทรศัพท์" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="เพศ">wc</i></span>
-                      <!-- <input id="sex" type="text" class="form-control" name="sex" placeholder="เพศ" required> -->
-                      <select id="sex" name="sex" required class="form-control"  size="">
+                      <select id="gender" name="gender" required class="form-control"  size="">
                         <option value="" >--กรุณาเลือกเพศ--</option>
-                        <option value="ชาย"><h5>ชาย</h5></option>
-                        <option value="หญิง"><h5>หญิง</h5></option>
+                        <option value="Male"><h5>ชาย</h5></option>
+                        <option value="Female"><h5>หญิง</h5></option>
                       </select>
                     </div>
                     <br>
@@ -78,17 +82,17 @@
                       <span class="input-group-addon"><i class="material-icons" title="สถานะ">wc</i></span> 
                       <select id="status" name="status" required class="form-control"  size="">
                         <option value="" >--กรุณาสถานะ--</option>
-                        <option value="professor"><h5>อาจารย์</h5></option>
-                        <option value="personnel"><h5>เจ้าหน้าที่</h5></option>
+                        <option value="PROFESSOR"><h5>อาจารย์</h5></option>
+                        <option value="PERSONNEL"><h5>เจ้าหน้าที่</h5></option>
                       </select>
                     </div>
                     <br>
                     <div class="text-center">
-                     <button class="btn btn-info">สมัครสมาชิก</button></a> 
+                     <button class="btn btn-info">เพิ่มบัญชีบุคลากร</button>
                      
                      <div class="register-link m-t-15 text-center">
+                     <p> <center><a href="career-advice.php?career=tables_user">กลับ</a></p></center>
                      </form>
-                     <p> <center>Already have account ? <a href="page-login.php">ลงชื่อเข้าใช้ระบบ</a></p></center>
                    </div>
                  </div>
                </div> 
@@ -103,33 +107,6 @@
 
    </div>
 
-   <!-- Modal -->
-   <div class="modal fade" id="messageModal" role="dialog" aria-labelledby="Message" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="messageModalLabel">Message</h4>
-        </div>
-        <div class="modal-footer">
-          <button id="btClose" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal fade" id="errorModal" role="dialog" aria-labelledby="Message" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" >อีเมล์หรือรหัสผ่านผิด กรุลองใหม่อีกครั้ง</h4>
-        </div>
-        <div class="modal-footer">
-          <button id="btClose" class="btn btn-danger" data-dismiss="modal">ปิด</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer>
     <div class="container container-fluid bg-4 text-center">

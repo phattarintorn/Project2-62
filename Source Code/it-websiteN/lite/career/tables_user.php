@@ -34,7 +34,9 @@
                 <?php
                 // if (isset($_SESSION["levels_train"])) {
                 if ($_SESSION["USER_STATUS"] == "ADMIN") {
-                  $sql = "SELECT * FROM M_USER ORDER BY M_USER.USER_STATUS ASC";
+                  $sql = "SELECT * FROM M_USER 
+                  WHERE USER_STATUS = 'PERSONNEL' OR USER_STATUS = 'PROFESSOR' OR USER_STATUS = 'STUDENT'
+                  ORDER BY USER_STATUS ASC";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) 
                   { 

@@ -4,34 +4,38 @@
 include("db/db.php"); 
 $status = $_REQUEST['status'];
 
-if ($status == "admin") {
+if ($status == "ADMIN") {
 	// echo $status;
 	$id = $_POST["id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
-	$sex = $_POST["sex"];
-}elseif ($status == "professor") {
+	$tel = $_POST["tel"];
+	$gender = $_POST["gender"];
+}elseif ($status == "PROFESSOR") {
 	// echo $status;
 	$id = $_POST["id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
-	$sex = $_POST["sex"];
-}elseif ($status == "personnel") {
+	$tel = $_POST["tel"];
+	$gender = $_POST["gender"];
+}elseif ($status == "PERSONNEL") {
 	// echo $status;
 	$id = $_POST["id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
-	$sex = $_POST["sex"];
+	$tel = $_POST["tel"];
+	$gender = $_POST["gender"];
 }else{
 	// echo $status;
 	$id = $_POST["id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
-	$sex = $_POST["sex"];
+	$gender = $_POST["gender"];
+	$tel = $_POST["tel"];
 	$advisors = $_POST["advisors"];
 	$gpa = $_POST["gpa"];
 	$gpax = $_POST["gpax"];
@@ -42,29 +46,31 @@ if ($status == "admin") {
 if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
-if ($status == "student") {
-	$sql = "UPDATE `customer` SET 
-	`firstname`='" .$firstname."',
-	`lastname`='" .$lastname."',
-	`sex`='" .$sex."',
-	`advisors`='" .$advisors."',
-	`gpa`='" .$gpa."',
-	`gpax`='" .$gpax."',
-	`email`='" .$email."'WHERE id=" . $id;
+if ($status == "STUDENT") {
+	$sql = "UPDATE M_USER SET 
+	USER_FIRSTNAME ='" .$firstname."',
+	USER_LASTNAME ='" .$lastname."',
+	USER_GENDER ='" .$gender."',
+	ADVISOR_ID ='" .$advisors."',
+	USER_TEL ='" .$tel."',
+	USER_GPA ='" .$gpa."',
+	USER_GPAX ='" .$gpax."',
+	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
 }else{
-	$sql = "UPDATE `customer` SET 
-	`firstname`='" .$firstname."',
-	`lastname`='" .$lastname."',
-	`sex`='" .$sex."',
-	`email`='" .$email."'WHERE id=" . $id;
+	$sql = "UPDATE M_USER SET 
+	USER_FIRSTNAME ='" .$firstname."',
+	USER_LASTNAME ='" .$lastname."',
+	USER_GENDER ='" .$gender."',
+	USER_TEL ='" .$tel."',
+	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
 }
 
 
 if (mysqli_query($conn, $sql)) {
 	echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-		window.location.href='career-advice.php?career=user_profile&".$id."';</script>");
+		window.location.href='career-advice.php?career=user_profile';</script>");
 } else {
-	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=tables_user';</script>");
+	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=user_profile';</script>");
 }
 
 mysqli_close($conn);
