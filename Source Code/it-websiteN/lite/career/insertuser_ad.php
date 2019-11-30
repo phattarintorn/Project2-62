@@ -43,7 +43,10 @@ if (!$conn) {
 	die("Connection failed: " . mysqli_connect_error());
 }
 if ($status == "STUDENT") {
-	$sql = "UPDATE M_USER SET 
+	$sql = "UPDATE M_USER AS USER
+	INNER JOIN MAPPING_STUDENT_DATA AS MS_DATA
+	ON MS_DATA.STUDENT_ID = USER.USER_ID
+	SET 
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
 	USER_GENDER ='" .$gender."',

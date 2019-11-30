@@ -10,6 +10,6 @@ if ($conn->query($sql)) {
 		window.location.href='career-advice.php?career=tables_user';</script>");
 } else { 
 	echo ("<script = 'javascript'>alert('ระบบทำการลบผู้ใช้ ผิดพลาด!!') 
-		window.location.href='index.php?page=tables_user';</script>");
+		window.location.href='career-advice.php?career=tables_user';</script>");
 }
 ?> 

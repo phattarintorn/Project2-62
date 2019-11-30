@@ -99,7 +99,7 @@ if ($result->num_rows > 0)
 							<label for="text-input" class=" form-control-label">รหัสอาจารย์:</label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_NAME"].'
+							'.$row["USER_USERNAME"].'
 							<input type="hidden" name="user_name" class="form-control" value="'.$row["USER_NAME"].'" >
 							</div>
 							</div>
