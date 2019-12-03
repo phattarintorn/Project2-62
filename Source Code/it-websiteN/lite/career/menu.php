@@ -43,6 +43,10 @@
               <a href="career-advice.php?career=add_career">
                 <i class="mdi mdi-account-convert"></i> อาชีพ
               </a>
+              <br><br>
+              <a href="career-advice.php?career=add_module">
+                <i class="mdi-book-plus"></i> เพิ่มรายวิชา
+              </a>
               <?php
             } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {
               ?> 

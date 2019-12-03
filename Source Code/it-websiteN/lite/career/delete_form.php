@@ -4,10 +4,10 @@ include("db/db.php");
 
 
 
-$Deleteid = $_GET["id"];
+$DeleteidGroup = $_GET["idGroup"];
 
 $conn->query("SET NAMES UTF8");
-$sql="DELETE FROM question WHERE q_id = ".$Deleteid; 
+$sql="DELETE FROM m_group_question WHERE QUESTION_GROUP = ".$DeleteidGroup; 
 
 if ($conn->query($sql)) { 
 	echo ("<script = 'javascript'>alert('ระบบทำการยกเลิกสำเร็จ') 

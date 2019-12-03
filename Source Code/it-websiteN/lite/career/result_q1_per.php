@@ -35,7 +35,6 @@
 				<tbody>
 					<?php 
 
-					// $sql = "SELECT * FROM question,q1 WHERE question.q_id = q1.q_id AND question.q_group =".$q_group;
 					$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 					$result = $conn->query($sql);
 					if ($result->num_rows > 0) 
