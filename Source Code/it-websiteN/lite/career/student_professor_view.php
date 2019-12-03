@@ -8,7 +8,12 @@ if ($conn->connect_error) {
 } 
 $id = $_REQUEST['id'];
 
-$sql = "SELECT * FROM M_USER WHERE USER_ID =".$id;
+$sql = "SELECT * FROM M_USER AS u
+        LEFT JOIN MAPPING_STUDENT_DATA AS mdata
+        ON u.USER_ID = mdata.STUDENT_ID
+        LEFT JOIN M_BRANCH AS b
+        ON mdata.BRANCH_ID = b.BRANCH_ID
+        WHERE USER_ID =".$id;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
 { 
@@ -83,6 +88,16 @@ if ($result->num_rows > 0)
             </div>
             <div class="col col-md-4">
               <?php echo $row["USER_EMAIL"]; ?>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col col-md-1">
+            </div>
+            <div class="col col-md-2">
+              <label for="text-input" class=" form-control-label">หลักสูตร : </label>
+            </div>
+            <div class="col col-md-4">
+              <?php echo $row["BRANCH_NAME"]; ?>
             </div>
           </div>
           <div class="row form-group">

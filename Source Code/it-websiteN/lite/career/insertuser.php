@@ -68,13 +68,14 @@ if ($status == "STUDENT") {
 	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
 }
 
-echo $sql;
+//echo $sql;
 
 if (mysqli_query($conn, $sql)) {
 	echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
 		window.location.href='career-advice.php?career=user_profile';</script>");
 } else {
-	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=user_profile';</script>");
+	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+		window.location.href='career-advice.php?career=user_profile';</script>");
 }
 
 mysqli_close($conn);
