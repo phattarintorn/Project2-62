@@ -42,7 +42,7 @@
 					</thead>
 					<tbody>
 						<?php
-						// $sql = "SELECT * FROM question,q1 WHERE question.q_id = q1.q_id AND q1.q_id =".$row["q_id"];
+						
  						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE Mq.QUESTION_ID = '".$q_id."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 
@@ -56,8 +56,7 @@
 								<input type="hidden" id="q_noq1"  name="q_noq1" value="'.$row["QUESTION_NO"].'">
 								<input type="hidden" id="choose_nonq1"  name="choose_nonq1" value="'.$row["QUESTION_CHOICE"].'">
 								';
-								// <input type="hidden" id="q1_id'.$i.'"  name="q1_id'.$i.'" value="'.$row["q1_id"].'">
-
+								
 								echo '<tr>';
 								echo '<td align="center">';
 								echo $row["QUESTION_NO"];

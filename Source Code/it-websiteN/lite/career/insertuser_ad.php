@@ -68,7 +68,8 @@ if (mysqli_query($conn, $sql)) {
 	echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
 		window.location.href='career-advice.php?career=tables_user';</script>");
 } else {
-	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=tables_user';</script>");
+	echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+		window.location.href='career-advice.php?career=tables_user';</script>");
 }
 
 mysqli_close($conn);

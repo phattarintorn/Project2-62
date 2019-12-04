@@ -18,16 +18,17 @@ if ($result->num_rows > 0)
 	while($row = $result->fetch_assoc()) 
 	{
 		?>
-		
-		<div class="card">
-			<div class="card-header">
-				<strong>ข้อมูลผู้ใช้</strong>
-			</div>
 
-			<div class="card-body card-block">
-				<form action="career-advice.php?career=insertuser" method="post" enctype="multipart/form-data" class="form-horizontal" id="edituser_profile">
+<div class="card">
+    <div class="card-header">
+        <strong>ข้อมูลผู้ใช้</strong>
+    </div>
 
-					<?php
+    <div class="card-body card-block">
+        <form action="career-advice.php?career=insertuser" method="post" enctype="multipart/form-data"
+            class="form-horizontal" id="edituser_profile">
+
+            <?php
 					if (isset($row["USER_STATUS"])) {
 						if ($row["USER_STATUS"] == "ADMIN") {
 							echo '
@@ -258,7 +259,7 @@ if ($result->num_rows > 0)
 							<div class="col col-md-5">
 							<input type="text" name="gender" class="form-control" value="'.$row["USER_GENDER"].'">
 							</div>
-							</div>
+							</div>							
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์</label>
@@ -266,15 +267,35 @@ if ($result->num_rows > 0)
 							<div class="col col-md-5">
 							<input type="text" name="tel" class="form-control" value="'.$row["USER_TEL"].'">
 							</div>
-							</div>
+							</div>'; ?>
+							
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา</label>
 							</div>
 							<div class="col col-md-5">
-							<input type="text" name="advisors" class="form-control" value="'.$row["ADVISOR_ID"].'">
+							<select id="advisors" name="advisors" required class="form-control"  size="">
+                        <option value="" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
+                        <?php
+                        $sqls = "SELECT * FROM `M_USER` WHERE `USER_STATUS` = 'PROFESSOR'";
+                        $result = $conn->query($sqls);
+                        if ($result->num_rows > 0) 
+                        {  
+                          while($row2 = $result->fetch_assoc()) 
+                          {   
+                            ?>
+                            <option value="<?php echo $row2["USER_ID"];?>"><?php echo $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"];?></option>  
+                            <?php
+                          }
+                        }   
+                        ?>
+					  </select>
+					  
+							<!-- <input type="text" name="advisors" class="form-control" value="'.$row["ADVISOR_ID"].'"> -->
 							</div>
 							</div>
+
+							<?php echo '
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม</label>
@@ -304,24 +325,24 @@ if ($result->num_rows > 0)
 						}
 					}
 					?>
-				</form>
-				<center>
-					<button type="submit" form="edituser_profile" class="btn btn-success ">บันทึก</button>
-					<a href="career-advice.php?career=user_profile">
-						<button class="btn btn-danger">ยกเลิก</i></button></a>
-					</a>
-				</center>
-				<br><br>
+        </form>
+        <center>
+            <button type="submit" form="edituser_profile" class="btn btn-success ">บันทึก</button>
+            <a href="career-advice.php?career=user_profile">
+                <button class="btn btn-danger">ยกเลิก</i></button></a>
+            </a>
+        </center>
+        <br><br>
 
 
-			</div>
-		</div>
-	</div>
+    </div>
+</div>
+</div>
 
 
-	<?php
+<?php
 }
 
 $conn->close(); 
 }
-?>   
+?>

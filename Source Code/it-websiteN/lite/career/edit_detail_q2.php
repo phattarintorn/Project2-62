@@ -32,7 +32,7 @@
 					</thead>
 					<tbody>
 						<?php
-						// $sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND q2.q_id =".$row["q_id"];
+					
 						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE Mq.QUESTION_ID = '".$q_id."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 

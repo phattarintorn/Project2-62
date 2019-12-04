@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <div class="col-md-2">
 </div>
 <div class="col-md-2">
@@ -8,51 +10,59 @@
 	<div class="card">
 		<div class="card-header">
 			<strong class="card-title"><center>อาชีพ</strong></center>
-		</div><br><br>
+		</div>
 
 		<div class="card-body">
-			<div class="row">
-				
 				<?php
 				include("db/db.php"); 
-
 
 				if ($conn->connect_error) {
 					die("Connection failed: " . $conn->connect_error);
 				}
+				?>
 
-
-				$sql = "SELECT * FROM `data_career` WHERE `career_id`";
+				<table id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th><center>ชื่ออาชีพ</center></th>
+                    <th><center>รูป</center></th> 
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+				<?php
+				$sql = "SELECT * FROM m_career WHERE CAREER_ID";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) 
 				{ 
 					while($row = $result->fetch_assoc()) 
 					{
-						?>	
-						<div class="col-xs-3 col-sm-3">
-							<div class="card">
-								<center>
-									<br><strong><!-- อาชีพ:  --><?php echo $row["career_name"]; ?><hr></strong>
-									<img src="images/career/character/<?php echo $row["career_character"]; ?>" title="<?php echo $row["career_detail"]; ?>"	  style="width:80%;max-width:180px;height:80%;max-height:280px" >
-									<br><br>
-
-									<button type="submit"class="btn btn-success btn-sm" onclick="window.location='career-advice.php?career=detail_career&career_id=<?php echo $row["career_id"] ?>'">ดูรายละเอียด</button>
-									<button type="submit" value="submit" name="submit" class="btn btn-danger btn-sm" onclick="window.location='career-advice.php?career=delete_career&career_id=<?php echo $row["career_id"] ?>'">ลบข้อมูล</button><br><br>
-								</center>
-							</div>
-
-						</div>
-						<?php
-
-					}
-				}	
-
-				?>
-			</div>
+					  echo "<tr>";
+                      echo '<td><center>'.$row['CAREER_NAME'].'</center></td>';
+                      echo '<td><center>'.$row['CAREER_IMAGE'].'</center></td>';
+                      echo '<td><center>
+                      <a title="รายละเอียดอาชีพ" class="btn-link ti-clipboard" href="#"> </a>
+                      <a title="แก้ไข" class="btn-link ti-write" href="#"> </a>';
+					  echo '</center></td>'; 
+					  echo "</tr>";
+                    }   
+                  } ?>
+                </tbody>
+              </table>
 		</div>
 	</div>
 </div>
-
+<script src="assets/js/lib/data-table/datatables.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/jszip.min.js"></script>
+<script src="assets/js/lib/data-table/pdfmake.min.js"></script>
+<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="assets/js/lib/data-table/datatables-init.js"></script>
 
 
 

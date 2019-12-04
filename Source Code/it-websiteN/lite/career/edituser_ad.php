@@ -268,15 +268,35 @@ if ($result->num_rows > 0)
 								<div class="col col-md-5">
 								<input type="text" name="gender" class="form-control" value="'.$row["USER_GENDER"].'">
 								</div>
-								</div>
+								</div>'; ?>
+
 								<div class="row form-group">
 								<div class="col col-md-3">
-								<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา</label>
+								<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>
 								</div>
 								<div class="col col-md-5">
-								<input type="text" name="advisors" class="form-control" value="'.$row["ADVISOR_ID"].'">
+								<?php
+								
+								$sql = "SELECT u.USER_FIRSTNAME, u.USER_LASTNAME FROM m_user as u
+								LEFT JOIN mapping_student_data as mdata
+								ON u.USER_ID = mdata.ADVISOR_ID
+								WHERE student_ID = ".$id;
+
+								$result = $conn->query($sql);
+								if ($result->num_rows > 0) 
+								{  
+								  while($row2 = $result->fetch_assoc()) 
+								  {   ?>
+									<?php echo $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"];?>
+									
+									<?php
+								  }
+								}
+								?>
 								</div>
 								</div>
+								
+								<?php echo '
 								<div class="row form-group">
 								<div class="col col-md-3">
 								<label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม</label>
