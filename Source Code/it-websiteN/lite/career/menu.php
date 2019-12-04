@@ -73,10 +73,10 @@
           ?>
           <div align="left">
           <a href="page-login.php">
-              <i class="fa fa-power-off"></i> เข้าสู่ระบบ
+              <i class="fa fa-user"></i> เข้าสู่ระบบ
             </a> <br><br>
             <a href="page-registerstudent.php">
-              <i class="fa fa-power-off"></i> สมัครสมาชิก
+              <i class="fa fa-plus-circle"></i> สมัครสมาชิก
             </a> <br>
             <hr><br>
             ระบบแนะนำอาชีพที่เหมาะสมกับนักศึกษา

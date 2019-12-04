@@ -37,7 +37,7 @@
                   <form action="../lite/page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสนักศึกษา">person</i></span>
-                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสนักศึกษา " required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username" placeholder="รหัสนักศึกษา " required maxlength="8">
                     </div>
                     <br>
                     <div class="input-group">

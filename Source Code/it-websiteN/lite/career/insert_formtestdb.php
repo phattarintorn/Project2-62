@@ -21,7 +21,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
-			
+
 			$sql = "INSERT INTO MAPPING_STUDENT_LOG (STUDENT_ID, QUESTION_TYPE, MAPPING_QUESTION_ID, QUESTION_SCORE, QUESTION_SELECTED, CREATE_DATE, CAREER_ID) 
 			VALUES (" .$user_idq1.", '" .$form_type1."', " .$mapp_id.", " .$choice.", " .$choice.", '" . $form_date . "', " . $career . ")";
 
@@ -100,9 +100,13 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 
 			if (mysqli_query($conn, $sql)) {
 				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-					window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."';</script>");
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."';
+					</script>");
 			} else {
-				echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=insert_formtest';</script>");
+				echo ("<script = 'javascript'>
+					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+					window.location.href='career-advice.php?career=insert_formtest';
+				</script>");
 			}
 		}
 	}
@@ -149,9 +153,13 @@ if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 
 			if (mysqli_query($conn, $sql)) {
 				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-					window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."';</script>");
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."';
+					</script>");
 			} else {
-				echo ("<script = 'javascript'>alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) window.location.href='career-advice.php?career=insert_formtest';</script>");
+				echo ("<script = 'javascript'>
+					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+					window.location.href='career-advice.php?career=insert_formtest';
+				</script>");
 			}
 		}
 	}

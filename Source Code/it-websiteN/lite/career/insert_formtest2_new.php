@@ -54,7 +54,7 @@
                     <input type="hidden" id="q_noq2<?php echo $i ?>" name="q_noq2<?php echo $i ?>" value="<?php echo $i ?>"> 
                     <input type="hidden" id="q_group" name="q_group" value="<?php echo $row["QUESTION_GROUP"] ?>"> 
                     <input type="hidden" id="q_typeq2" name="q_typeq2" value="<?php echo $row["QUESTION_TYPE"] ?>"> 
-                    <input type="hidden" id="q2_no" name="q2_no" value="<?php echo $row["QUESTION_CHOISE"] ?>"> 
+                    <input type="hidden" id="q2_no" name="q2_no" value="<?php echo $row["QUESTION_CHOICE"] ?>"> 
                     <input type="hidden" id="form_date<?php echo $i ?>" name="form_date<?php echo $i ?>" value="<?php date_default_timezone_set('asia/bangkok'); echo date('y-m-d H:i:s'); ?>"> 
  
                     <?php

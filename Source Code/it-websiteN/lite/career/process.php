@@ -89,7 +89,8 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 
 	if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 		echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-			window.location.href='career-advice.php?career=action&q_id=".$q_id."&q_id2=".$q_id2."&form_date=".$form_date."&form_type=".$form_type."&form_type2=".$form_type2."&form_side=".$form_part."&form_side2=".$form_part2."';</script>");
+				window.location.href='career-advice.php?career=action&q_id=".$q_id."&q_id2=".$q_id2."&form_date=".$form_date."&form_type=".$form_type."&form_type2=".$form_type2."&form_side=".$form_part."&form_side2=".$form_part2."';
+			</script>");
 	}
 }
 

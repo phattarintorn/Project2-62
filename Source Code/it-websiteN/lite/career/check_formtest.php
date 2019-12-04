@@ -8,7 +8,6 @@
 
 		$QUESTION_GROUP = $_REQUEST['QUESTION_GROUP'];
 
-		// $sql = "SELECT * FROM question WHERE status_using =0  AND q_group = ".$q_group;
 		$sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 AND QUESTION_TYPE = 'ความคิดเห็น' AND QUESTION_GROUP = " . $QUESTION_GROUP;
 		$result = $conn->query($sql);
 
