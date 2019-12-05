@@ -58,7 +58,8 @@
                 <i class="mdi mdi-bulletin-board"></i> ประวัติการทำแบบทดสอบ
               </a>  
               <br><br> 
-              <a href="career-advice.php?career=plan_Photo">
+              <!-- <a href="career-advice.php?career=plan_Photo"> -->
+              <a href="career-advice.php?career=dashboard_career_module">
                 <i class="mdi mdi-open-in-new"></i> แนะนำแผนการเรียน
               </a>  <br><br>
               <a href="career-advice.php?career=dashboard_student">

@@ -35,13 +35,13 @@ if ($i === 0) {
 	}
 
 	if (isset($_POST["branch"])) {
-		$sql = "INSERT INTO M_USER (USER_USERNAME, USER_PASSWORD, USER_FIRSTNAME, USER_LASTNAME, USER_GENDER, USER_GPA, USER_GPAX, USER_TEL, USER_EMAIL, USER_STATUS) 
+		$sql = "INSERT INTO M_USER(USER_USERNAME, USER_PASSWORD, USER_FIRSTNAME, USER_LASTNAME, USER_GENDER, USER_GPA, USER_GPAX, USER_TEL, USER_EMAIL, USER_STATUS) 
 		VALUES ('" . $username . "','" . $password . "','" . $firstname . "','" . $lastname . "','" . $gender . "','" . $gpa . "','" . $gpax . "', '" . $tel . "','" . $email . "','" . $status . "')";
 
 		if (mysqli_query($conn, $sql)) {
 			$last_id = mysqli_insert_id($conn);
-			$sql = "INSERT INTO MAPPING_STUDENT_DATA (STUDENT_ID, BRANCH_ID, ADVISOR_ID, CAREER_ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY)
-			VALUES (" . $last_id . ", " . $branch . ", " . $advisor . ", 0, SYSDATE(), 'SYSTEM', SYSDATE(), 'SYSTEM')";
+			$sql = "INSERT INTO MAPPING_STUDENT_DATA (STUDENT_ID, BRANCH_ID, ADVISOR_ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY)
+			VALUES (" . $last_id . ", " . $branch . ", " . $advisor . ", SYSDATE(), 'SYSTEM', SYSDATE(), 'SYSTEM')";
 			if (mysqli_query($conn, $sql)) {
 				echo ("<script = 'javascript'>alert('เพิ่มข้อมูลสำเร็จ กรุณาเข้าสู่ระบบ') 
 					window.location.href='page-login.php';</script>");
@@ -67,8 +67,7 @@ if ($i === 0) {
 	}
 
 } else {
-	if (isset($_POST["branch"])) {
-		echo ("<script = 'javascript'>
+	echo ("	<script = 'javascript'>
 				alert('Username มีอยู่ในระบบอยู่แล้ว หากลืมรหัสผ่าน กรุณาติดต่อเจ้าหน้าที่')
 				window.location.href='page-register.php';
 			</script>
