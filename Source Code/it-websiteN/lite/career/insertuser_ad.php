@@ -1,7 +1,9 @@
 <?php
 
 // Create connection
-include("db/db.php"); 
+include("db/db.php");
+
+$session = $_SESSION["USER_STATUS"]; 
 $status = $_REQUEST['status'];
 
 if ($status == "ADMIN") {
@@ -54,7 +56,9 @@ if ($status == "STUDENT") {
 	ADVISOR_ID ='" .$advisors."',
 	USER_GPA ='" .$gpa."',
 	USER_GPAX ='" .$gpax."',
-	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
+	USER_EMAIL ='" .$email."',
+	UPDATE_DATE = SYSDATE(),
+	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
 }else{
 	$sql = "UPDATE M_USER SET 
 	USER_FIRSTNAME ='" .$firstname."',
@@ -63,6 +67,7 @@ if ($status == "STUDENT") {
 	USER_TEL ='" .$tel."',
 	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
 }
+//cho $sql;
 
 if (mysqli_query($conn, $sql)) {
 	echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 

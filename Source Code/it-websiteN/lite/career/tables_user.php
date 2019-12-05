@@ -45,8 +45,18 @@
                       echo "<tr>";
                       echo '<td>'.$row['USER_USERNAME'].'</td>';
                       echo '<td>'.$row['USER_FIRSTNAME'].' ' .$row['USER_LASTNAME'].'</td>';
-                      echo '<td>'.$row['USER_GENDER'].'</td>';
-                      echo '<td>'.$row['USER_STATUS'].'</td>';
+                      if($row["USER_GENDER"] == "M"){
+                        echo '<td>ชาย</td>';
+                      } else {
+                        echo '<td>หญิง</td>';
+                      }
+                      if($row["USER_STATUS"] == "PROFESSOR") {
+                        echo '<td>อาจารย์</td>';
+                      } elseif($row["USER_STATUS"] == "PERSONNEL") {
+                        echo '<td>เจ้าหน้าที่</td>';
+                      } else {
+                        echo '<td>นักศึกษา</td>';
+                      }
                       echo '<td>'.$row['USER_EMAIL'].'</td>';
                       echo '<td>
                       <a title="แก้ไข"  class="btn-link ti-write" href="career-advice.php?career=edituser_ad&id='.$row['USER_ID'].'"></a>

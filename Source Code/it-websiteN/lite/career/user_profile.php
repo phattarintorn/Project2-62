@@ -52,15 +52,25 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-5">
 													' . $row["USER_LASTNAME"] . '
 													</div>
-													</div>
+													</div>';?>
+
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">อีเมล:</label>
+													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_EMAIL"] . '
+													<?php
+														if($row["USER_GENDER"] == "M")
+														{
+															echo 'ชาย';
+														} else {
+															echo 'หญิง';
+														}
+													?>
 													</div>
 													</div>
+
+													<?php echo'
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
@@ -71,10 +81,10 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เพศ:</label>
+													<label for="text-input" class=" form-control-label">อีเมล:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_GENDER"] . '
+													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>
 													';
@@ -104,15 +114,25 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-5">
 													' . $row["USER_LASTNAME"] . '
 													</div>
-													</div>
+													</div>';?>
+
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">อีเมล:</label>
+													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_EMAIL"] . '
+													<?php
+														if($row["USER_GENDER"] == "M")
+														{
+															echo 'ชาย';
+														} else {
+															echo 'หญิง';
+														}
+													?>
 													</div>
 													</div>
+													
+													<?php echo'													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
@@ -123,10 +143,10 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เพศ:</label>
+													<label for="text-input" class=" form-control-label">อีเมล:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_GENDER"] . '
+													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>
 													';
@@ -156,15 +176,25 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-5">
 													' . $row["USER_LASTNAME"] . '
 													</div>
-													</div>
+													</div>';?>
+
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">อีเมล:</label>
+													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_EMAIL"] . '
+													<?php
+														if($row["USER_GENDER"] == "M")
+														{
+															echo 'ชาย';
+														} else {
+															echo 'หญิง';
+														}
+													?>
 													</div>
 													</div>
+													
+													<?php echo'													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
@@ -175,10 +205,10 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เพศ:</label>
+													<label for="text-input" class=" form-control-label">อีเมล:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_GENDER"] . '
+													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>
 													';
@@ -225,16 +255,24 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-5">
 													' . $row["USER_TEL"] . '
 													</div>
-													</div>
+													</div>';?>
+
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
 													<div class="col col-md-5">
-													' . $row["USER_GENDER"] . '
+													<?php
+														if($row["USER_GENDER"] == "M")
+														{
+															echo 'ชาย';
+														} else {
+															echo 'หญิง';
+														}
+													?>
 													</div>
-													</div>'; ?>
-
+													</div>
+													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>

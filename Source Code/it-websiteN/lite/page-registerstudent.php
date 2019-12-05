@@ -59,8 +59,8 @@
                       <span class="input-group-addon"><i class="material-icons" title="เพศ">wc</i></span>
                       <select id="gender" name="gender" required class="form-control"  size="">
                         <option value="" >--กรุณาเลือกเพศ--</option>
-                        <option value="Male"><h5>ชาย</h5></option>
-                        <option value="Female"><h5>หญิง</h5></option>
+                        <option value="M"><h5>ชาย</h5></option>
+                        <option value="F"><h5>หญิง</h5></option>
                       </select>
                     </div>
                     <br> 
