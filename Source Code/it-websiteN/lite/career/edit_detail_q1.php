@@ -55,7 +55,8 @@
 								<input type="hidden" id="q_id'.$i.'"  name="q_id'.$i.'" value="'.$row["QUESTION_ID"].'">
 								<input type="hidden" id="q_noq1"  name="q_noq1" value="'.$row["QUESTION_NO"].'">
 								<input type="hidden" id="choose_nonq1"  name="choose_nonq1" value="'.$row["QUESTION_CHOICE"].'">
-								';
+								<input type="hidden" id="group"  name="q_group" value="'.$row["QUESTION_GROUP"].'">';
+								
 								
 								echo '<tr>';
 								echo '<td align="center">';

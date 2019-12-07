@@ -46,6 +46,7 @@
 								<input type="hidden" id="q_id2'.$i.'"  name="q_id2'.$i.'" value="'.$row["QUESTION_ID"].'">
 								<input type="hidden" id="q2_id'.$i.'"  name="q2_id'.$i.'" value="'.$row["QUESTION_ID"].'">
 								<input type="hidden" id="q_noq2"  name="q_noq2" value="'.$row["QUESTION_NO"].'"> 
+								<input type="hidden" id="group"  name="q_group" value="'.$row["QUESTION_GROUP"].'">
 								';
 								echo '<tr>'; 
 								echo '<td align="center" width="10%">ข้อ  '.$row["QUESTION_NO"].'</td>';

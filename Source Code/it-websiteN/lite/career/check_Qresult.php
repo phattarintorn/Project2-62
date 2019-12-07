@@ -46,7 +46,7 @@
 	?>
 	<center> 
 		<a href="career-advice.php?career=check_Qresult2&q_group=<?php echo $q_group ?>">
-			<button class="btn btn-danger">ต่อไป</i></button></a>
+			<button class="btn btn-danger" id="nextPage">ต่อไป</i></button></a>
 		</a>
 	</center> 
 </div> 

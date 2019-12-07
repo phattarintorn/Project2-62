@@ -66,5 +66,10 @@ $result = $conn->query($sql);
 			</table>
 		</div>
 	</div>
+	<CENTER >
+		<a href="career-advice.php?career=tables_q">
+			<button class="btn btn-danger">ย้อนกลับ</button>
+		</a>			
+	</CENTER>
 </div>
 

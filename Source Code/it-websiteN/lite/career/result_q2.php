@@ -42,6 +42,8 @@
 								$i = $i + 1;
 								$question_no = $row["QUESTION_NO"];	
 								$question_num = $question_no;
+								$count_C1 = 0;
+								$count_C2 = 0;
 								echo '<tr>'; 
 								if ($row["CAREER_ID_1"] != "") {
 									if ($row["QUESTION_NO"] == $question_no) {  
@@ -59,6 +61,7 @@
 										
 									} 
 								}else{  
+									$count_C1++;
 									echo '
 									<input type="hidden" name="q2_group" value="'.$row["QUESTION_GROUP"].'">
 									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
@@ -99,6 +102,7 @@
 										
 									} 
 								}else{  
+									$count_C2++;
 									echo '
 									<input type="hidden" name="q2_group" value="'.$row["QUESTION_GROUP"].'">
 									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
@@ -163,12 +167,16 @@
 					<input type="hidden" name="q_group" value="<?php echo $q_group ?>">
 					<div class="form-group"> 
 						<center>
-							<button type="submit" class="btn btn-success">บันทึก</button> 
+							<button type="submit" id="saveDataQ2"class="btn btn-success">บันทึก</button> 
 						</center> 
 					</div>
 				</div> 
 			</center>
 		</div>
+		<?php 
+			if($count_C1==0 && $count_C2==0)
+				echo ("<script = 'javascript'>document.getElementById('saveDataQ2').disabled = true;</script>");
+		?>
 	</div>
 </form> 
 

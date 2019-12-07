@@ -35,11 +35,22 @@
 							while($row = $result->fetch_assoc()) 
 							{  
 								$i = $i + 1;
+								$count = 0;
 								echo '<tr>'; 
 								if ($row["CAREER_ID_1"] != "") {
-
-								}else{  
+									echo'
+									<td width="10%" align="center">
+									<input type="checkbox"  disabled />
+									<label a></label></br> ';
+									echo '<td align="center">';
+									echo $row["QUESTION_NO"];
+									echo '</td>';  
+									echo '<td align="left">';
+									echo $row["QUESTION_DETAIL_1"];
+									echo '</td>';
 									
+								}else{  
+									$count++;
 									echo '
 									<input type="hidden" name="q1_group" value="'.$row["QUESTION_GROUP"].'">
 									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
@@ -97,12 +108,18 @@
 					</div>
 					<div class="form-group"> 
 						<center>
-							<button type="submit" class="btn btn-success">บันทึก</button> 
+							<button type="submit" id="saveDataQ1" class="btn btn-success" >บันทึก</button> 
 						</center> 
 					</div>
 				</div> 
 			</center>
 		</div>
+		<?php 
+			if($count==0)
+				echo ("<script = 'javascript'>
+					document.getElementById('saveDataQ1').disabled = true;		
+				</script>");
+		?>
 	</div>
 </div>  
 </form> 

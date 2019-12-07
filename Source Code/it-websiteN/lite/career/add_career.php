@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <div class="col-md-2">
 </div>
 <div class="col-md-2">
@@ -34,24 +35,27 @@
 				$sql = "SELECT * FROM m_career WHERE CAREER_ID";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) 
-				{ 
+				{ $i=0;
 					while($row = $result->fetch_assoc()) 
 					{
+						$i++;
 					  echo "<tr>";
-                      echo '<td><center>'.$row['CAREER_NAME'].'</center></td>';
-                      echo '<td><center>'.$row['CAREER_IMAGE'].'</center></td>';
+                      echo '<td><left>'.$row['CAREER_NAME'].'</left></td>';
+                      echo '<td><center id='.$i.'>'.$row['CAREER_IMAGE'].'</center></td>';
                       echo '<td><center>
                       <a title="รายละเอียดอาชีพ" class="btn-link ti-clipboard" href="#"> </a>
                       <a title="แก้ไข" class="btn-link ti-write" href="#"> </a>';
 					  echo '</center></td>'; 
 					  echo "</tr>";
+
                     }   
                   } ?>
                 </tbody>
-              </table>
+              </table>			 
 		</div>
 	</div>
 </div>
+
 <script src="assets/js/lib/data-table/datatables.min.js"></script>
 <script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
 <script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
