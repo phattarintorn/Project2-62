@@ -1,7 +1,9 @@
 <?php
 
 // Create connection
-include("db/db.php"); 
+include("db/db.php");
+
+$session = $_SESSION["USER_STATUS"];
 $status = $_REQUEST['status'];
 
 if ($status == "ADMIN") {
@@ -11,7 +13,6 @@ if ($status == "ADMIN") {
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
 	$tel = $_POST["tel"];
-	$gender = $_POST["gender"];
 }elseif ($status == "PROFESSOR") {
 	// echo $status;
 	$id = $_POST["id"];
@@ -19,7 +20,6 @@ if ($status == "ADMIN") {
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
 	$tel = $_POST["tel"];
-	$gender = $_POST["gender"];
 }elseif ($status == "PERSONNEL") {
 	// echo $status;
 	$id = $_POST["id"];
@@ -27,16 +27,13 @@ if ($status == "ADMIN") {
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
 	$tel = $_POST["tel"];
-	$gender = $_POST["gender"];
 }else{
 	// echo $status;
 	$id = $_POST["id"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$email = $_POST["email"];
-	$gender = $_POST["gender"];
 	$tel = $_POST["tel"];
-	$advisors = $_POST["advisors"];
 	$gpa = $_POST["gpa"];
 	$gpax = $_POST["gpax"];
 }
@@ -53,17 +50,16 @@ if ($status == "STUDENT") {
 	SET
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
-	USER_GENDER ='" .$gender."',
-	ADVISOR_ID ='" .$advisors."',
 	USER_TEL ='" .$tel."',
 	USER_GPA ='" .$gpa."',
 	USER_GPAX ='" .$gpax."',
-	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
+	USER_EMAIL ='" .$email."',
+	UPDATE_DATE = SYSDATE(),
+	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
 }else{
 	$sql = "UPDATE M_USER SET 
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
-	USER_GENDER ='" .$gender."',
 	USER_TEL ='" .$tel."',
 	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
 }

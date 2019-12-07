@@ -16,6 +16,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 		$q1_detailq1 = $_POST["q1_detailq1$i"];
 		$career = $_POST["career$i"];
 		$form_date = $_POST["form_date$i"];
+
 		if($choice != "")
 		{
 			if (!$conn) {
@@ -27,6 +28,43 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 
 			mysqli_query($conn, $sql);
 		}
+	}
+
+	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
+		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+		WHERE L.STUDENT_ID = $user_idq1 AND Q.QUESTION_ID = $q_idq1 GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+	
+	$result = $conn->query($sql);
+
+	if ($result->num_rows > 0) 
+	{
+		$i = 0;
+		$top_score = 0;
+		$total_score = 0;
+
+		while($row = $result->fetch_assoc()) 
+		{  
+			$i = $i +1;
+			$form_part = $row['QUESTION_PART'];
+			$form_type = $row['QUESTION_TYPE'];
+			
+			if ($i <= "5") {
+				$top_score = $top_score +  $row["SUM"];
+			} 
+
+			$total_score = $total_score +  $row["SUM"];
+
+			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
+			VALUES ($q_idq1, $user_idq1, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
+
+			mysqli_query($conn, $sql);
+
+		}
+		
+		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score . ", TOP_SCORE = " . $top_score . " WHERE QUESTION_ID = $q_idq1 AND STUDENT_ID = $user_idq1";
+		mysqli_query($conn, $sql);
+
 	}
 
 	$user_idq2 = $_POST["user_idq2"];
@@ -67,8 +105,49 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 			mysqli_query($conn, $sql);
 		}
 	}
+
+	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
+	LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+	LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+		WHERE L.STUDENT_ID = $user_idq2 AND Q.QUESTION_ID = $q_idq2 GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+	
+	$result = $conn->query($sql);
+	
+	if ($result->num_rows > 0) 
+	{
+		$i2 = 0;
+		$top_score2 = 0;
+		$total_score2 = 0;
+
+		while($row = $result->fetch_assoc()) 
+		{  
+			$i2 = $i2 +1;
+			$form_part2 = $row['QUESTION_PART'];
+			$form_type2 = $row['QUESTION_TYPE'];
+
+			if ($i2 <= "5") {
+				$top_score2 = $top_score2 +  $row["SUM"];
+			} 
+
+			$total_score2 = $total_score2 +  $row["SUM"];
+
+			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
+				VALUES ($q_idq2, $user_idq2, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
+
+			mysqli_query($conn, $sql);
+
+		}
+
+		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score2 . ", TOP_SCORE = " . $top_score2 . " WHERE QUESTION_ID = $q_idq2 AND STUDENT_ID = $user_idq2";
+		mysqli_query($conn, $sql);
+
+	}
+
 	if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"])) {
-		echo ("<script = 'javascript'> window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&q_id2=".$q_idq2."&form_date=".$form_date."'; </script>");
+		// echo ("<script = 'javascript'> window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&q_id2=".$q_idq2."&form_date=".$form_date."'; </script>");
+		echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+			window.location.href='career-advice.php?career=action&q_id=".$q_idq1."&q_id2=".$q_idq2."&form_date=".$form_date."&form_type=".$form_type."&form_type2=".$form_type2."&form_side=".$form_part."&form_side2=".$form_part2."';
+		</script>");
 	}
 }
 //-----------------------------------------------------------------------------------------------------------------------------------------
