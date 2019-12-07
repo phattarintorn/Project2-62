@@ -51,6 +51,10 @@
             } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {
               ?> 
               <a href="career-advice.php?career=tables_q">
+                <i class="mdi mdi-message-bulleted"></i> แผนการเรียน
+              </a>  
+              <br><br>
+              <a href="career-advice.php?career=tables_q">
                 <i class="mdi mdi-message-bulleted"></i> ทำแบบสอบถาม
               </a>  
               <br><br>
@@ -58,11 +62,11 @@
                 <i class="mdi mdi-bulletin-board"></i> ประวัติการทำแบบทดสอบ
               </a>  
               <br><br> 
-              <!-- <a href="career-advice.php?career=plan_Photo"> -->
               <a href="career-advice.php?career=dashboard_career_module">
                 <i class="mdi mdi-open-in-new"></i> แนะนำแผนการเรียน
-              </a>  <br><br>
-              <a href="career-advice.php?career=dashboard_student">
+              </a>
+              <br><br>
+              <a href="career-advice.php?career=dashboard_student_report">
                 <i class="mdi mdi-chart-arc"></i> รายงาน
               </a>
               <?php
@@ -77,12 +81,13 @@
         } else {
           ?>
           <div align="left">
-          <a href="page-login.php">
+            <a href="page-login.php">
               <i class="fa fa-user"></i> เข้าสู่ระบบ
-            </a> <br><br>
+            </a>
+            <br><br>
             <a href="page-registerstudent.php">
               <i class="fa fa-plus-circle"></i> สมัครสมาชิก
-            </a> <br>
+            </a><br>
             <hr><br>
             ระบบแนะนำอาชีพที่เหมาะสมกับนักศึกษา
           </div>

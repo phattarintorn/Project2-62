@@ -37,7 +37,8 @@ $q_group = $_REQUEST['q_group'];
                 G.QUESTION_GROUP, G.QUESTION_ID FROM MAPPING_STUDENT_LOG AS L
                 LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
                 LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-                WHERE G.QUESTION_STATUS = 0 AND G.QUESTION_GROUP = $q_group GROUP BY L.CREATE_DATE, G.QUESTION_TYPE"; //`form_date`
+                WHERE G.QUESTION_STATUS = 0 AND G.QUESTION_GROUP = $q_group 
+                GROUP BY L.CREATE_DATE, G.QUESTION_TYPE";
 
                 $result = $conn->query($sql);
 

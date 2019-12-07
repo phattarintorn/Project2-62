@@ -13,7 +13,6 @@
         </tr>
     </thead>
     <?php
-    // $sql = "SELECT * FROM `sum_form`,data_career WHERE sum_form.career = data_career.career_name AND `user_id`= '$_SESSION_id' AND `date` = '$form_date' AND `type` = '$form_type' AND `side` = '$form_side' ORDER BY `sum_form`.`degree` ASC";
     $sql = "SELECT * FROM MAPPING_STUDENT_REPORT AS R
         LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
         LEFT JOIN M_GROUP_QUESTION AS G ON R.QUESTION_ID = G.QUESTION_ID

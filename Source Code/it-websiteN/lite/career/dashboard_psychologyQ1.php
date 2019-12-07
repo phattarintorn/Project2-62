@@ -1,4 +1,7 @@
 <?php 
+include("dashboard_highcharts_psychology.php");  
+echo '<hr>';  
+
 $sql = "SELECT * FROM MAPPING_STUDENT_REPORT AS R
   LEFT JOIN M_CAREER AS C ON R.CAREER_ID = C.CAREER_ID
   LEFT JOIN M_GROUP_QUESTION AS G ON R.QUESTION_ID = G.QUESTION_ID
@@ -56,6 +59,4 @@ if ($result->num_rows > 0)
  </div>
  <?php    
 } 
-echo '<hr>';  
-include("dashboard_highcharts_psychology.php");  
 ?>

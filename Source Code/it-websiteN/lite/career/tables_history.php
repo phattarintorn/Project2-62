@@ -50,7 +50,8 @@
                     $sql = "SELECT * FROM MAPPING_STUDENT_LOG AS L
                       LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
                       LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-                      WHERE G.QUESTION_STATUS = 0 GROUP BY G.QUESTION_GROUP"; 
+                      WHERE G.QUESTION_STATUS = 0 AND L.STUDENT_ID = " . $_SESSION["USER_ID"] . "
+                      GROUP BY G.QUESTION_GROUP"; 
 
                     // $sql = "SELECT * FROM `question` WHERE `status_using`=0 ORDER BY `question`.`q_day` DESC"; 
 
