@@ -36,6 +36,12 @@
   </div>
 </h5>
 <!-- ------------------------------------------------------------------------------------------- -->
+<?php
+include("db/db.php"); 
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+?>
 <!-- Modal AddCareer -->
 <div class="modal fade" id="AddCareer" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -58,20 +64,41 @@
             </div>
             <div class="row form-group">
               <div class="col-md-12">
-                รายละเอียด
+                Module
               </div>
               <div class="col-md-12">
-                <input type="textarea" name="career_detail" class="form-control" required>
+                <?php
+                  $sql = "SELECT * FROM m_module WHERE MODULE_ID";
+                  $result = $conn->query($sql);
+                    if ($result->num_rows > 0) 
+                    { $i=0;
+                      while($row = $result->fetch_assoc()) 
+                      {
+                        $i = $i+1;
+                        echo ' 
+                        <div class="row ">
+                          <div class="col-md-1 center-block">
+                            <input type="checkbox" name="choice_module'.$i.'" id="choice_module'.$i.'" value="'. $row["MODULE_ID"].'"/>
+                            <label for="choice_module'.$i.'" ></label></br>
+                          </div>';
+                        echo '<div class="col">';
+                        echo $row["MODULE_CODE"]." ".$row["MODULE_NAME"];
+                        echo '</div>';  
+                        echo '</div>';  
+                      }
+                      echo '<input type="hidden" name="count_career" value="'.$i.'">';
+                    }
+                ?>
               </div>
             </div>
-            <div class="row form-group">
+            <!-- <div class="row form-group">
               <div class="col-md-12">
                 หลักสูตร
               </div>
               <div class="col-md-12">
                 <input type="file" name="career_course" class="form-control" required>
               </div>
-            </div>
+            </div> -->
             <div class="row form-group">
               <div class="col-md-12">
                 ภาพประกอบ อาชีพ

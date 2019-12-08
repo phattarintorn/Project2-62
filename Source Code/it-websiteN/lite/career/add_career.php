@@ -26,7 +26,6 @@
                 <thead>
                   <tr>
                     <th><center>ชื่ออาชีพ</center></th>
-                    <th><center>รูป</center></th> 
                     <th></th>
                   </tr>
                 </thead>
@@ -41,7 +40,6 @@
 						$i++;
 					  echo "<tr>";
                       echo '<td><left>'.$row['CAREER_NAME'].'</left></td>';
-                      echo '<td><center id='.$i.'>'.$row['CAREER_IMAGE'].'</center></td>';
                       echo '<td><center>
                       <a title="รายละเอียดอาชีพ" class="btn-link ti-clipboard" href="#"> </a>
                       <a title="แก้ไข" class="btn-link ti-write" href="#"> </a>';
