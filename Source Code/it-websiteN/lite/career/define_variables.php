@@ -9,14 +9,14 @@ if (isset($_POST["q1_group"])) {
 	
 	for ($i=1; $i <= $q_no; $i++) { 
 
-				if (isset($_POST["choice".$i])) {
+		if (isset($_POST["choice".$i])) {
 
-					$sql = "UPDATE mapping_question  SET CAREER_ID_1 ='".$career."' WHERE QUESTION_ID=".$q_id." AND QUESTION_NO = ".$i;
+			$sql = "UPDATE mapping_question  SET CAREER_ID_1 ='".$career."' WHERE QUESTION_ID=".$q_id." AND QUESTION_NO = ".$i;
 					
-					if (mysqli_query($conn, $sql)) {
-						echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-							window.location.href='career-advice.php?career=check_Qresult&q_group=".$q_group."';</script>"); 
-					} 
-				}
-			}
+			if (mysqli_query($conn, $sql)) {
+				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+					window.location.href='career-advice.php?career=check_Qresult&q_group=".$q_group."';</script>"); 
+			} 
+		}
+	}
 }
