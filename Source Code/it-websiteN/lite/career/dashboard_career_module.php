@@ -21,7 +21,7 @@
                         echo '<div class = "card-body" style = "padding: 15px;">';
                         echo '<img style="width:35%; height:45%; margin-bottom: 10px;" src="images/career/character/' . $row["CAREER_IMAGE"] . '">';
                         echo '<br>';
-                        echo '<a href="career-advice.php?career=select_module&CAREER_ID=' . $row["CAREER_ID"] . '" class="btn btn-success" style = "width:80%;">See Profile</a>';
+                        echo '<a href="career-advice.php?career=student_select_module&CAREER_ID=' . $row["CAREER_ID"] . '" class="btn btn-success" style = "width:80%;">See Profile</a>';
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';

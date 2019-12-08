@@ -34,10 +34,9 @@
                 if ($i <= 5) {
                     ?>
                     <tr>
-                        <!-- <th><?php //echo $row['degree']; ?></th> -->
                         <th><?php echo 'อันดับ '.$i.' '.$row['CAREER_NAME']; ?></th>
                         <?php $sumMax = $row['RAW_SCORE'] + $sumMax ; 
-                        $Max_score = ($row['RAW_SCORE'] / $row['TOP_SCORE'] ) *100; ?>
+                        $Max_score = ($row['RAW_SCORE'] / $row['TOTAL_SCORE'] ) *100; ?>
                         <td><?php echo ' '.number_format($Max_score, 2, '.', ' '); ?></td>
                     </tr>
                     <?php
