@@ -91,14 +91,6 @@ include("db/db.php");
                 ?>
               </div>
             </div>
-            <!-- <div class="row form-group">
-              <div class="col-md-12">
-                หลักสูตร
-              </div>
-              <div class="col-md-12">
-                <input type="file" name="career_course" class="form-control" required>
-              </div>
-            </div> -->
             <div class="row form-group">
               <div class="col-md-12">
                 ภาพประกอบ อาชีพ

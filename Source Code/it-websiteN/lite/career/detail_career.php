@@ -1,58 +1,61 @@
+<?php
+    include("db/db.php");
+    $conn->query("SET NAMES UTF8");
 
-<div class="col-md-12">
-	<div class="card">
-		<div class="card-header">
-			<strong class="card-title"><center>รายละเอียดอาชีพ</strong>
-			</div><br>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-md-9">
-						<div class="input-group"> 
-							<br>
-							<div class="left"> 
-								<?php
-								$career_id = $_REQUEST["career_id"];
-								include("db/db.php"); 
-								if ($conn->connect_error) {
-									die("Connection failed: " . $conn->connect_error);
-								}
-								$sql = "SELECT * FROM `data_career` WHERE `career_id` =".$career_id;
-								$result = $conn->query($sql);
-								if ($result->num_rows > 0) 
-								{ 
-									while($row = $result->fetch_assoc()) 
-									{
-										?>
-										<div class="modal-body">
-											<strong>ชื่ออาชีพ :</strong> &nbsp; &nbsp; &nbsp;
-											<?php echo $row["career_name"];?> 
-											<br><hr>
-											<strong>รายละเอียด :</strong> &nbsp; &nbsp; &nbsp;
-											<?php echo $row["career_detail"];?> 
-											<br><hr>
-											<strong>หลักสูตร :</strong> &nbsp; &nbsp; &nbsp;
-											<img style="width:30%;height:30%" src="images/career/course/<?php echo $row["career_course"];?>">
-											<br><hr>
-											<strong>รูปภาพอาชีพ :</strong> &nbsp; &nbsp; &nbsp;
-											<img style="width:20%;height:20%" src="images/career/character/<?php echo $row["career_character"];?>">
-											<br><hr>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<?php
-					}
-				} 
-				?>
-				<br>
-				<br>
-				<div class="col-md-2">
-					<button class="btn btn-secondary btn-sm" onclick="window.location='career-advice.php?career=add_career'">กลับ</button><br><br></div>
+	$CAREER_ID = $_GET["career_id"];
+?>
+<div class = "card">
+    <div class = "card-header">
+        <strong class="card-title">รายละเอียดอาชีพ</strong>
+    </div>
+    <div class = "row card-body" style = "padding: 20px;">
+        <div class = "col-md-3">
+            <div class = "card" style = "height: auto;" align = "center">
+                <?php
+                    $sql = "SELECT * FROM M_CAREER WHERE CAREER_ID = $CAREER_ID";
+                    $result = $conn->query($sql);
 
-				
-			</div>
-			</div>
-			</div>
-			
-				
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) {
+                            echo '<div class = "card-body" style = "padding: 15px;">';
+                            echo '<img style="width:35%; height:45%; margin-bottom: 10px;" src="images/career/character/' . $row["CAREER_IMAGE"] . '">';
+                            echo '<br>';
+                            echo $row["CAREER_NAME"];
+                            echo '</div>';
+                        }
+                    }
+                ?>
+            </div>
+        </div>
+        <div class = "col-md-9">
+            <div class = "card" align = "center">
+                <div class = "card-header">
+                    <strong class="card-title">Module</strong>
+                </div>
+                <div class = "row card-body" style = "padding: 20px;">
+                    <?php
+                            echo '<div class = "col-md-12 text-left">';
+                            $sql = "SELECT * FROM MAPPING_CAREER_MODULE AS MAPP
+                            LEFT JOIN M_MODULE AS M ON MAPP.MODULE_ID = M.MODULE_ID
+                            WHERE MAPP.CAREER_ID = $CAREER_ID ";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while($row = $result->fetch_assoc()) {
+                                    echo '<br>';
+                                    echo $row["MODULE_CODE"];
+                                    echo ' - ';
+                                    echo $row["MODULE_NAME"];
+                                    echo '<br>';
+                                }
+                            }
+                            echo '</div>';                       
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>	
+<div class="col-md-2">
+	<button class="btn btn-secondary " onclick="window.location='career-advice.php?career=add_career'">กลับ</button>
+</div>

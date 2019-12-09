@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
 				<?php
-				$sql = "SELECT * FROM m_career WHERE CAREER_ID";
+				$sql = "SELECT * FROM m_career WHERE CAREER_ID ";
 				$result = $conn->query($sql);
 				if ($result->num_rows > 0) 
 				{ $i=0;
@@ -41,8 +41,8 @@
 					  echo "<tr>";
                       echo '<td><left>'.$row['CAREER_NAME'].'</left></td>';
                       echo '<td><center>
-                      <a title="รายละเอียดอาชีพ" class="btn-link ti-clipboard" href="#"> </a>
-                      <a title="แก้ไข" class="btn-link ti-write" href="#"> </a>';
+                      <a title="รายละเอียดอาชีพ" class="btn-link ti-clipboard" href="career-advice.php?career=detail_career&career_id='.$row['CAREER_ID'].'"> </a>
+                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=edit_career&career_id='.$row['CAREER_ID'].'"></a>';
 					  echo '</center></td>'; 
 					  echo "</tr>";
 

@@ -63,7 +63,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 									</div>
 									<div class="col-md-5">
 										<select class="form-control" name="q_side<?php echo $i;?>" required>	
-											<option></option>
+											<option disabled selected value="">--โปรดเลือก--</option>
 											<option value="ด้านทักษะ" title="">วัดผลด้านทักษะ</option>
 											<option value="ด้านจิตวิทยา" title="">วัดผลด้านจิตวิทยา</option>
 										</select> 
@@ -78,11 +78,9 @@ function AddQ(topics,selObj,restore){ //v3.0
 									</div>
 									<div class="col-md-5">
 										<select class="form-control" name="q_type<?php echo $i;?>" required>	
-											<option></option>
+											<option disabled selected value="">--โปรดเลือก--</option>
 											<option value="ความคิดเห็น">ถามระดับความคิดเห็น</option>
 											<option value="เปรียบเทียบ">ถามเปรียบเทียบ</option>
-											<!-- <option value="Q3">เลือกเพียงหนึ่งคำตอบ</option> -->
-											<!-- <option value="Q4">เลือกหลายคำตอบ</option> -->
 										</select> 
 										<?php
 										if ($i == "1") {
@@ -111,18 +109,6 @@ function AddQ(topics,selObj,restore){ //v3.0
 										<input type="number" class="form-control" name="q_no<?php echo $i;?>" placeholder="จำนวนข้อคำถาม" min="3" max="50" required> 
 									</div>
 								</div>
-								<!-- <input type="hidden" class="form-control" name="choose_no<?php echo $i;?>" value="">   -->
-
-								<!-- <div class="row form-group">
-									<div class="col-md-2">
-									</div>
-									<div class="col-md-3">
-										จำนวนตัวเลือกคำถาม 
-									</div>
-									<div class="col-md-5">
-										<input type="number" class="form-control" name="choose_no<?php// echo $i;?>" placeholder="จำนวนตัวเลือก" min="2" max="5" required>  
-									</div>
-								</div> -->
 								<hr>
 								<?php
 
