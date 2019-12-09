@@ -38,7 +38,8 @@
                   LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
                   LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
                   WHERE G.QUESTION_STATUS = 0 AND G.QUESTION_GROUP = $QUESTION_GROUP 
-                  AND G.QUESTION_TYPE = 'เปรียบเทียบ' AND L.STUDENT_ID = " . $_SESSION['USER_ID'];
+                  AND G.QUESTION_TYPE = 'เปรียบเทียบ' AND L.STUDENT_ID = " . $_SESSION['USER_ID'] . "
+                  AND L.CREATE_DATE = '$CREATE_DATE'"; 
 
                 $result = $conn->query($sql);
 

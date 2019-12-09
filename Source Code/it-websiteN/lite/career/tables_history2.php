@@ -65,7 +65,7 @@ $q_group = $_REQUEST['q_group'];
 
 
                         echo '<td align="center">';
-                        echo '<a title="ดูประวัติ"  class="btn-link ti-write" href="career-advice.php?career=check_form&QUESTION_GROUP='.$row['QUESTION_GROUP'].'&QUESTION_TYPE='.$row['QUESTION_TYPE'].'"></a>';  
+                        echo '<a title="ดูประวัติ"  class="btn-link ti-write" href="career-advice.php?career=check_form&QUESTION_GROUP='.$row['QUESTION_GROUP'].'&QUESTION_TYPE='.$row['QUESTION_TYPE'].'&CREATE_DATE='.$row['CREATE_DATE'].'"></a>';  
                         echo '</td>';
                         echo '<td align="center">'; 
                         echo '<a title="ดูรายงาน"  class="btn-link ti-book" href="career-advice.php?career=action&q_id='.$row['QUESTION_ID'].'&form_date='.$row['CREATE_DATE'].'&form_type='.$row['QUESTION_TYPE'].'&form_side='.$row['QUESTION_PART'].'"></a>';  

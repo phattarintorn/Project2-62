@@ -50,7 +50,7 @@
               <?php
             } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {
               ?> 
-              <a href="career-advice.php?career=student_manage_module">
+              <a href="career-advice.php?career=student_module">
                 <i class="mdi mdi-message-bulleted"></i> แผนการเรียน
               </a>  
               <br><br>

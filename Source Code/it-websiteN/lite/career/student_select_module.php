@@ -2,8 +2,8 @@
     include('db/db.php');
 
     $sql = "SELECT * FROM MAPPING_MODULE_SEMESTER AS MS
-        LEFT JOIN M_MODULE AS M ON MS.MODULE_ID = M.MODULE_ID
-        WHERE MS.MODULE_SEMESTER = 1 ";
+        LEFT JOIN M_MODULE AS M ON MS.MODULE_ID = M.MODULE_ID";
+        // WHERE MS.MODULE_SEMESTER = 1 ";
 
     $result = $conn->query($sql);
 
