@@ -29,11 +29,11 @@
 
 <script src="js/jqsnow.js"></script>
 
-  <script >
+  <!-- <script >
   $(document).ready( function(){
       $.fn.snow();
   });
-  </script>
+  </script> -->
 
   <script type="text/javascript">
   function MM_swapImgRestore() { //v3.0

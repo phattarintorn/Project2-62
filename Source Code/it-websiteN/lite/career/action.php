@@ -18,17 +18,15 @@
 						$form_side = $_REQUEST['form_side']; 
 
 						if ($form_side == 'ด้านทักษะ' && $form_type == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_skiil.php");   //ได้แล้ว 
+							include("career/dashboard_highcharts_skill.php"); //ได้แล้ว 
 						}
 						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
-							// include("career/dashboard_psychologyQ1.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
 						}
 						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_skiil.php");   
+							include("career/dashboard_highcharts_skill.php"); //ได้แล้ว 
 						}
 						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
-							// include("career/dashboard_psychologyQ2.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
 						}
 					} 
@@ -48,31 +46,25 @@
 							include("career/dashboard_highcharts_skiil.php");   //ได้แล้ว 
 						}
 						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
-							// include("career/dashboard_psychologyQ1.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
 						}
 						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
 							include("career/dashboard_highcharts_skiil.php");   
 						}
 						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
-							// include("career/dashboard_psychologyQ2.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
 						}
 						//--------------------------------------------------------//
 						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'ความคิดเห็น') {
-							// include("career/dashboard_skiilQ1_2.php");   //ได้แล้ว 
 							include("career/dashboard_highcharts_skill2.php");   //ได้แล้ว 
 						}
 						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'ความคิดเห็น') {
-							// include("career/dashboard_psychologyQ1_2.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology2.php"); //ได้แล้ว 
 						}
 						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'เปรียบเทียบ') {
-							// include("career/dashboard_skiilQ2_2.php"); //ได้แล้ว
 							include("career/dashboard_highcharts_skill2.php"); //ได้แล้ว
 						}
 						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'เปรียบเทียบ') {
-							// include("career/dashboard_psychologyQ2_2.php"); //ได้แล้ว 
 							include("career/dashboard_highcharts_psychology2.php"); //ได้แล้ว 
 						}
 					} 
