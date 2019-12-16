@@ -364,3 +364,92 @@
         }
     }
 ?>
+<script>
+    let x = [
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: 'เทอม 1'
+            },
+            {
+                value : 0,
+                text: 'เทอม 2'
+            },
+            {
+                value : 0,
+                text: 'เทอม 3'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 1'
+            },
+            {
+                value : 4,
+                text: '204040 - English for Digital Technology Professionals Module'
+            },
+            {
+                value : 2,
+                text: '204020 - Introduction to Software Developer Professionals Module'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+    ]
+
+    // console.log(x)
+
+    for (i = 0; i < x.length; i++) {
+        let test = '<div class = "row" style = "margin: 20px;">'
+        for (j = 0; j < x[i].length; j++) {
+            test += '<div class = "col-md-3">'
+            let name = 'module_' + '_' + '_' + j
+            let value = x[i][j].value
+            let text = x[i][j].text
+            
+            if (value == 0) {
+                if (text != '')
+                    test += '<strong class = "card-title">'+ text +'</strong>'
+            } else if (value == -1){
+                test += '<select class="form-control" name = "module_1_1_3" required>'
+                test += 'include("student_select_module.php");'
+                test += '</select>'
+            } else {
+                test += '<select class="form-control" name = "module_1_1_3">'
+                let log = '<option value = "'+ value +'">'+ text +'</option>'
+                test += log
+                test += '</select>'
+            }
+
+            test += '</div>'
+        }
+        test += '</div>'
+        console.log(test)
+    }
+
+    function selectModule() {
+        let input = { id: 1 }
+        $.ajax({
+            url: "career/student_select_module.php",
+            method: "POST",
+            data: JSON.stringify(input),
+            dataType: "JSON",
+            success: function(response) {
+                for (x = 0; x < response.length; x++) {
+                    console.log(response[x])
+                }
+            },
+            error: function(err) {
+                console.log(err.responseText)
+            }
+        })
+    }
+
+</script>
