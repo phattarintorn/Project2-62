@@ -74,286 +74,8 @@
                     <div class = "row" style = "margin: 20px;">
                         <div class = "card" style = "width: 100vw;">
                             <div class = "card-body">
-                                <form action="career-advice.php?career=student_update_module" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">เทอม 1</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">เทอม 2</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">เทอม 3</strong>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- YEAR 1 ROW 1 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">ปีการศึกษา 1</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_1_1">
-                                                <option value = "4">204040 - English for Digital Technology Professionals Module</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_1_2">
-                                                <option value = "2">204020 - Introduction to Software Developer Professionals Module</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_1_3" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 1 ROW 2 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_1_1">
-                                                <option value = "1">204040 - Information Technology Foundation Module</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_1_2">
-                                                <option value = "3">204030 - Information Technology Foundation Module</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_1_3" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 1 ROW 3 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_1_1">
-                                                <option value = "55">213101 - English for Communication I</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_1_2">
-                                                <option value = "56">213102 - English for Communication II</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_1_3">
-                                                <option value = "57">213103 - English for Academic purposes</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 1 ROW 4 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_4_1_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_4_1_3" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                <form action="career-advice.php?career=student_update_module" id = "form_module" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                    <!-- YEAR 2 ROW 1 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">ปีการศึกษา 2</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_2_1" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_2_2" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_2_3" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 2 ROW 2 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_2_1" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_2_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_2_3" required>
-                                                <?php include('student_select_module.php'); ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 2 ROW 3 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_2_1" >
-                                                <option value = "58">213104 - English for Specific purposes</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_2_2" >
-                                                <option value = "59">213105 - English for careers</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_2_3" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 2 ROW 4 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_4_2_1" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_4_2_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- YEAR 3 ROW 1 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">ปีการศึกษา 3</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_3_1" >
-                                                <option value = "5">234990 - Project in Information Technology Module</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_3_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_3_3" >
-                                                <option value = "60">XXXXXX - Free Eelective Course</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 3 ROW 2 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_3_1" >
-                                                <option value = "62">205305 - Entrepreneurship and New Venture Creation</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_3_2" >
-                                                <option value = "63">205306 - Go-to-Market Strategies for Innovative Product and Service</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_2_3_3" >
-                                                <option value = "64">205307 - Business Plan and Financing</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 3 ROW 3 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_3_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_3_3_3" >
-                                                <option value = "38">204490 - Pre-Cooperative Education</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 3 ROW 4 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_4_3_3" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                                                    
-                                    <!-- YEAR 4 ROW 1 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-3">
-                                            <strong class = "card-title">ปีการศึกษา 4</strong>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_4_1" >
-                                                <option value = "39">204491 - Cooperative Education I</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                            <select class="form-control" name = "module_1_4_2" >
-                                                <option value = "60">XXXXXX - General Education</option>
-                                            </select>
-                                        </div>
-                                        <div class = "col-md-3">
-                                        </div>
-                                    </div>
-                                    <!-- YEAR 4 ROW 2 -->
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-12">
-                                        </div>
-                                    </div>
-
-                                    <div class = "row" style = "margin: 20px;">
-                                        <div class = "col-md-8">
-                                        </div>
-                                        <div class = "col-md-2">
-                                            <button class="btn btn-success" style = "width:100%;">บันทึก</button></a> 
-                                        </div>
-                                        <div class = "col-md-2">
-                                            <a href="career-advice.php?career=student_manage_module" class="btn btn-warning" style = "width:100%;">ย้อนกลับ</a>
-                                        </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -402,54 +124,319 @@
                 text: 'select'
             },
         ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 1,
+                text: '204040 - Information Technology Foundation Module'
+            },
+            {
+                value : 3,
+                text: '204030 - Information Technology Foundation Module'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 55,
+                text: '213101 - English for Communication I'
+            },
+            {
+                value : 56,
+                text: '213102 - English for Communication II'
+            },
+            {
+                value : 57,
+                text: '213103 - English for Academic purposes'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 2'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 58,
+                text: '213104 - English for Specific purposes'
+            },
+            {
+                value : 59,
+                text: '213105 - English for careers'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 3'
+            },
+            {
+                value : 5,
+                text: '234990 - Project in Information Technology Module'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 62,
+                text: '205305 - Entrepreneurship and New Venture Creation'
+            },
+            {
+                value : 63,
+                text: '205306 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 64,
+                text: '205307 - Business Plan and Financing'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 38,
+                text: '204490 - Pre-Cooperative Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 4'
+            },
+            {
+                value : 39,
+                text: '204491 - Cooperative Education I'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
     ]
 
-    // console.log(x)
-
-    for (i = 0; i < x.length; i++) {
-        let test = '<div class = "row" style = "margin: 20px;">'
-        for (j = 0; j < x[i].length; j++) {
-            test += '<div class = "col-md-3">'
-            let name = 'module_' + '_' + '_' + j
-            let value = x[i][j].value
-            let text = x[i][j].text
-            
-            if (value == 0) {
-                if (text != '')
-                    test += '<strong class = "card-title">'+ text +'</strong>'
-            } else if (value == -1){
-                test += '<select class="form-control" name = "module_1_1_3" required>'
-                test += 'include("student_select_module.php");'
-                test += '</select>'
-            } else {
-                test += '<select class="form-control" name = "module_1_1_3">'
-                let log = '<option value = "'+ value +'">'+ text +'</option>'
-                test += log
-                test += '</select>'
-            }
-
-            test += '</div>'
-        }
-        test += '</div>'
-        console.log(test)
-    }
-
-    function selectModule() {
-        let input = { id: 1 }
+    function select_module() {
         $.ajax({
             url: "career/student_select_module.php",
             method: "POST",
-            data: JSON.stringify(input),
             dataType: "JSON",
             success: function(response) {
-                for (x = 0; x < response.length; x++) {
-                    console.log(response[x])
-                }
+                generate_module(response)
             },
             error: function(err) {
                 console.log(err.responseText)
             }
         })
     }
+
+    function generate_module(input) {
+        let str = ''
+        let year = 0
+        let order = 1
+        for (i = 0; i < x.length; i++) {
+
+            if ( i%4 == 1 ) {
+                order = 1
+                year ++
+            }
+
+            str += '<div class = "row" style = "margin: 20px;">'
+            for (j = 0; j < x[i].length; j++) {
+                str += '<div class = "col-md-3">'
+                let name = 'module_' + order + '_' + year + '_' + j
+                let value = x[i][j].value
+                let text = x[i][j].text
+                
+                if (value == 0) {
+                    if (text != '')
+                        str += '<strong class = "card-title">'+ text +'</strong>'
+                } else if (value == -1){
+                    str += '<select class="form-control" name = "'+ name +'" required>'
+
+                    for (q = 0; q < input.length; q++) {
+                        if ( input[q].semester == j ) {
+                            let value_module = input[q].id
+                            let text_module = input[q].code + ' - ' + input[q].name
+                            str += '<option value = "'+ value_module +'">'+ text_module +'</option>'
+                        }
+                    }
+
+                    str += '</select>'
+                } else {
+                    str += '<select class="form-control" name = "'+ name +'">'
+                    str += '<option value = "'+ value +'">'+ text +'</option>'
+                    str += '</select>'
+                }
+                
+                str += '</div>'
+            }
+
+            order ++
+
+            str += '</div>'
+
+        }
+
+        str += '<div class = "row" style = "margin: 20px;">'
+        str += '<div class = "col-md-8">'
+        str += '</div>'
+        str += '<div class = "col-md-2">'
+        str += '<button class="btn btn-success" style = "width:100%;">บันทึก</button></a>' 
+        str += '</div>'
+        str += '<div class = "col-md-2">'
+        str += '<a href="career-advice.php?career=student_manage_module" class="btn btn-warning" style = "width:100%;">ย้อนกลับ</a>'
+        str += '</div>'
+        str += '</div>'
+
+        $('#form_module').append(str);
+
+    }
+
+    select_module()
 
 </script>
