@@ -87,7 +87,280 @@
     }
 ?>
 <script>
-    let x = [
+    let major = [
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: 'เทอม 1'
+            },
+            {
+                value : 0,
+                text: 'เทอม 2'
+            },
+            {
+                value : 0,
+                text: 'เทอม 3'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 1'
+            },
+            {
+                value : 1,
+                text: '234010 - Information Technology Foundation Module'
+            },
+            {
+                value : 2,
+                text: '204020 - Introduction to Software Developer Professionals Module'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 55,
+                text: '213101 - English for Communication I'
+            },
+            {
+                value : 3,
+                text: '204030 - Introduction to Data Science Professionals Module'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 56,
+                text: '213102 - English for Communication II'
+            },
+            {
+                value : 57,
+                text: '213203 - English for Academic purposes'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 2'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : -1,
+                text: 'select'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 58,
+                text: '213204 - English for Specific purposes'
+            },
+            {
+                value : 59,
+                text: '213205 - English for careers'
+            },
+            {
+                value : 61,
+                text: 'XXXXXX - Free Eelective Course'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 3'
+            },
+            {
+                value : 5,
+                text: '234991 - Project in Information Technology Module'
+            },
+            {
+                value : 5,
+                text: '234992 - Project in Information Technology Module'
+            },
+            {
+                value : 39,
+                text: '204491 - Cooperative Education I'
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 5,
+                text: '234993 - Project in Information Technology Module'
+            },
+            {
+                value : 4,
+                text: '203325 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 4,
+                text: '203324 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 4,
+                text: '2234043 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 38,
+                text: '204490 - Pre-Cooperative Education'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: 'ปีการศึกษาที่ 4'
+            },
+            {
+                value : 61,
+                text: 'XXXXXX - Free Eelective Course'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+    ]
+
+    let minor = [
         [
             {
                 value : 0,
@@ -366,7 +639,7 @@
             method: "POST",
             dataType: "JSON",
             success: function(response) {
-                generate_module(response)
+                generate_module(response, major)
             },
             error: function(err) {
                 console.log(err.responseText)
@@ -374,23 +647,25 @@
         })
     }
 
-    function generate_module(input) {
+    function generate_module(input, obj) {
+        $('#form_module').empty();
+        
         let str = ''
         let year = 0
         let order = 1
-        for (i = 0; i < x.length; i++) {
+        for (i = 0; i < obj.length; i++) {
+            str += '<div class = "row" style = "margin: 20px;">'
 
             if ( i%4 == 1 ) {
                 order = 1
                 year ++
             }
 
-            str += '<div class = "row" style = "margin: 20px;">'
-            for (j = 0; j < x[i].length; j++) {
+            for (j = 0; j < obj[i].length; j++) {
                 str += '<div class = "col-md-3">'
                 let name = 'module_' + order + '_' + year + '_' + j
-                let value = x[i][j].value
-                let text = x[i][j].text
+                let value = obj[i][j].value
+                let text = obj[i][j].text
                 
                 if (value == 0) {
                     if (text != '')
@@ -438,5 +713,14 @@
     }
 
     select_module()
+
+    $(document).ready(function(){
+        $('select').on('change', function(event ) {
+            var prevValue = $(this).data('previous');
+            $('select').not(this).find('option[value="'+prevValue+'"]').show();    
+            var value = $(this).val();
+            $(this).data('previous',value); $('select').not(this).find('option[value="'+value+'"]').hide();
+        });
+    });
 
 </script>
