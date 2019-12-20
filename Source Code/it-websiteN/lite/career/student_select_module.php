@@ -1,6 +1,5 @@
 <?php
     include('../db/db.php');
-    // include('db/db.php');
 
     $sql = "SELECT * FROM MAPPING_MODULE_SEMESTER AS MS
         LEFT JOIN M_MODULE AS M ON MS.MODULE_ID = M.MODULE_ID";
@@ -15,7 +14,6 @@
                 "name" => $row["MODULE_NAME"],
                 "semester" => $row["MODULE_SEMESTER"]
             );
-            // echo '<option value = "' . $row["MODULE_ID"] . '">' . $row["MODULE_CODE"] . ' - ' . $row["MODULE_NAME"] . '</option>';
         }
 
         // Encoding array in JSON format

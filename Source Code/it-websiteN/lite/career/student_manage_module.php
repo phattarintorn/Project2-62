@@ -1,91 +1,22 @@
-<?php
-    include("db/db.php");
-    $conn->query("SET NAMES UTF8");
+<div class = "card">
+    <div class = "card-header">
+        <strong class="card-title">แผนการเรียน</strong>
+    </div>
+    <div class = "card-body">
 
-    $sql = "SELECT * FROM MAPPING_STUDENT_DATA AS MAPP
-        LEFT JOIN M_CAREER AS C ON MAPP.CAREER_ID = C.CAREER_ID
-        WHERE MAPP.STUDENT_ID = " . $_SESSION["USER_ID"];
-        
-    $result = $conn->query($sql);
+        <?php include('career/career_module.php') ?>
 
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-
-            $CAREER_ID = $row["CAREER_ID"];
-
-            ?>
-
-            <div class = "card">
-                <div class = "card-header">
-                    <strong class="card-title">แผนการเรียน</strong>
-                </div>
+        <div class = "row" style = "margin: 20px;">
+            <div class = "card" style = "width: 100vw;">
                 <div class = "card-body">
-                    <div class = "row" style = "margin: 20px;">
-                        <div class = "col-md-3">
-                            <div class = "card" style = "height: auto;" align = "center">
-                                <div class = "card-body" style = "padding: 15px;">
-                                    <img style="width:auto; height:20vh; margin-bottom: 10px;" src="images/career/character/<?php echo $row["CAREER_IMAGE"] ?>">
-                                    <br>
-                                    <?php echo $row["CAREER_NAME"] ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class = "col-md-9">
-                            <div class = "card" align = "center">
-                                <div class = "card-header">
-                                    <strong class="card-title">แผนการเรียน</strong>
-                                </div>
-                                <div class = "row card-body" style = "padding: 20px;">
-                                    <?php
-                                        for ( $i = 1; $i <= 3; $i++ ) {
-                                            echo '<div class = "col-md-4">';
-                                            echo '<div class = "card" align = "center">';
+                    <form action="career-advice.php?career=student_update_module" id = "form_module" method="post" enctype="multipart/form-data" class="form-horizontal">
 
-                                            $sql = "SELECT * FROM MAPPING_CAREER_MODULE AS MAPP
-                                                LEFT JOIN M_MODULE AS M ON MAPP.MODULE_ID = M.MODULE_ID
-                                                LEFT JOIN MAPPING_MODULE_SEMESTER AS S ON MAPP.MODULE_ID = S.MODULE_ID
-                                                WHERE MAPP.CAREER_ID = $CAREER_ID AND MODULE_SEMESTER = $i";
-
-                                            $result = $conn->query($sql);
-
-                                            echo '<div class = "card-header">';
-                                            echo '<strong class="card-title">เทอม ' . $i . '</strong>';
-                                            echo '</div>';
-                                            echo '<div class = "card-body" style = "padding: 20px;">';
-
-                                            if ($result->num_rows > 0) {
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo $row["MODULE_CODE"];
-                                                    echo ' - ';
-                                                    echo $row["MODULE_NAME"];
-                                                    echo '<br>';
-                                                    echo '<br>';
-                                                }
-                                            }
-                                            echo '</div>';
-                                            echo '</div>';
-                                            echo '</div>';
-                                        }
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class = "row" style = "margin: 20px;">
-                        <div class = "card" style = "width: 100vw;">
-                            <div class = "card-body">
-                                <form action="career-advice.php?career=student_update_module" id = "form_module" method="post" enctype="multipart/form-data" class="form-horizontal">
-
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
-            <?php
-        }
-    }
-?>
+        </div>
+    </div>
+</div>
 <script>
     let major = [
         [
@@ -385,8 +316,8 @@
                 text: 'ปีการศึกษาที่ 1'
             },
             {
-                value : 4,
-                text: '204040 - English for Digital Technology Professionals Module'
+                value : 1,
+                text: '234010 - Information Technology Foundation Module'
             },
             {
                 value : 2,
@@ -403,12 +334,12 @@
                 text: ''
             },
             {
-                value : 1,
-                text: '204040 - Information Technology Foundation Module'
+                value : 55,
+                text: '213101 - English for Communication I'
             },
             {
                 value : 3,
-                text: '204030 - Information Technology Foundation Module'
+                text: '204030 - Introduction to Data Science Professionals Module'
             },
             {
                 value : -1,
@@ -421,8 +352,8 @@
                 text: ''
             },
             {
-                value : 55,
-                text: '213101 - English for Communication I'
+                value : 60,
+                text: 'XXXXXX - General Education'
             },
             {
                 value : 56,
@@ -430,7 +361,7 @@
             },
             {
                 value : 57,
-                text: '213103 - English for Academic purposes'
+                text: '213203 - English for Academic purposes'
             },
         ],
         [
@@ -479,12 +410,12 @@
                 text: 'select'
             },
             {
-                value : 60,
-                text: 'XXXXXX - General Education'
-            },
-            {
                 value : -1,
                 text: 'select'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
             },
         ],
         [
@@ -494,15 +425,15 @@
             },
             {
                 value : 58,
-                text: '213104 - English for Specific purposes'
+                text: '213204 - English for Specific purposes'
             },
             {
                 value : 59,
-                text: '213105 - English for careers'
+                text: '213205 - English for careers'
             },
             {
-                value : 60,
-                text: 'XXXXXX - General Education'
+                value : 61,
+                text: 'XXXXXX - Free Eelective Course'
             },
         ],
         [
@@ -530,51 +461,15 @@
             },
             {
                 value : 5,
-                text: '234990 - Project in Information Technology Module'
+                text: '234991 - Project in Information Technology Module'
             },
             {
-                value : 60,
-                text: 'XXXXXX - General Education'
-            },
-            {
-                value : 60,
-                text: 'XXXXXX - General Education'
-            },
-        ],
-        [
-            {
-                value : 0,
-                text: ''
-            },
-            {
-                value : 62,
-                text: '205305 - Entrepreneurship and New Venture Creation'
-            },
-            {
-                value : 63,
-                text: '205306 - Go-to-Market Strategies for Innovative Product and Service'
-            },
-            {
-                value : 64,
-                text: '205307 - Business Plan and Financing'
-            },
-        ],
-        [
-            {
-                value : 0,
-                text: ''
-            },
-            {
-                value : 0,
-                text: ''
-            },
-            {
-                value : 60,
-                text: 'XXXXXX - General Education'
+                value : 5,
+                text: '234992 - Project in Information Technology Module'
             },
             {
                 value : 38,
-                text: '204490 - Pre-Cooperative Education'
+                text: '205395 - Pre-Cooperative Education'
             },
         ],
         [
@@ -583,9 +478,37 @@
                 text: ''
             },
             {
+                value : 5,
+                text: '234993 - Project in Information Technology Module'
+            },
+            {
+                value : 4,
+                text: '203325 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+        ],
+        [
+            {
                 value : 0,
                 text: ''
             },
+            {
+                value : 4,
+                text: '203324 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 4,
+                text: '2234043 - Go-to-Market Strategies for Innovative Product and Service'
+            },
+            {
+                value : 0,
+                text: ''
+            },
+        ],
+        [
             {
                 value : 0,
                 text: ''
@@ -593,6 +516,14 @@
             {
                 value : 60,
                 text: 'XXXXXX - General Education'
+            },
+            {
+                value : 60,
+                text: 'XXXXXX - General Education'
+            },
+            {
+                value : 0,
+                text: ''
             },
         ],
         [
@@ -602,11 +533,11 @@
             },
             {
                 value : 39,
-                text: '204491 - Cooperative Education I'
+                text: '205492 - Cooperative Education I'
             },
             {
-                value : 60,
-                text: 'XXXXXX - General Education'
+                value : 61,
+                text: 'XXXXXX - Free Eelective Course'
             },
             {
                 value : 0,
@@ -639,7 +570,7 @@
             method: "POST",
             dataType: "JSON",
             success: function(response) {
-                generate_module(response, major)
+                generate_module(response, minor)
             },
             error: function(err) {
                 console.log(err.responseText)
@@ -672,7 +603,7 @@
                         str += '<strong class = "card-title">'+ text +'</strong>'
                 } else if (value == -1){
                     str += '<select class="form-control" name = "'+ name +'" required>'
-
+                    str += '<option value = "">-- SELECT MODULE --</option>'
                     for (q = 0; q < input.length; q++) {
                         if ( input[q].semester == j ) {
                             let value_module = input[q].id
@@ -715,11 +646,14 @@
     select_module()
 
     $(document).ready(function(){
-        $('select').on('change', function(event ) {
-            var prevValue = $(this).data('previous');
-            $('select').not(this).find('option[value="'+prevValue+'"]').show();    
+        $('select').on('change', function(event) {
+            var prev = $(this).data('previous');
+            $('select').not(this).find('option[value="'+prev+'"]').show();    
             var value = $(this).val();
-            $(this).data('previous',value); $('select').not(this).find('option[value="'+value+'"]').hide();
+            if (value != '') {
+                $(this).data('previous',value); 
+                $('select').not(this).find('option[value="'+value+'"]').hide();
+            }
         });
     });
 

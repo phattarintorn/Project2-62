@@ -144,7 +144,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 		mysqli_query($conn, $sql);
 
 		$sql = "SELECT SUM(RAW_SCORE) AS SUM, CAREER_ID FROM MAPPING_STUDENT_REPORT
-			WHERE STUDENT_ID = " . $_SESSION["USER_ID"] . "
+			WHERE STUDENT_ID = " . $_SESSION["USER_ID"] . " AND CREATE_DATE = '$form_date'
 			GROUP BY CAREER_ID ORDER BY SUM DESC LIMIT 1";
 
 		$result = $conn->query($sql);
