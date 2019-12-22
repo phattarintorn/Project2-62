@@ -15,17 +15,18 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <strong class="card-title">ข้อมูลผู้ใช้</strong>
+            <strong class="card-title">ข้อมูลนักศึกษา</strong>
           </div>
           <div class="card-body">
             <table id="bootstrap-data-table" class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th>รหัสนักศึกษา</th>
-                  <th>ชื่อ</th>
-                  <th>เกรดเฉลี่ย</th>
-                  <th>เกรดเฉลี่ยรวม</th>
-                  <th><center>ผลการทำแบบสอบถาม</center></th>
+                  <th><center>รหัสนักศึกษา</center></th>
+                  <th><center>ชื่อ</center></th>
+                  <th><center>เกรดเฉลี่ย</center></th>
+                  <th><center>เกรดเฉลี่ยรวม</center></th>
+                  <th><center>สถานะแผนการเรียน</center></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -33,8 +34,8 @@
                 $advisor_id = $_SESSION["USER_ID"];
                 if ($_SESSION["USER_STATUS"] == "PROFESSOR") { 
                   $sql = "SELECT * FROM m_user 
-                  LEFT JOIN mapping_student_data
-                  ON m_user.USER_ID = mapping_student_data.STUDENT_ID
+                  LEFT JOIN mapping_student_data ON m_user.USER_ID = mapping_student_data.STUDENT_ID
+                  LEFT JOIN mapping_student_plan AS std_p ON m_user.USER_ID = std_p.STUDENT_ID
                   WHERE m_user.USER_STATUS = 'STUDENT' AND mapping_student_data.ADVISOR_ID = $advisor_id";
                   
                   $result = $conn->query($sql);
@@ -42,13 +43,19 @@
                   { 
                     while($row = $result->fetch_assoc()) 
                     { 
-                      echo "<tr>";
+                      echo '<tr>';
                       echo '<td>'.$row['USER_USERNAME'].'</td>';
                       echo '<td>'.$row['USER_FIRSTNAME'].' '.$row['USER_LASTNAME'].'</td>';
                       echo '<td>'.$row['USER_GPA'].'</td>';
                       echo '<td>'.$row['USER_GPAX'].'</td>';
+                      if ($row['PLAN_STATUS'] == 0) {
+                        echo '<td align="center">ยังไม่ผ่าน</td>';
+                      } else {
+                        echo '<td align="center">ผ่านแล้ว</td>';
+                      }
                       echo '<td align="center">
-                      <a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=student_professor_view&id='.$row['USER_ID'].'"></a>
+                      <a title="แผนการเรียน"  class="btn-link ti-write" href="career-advice.php?career=student_professor_view_module&id='.$row['USER_ID'].'"></a>
+                      <a title="รายงาน"  class="btn-link ti-bar-chart" href="career-advice.php?career=student_professor_view&id='.$row['USER_ID'].'"></a>
                       </td>';
 
                       echo "</tr>"; 
@@ -66,5 +73,16 @@
     </div>
   </div>
 </div>
-<?php 
-?> 
+
+<script src="assets/js/lib/data-table/datatables.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/jszip.min.js"></script>
+<script src="assets/js/lib/data-table/pdfmake.min.js"></script>
+<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="assets/js/lib/data-table/datatables-init.js"></script>
+

@@ -61,7 +61,9 @@ if ($status == "STUDENT") {
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
 	USER_TEL ='" .$tel."',
-	USER_EMAIL ='" .$email."'WHERE USER_ID=" . $id;
+	USER_EMAIL ='" .$email."',
+	UPDATE_DATE = SYSDATE(),
+	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
 }
 
 //echo $sql;

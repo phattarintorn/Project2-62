@@ -1,5 +1,6 @@
 <?php
 include("db/db.php");
+$advisor_id = $_SESSION["USER_ID"];
 ?>
 <br>
 
@@ -43,12 +44,49 @@ include("db/db.php");
 
   <div class="col-lg-12">
     <?php
-    $advisor_id = $_SESSION["USER_ID"];
-    $sql = "SELECT SUM(MAPPING_STUDENT_REPORT.RAW_SCORE), 
-    MAPPING_STUDENT_REPORT.CAREER_ID,
-    MAPPING_STUDENT_REPORT.STUDENT_ID, 
-    M_USER.USER_ID
-    FROM MAPPING_STUDENT_REPORT,M_USER WHERE M_USER.USER_STATUS = 'STUDENT'";
+    $sql = "SELECT std_data.STUDENT_ID FROM mapping_student_data AS std_data
+    LEFT JOIN mapping_student_plan AS std_p 
+    ON std_p.STUDENT_ID = std_data.STUDENT_ID
+    WHERE std_data.ADVISOR_ID = $advisor_id AND std_p.PLAN_STATUS = 0
+    GROUP BY std_p.STUDENT_ID";
+    
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) 
+    {  
+      $count = 0; 
+      ?> 
+      <div class="col-md-12" title="แจ้งเตือน"> 
+        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true" title="ปิด">&times;</span>
+          </button>
+          <?php
+          
+          while($row = $result->fetch_assoc()) 
+          {
+            $count = $count +1;
+          }
+          
+          ?>
+          <span>มีนักศึกษา</span>
+          <span class="badge badge-pill badge-danger"><?php echo $count ?></span>
+          <span>คน ในที่ปรึกษาของท่าน <u>ยังไม่ผ่าน</u> การยืนยันแผนการเรียน</span>
+        </div>  
+      </div>  
+      <?php  
+    }
+    ?>
+  </div>
+
+
+  <div class="col-lg-12">
+    <?php
+    $sql = "SELECT SUM(sr.RAW_SCORE)
+    FROM m_user 
+    LEFT JOIN mapping_student_report AS sr ON m_user.USER_ID = sr.STUDENT_ID
+    LEFT JOIN mapping_student_data ON m_user.USER_ID = mapping_student_data.STUDENT_ID
+    WHERE mapping_student_data.ADVISOR_ID = $advisor_id
+    GROUP BY m_user.USER_ID";
     
     $result = $conn->query($sql);
     if ($result->num_rows > 0) 
@@ -68,18 +106,27 @@ include("db/db.php");
           }
           
           ?>
-          <span>มี</span>
+          <span>มีนักศึกษา</span>
           <span class="badge badge-pill badge-warning"><?php echo $count ?></span>
-          <span>แบบสอบถาม <u>ทำแล้ว</u> ของนักศึกษาในที่ปรึกษาของท่าน </span>
+          <span>คน ในที่ปรึกษาของท่าน <u>ทำแบบสอบถามแล้ว</u>  </span>
         </div> 
       </div>  
       <?php  
-    } 
+    } else {
+      echo '<div class="col-md-12" title="แจ้งเตือน"> 
+      <div class="alert  alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true" title="ปิด">&times;</span>
+        </button>
+        <span>นักศึกษาในที่ปรึกษาของท่านยังไม่ทำแบบสอบถาม</span>
+        </div> 
+      </div>';
+    }
     ?>
   </div> 
-
 </div> 
 </div>
+
 
 <div class="col-lg-12">
   <hr>
