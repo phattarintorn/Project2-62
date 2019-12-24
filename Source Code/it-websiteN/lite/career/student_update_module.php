@@ -19,7 +19,17 @@
                     }
                     $sql .= ', ' . $no . ', ' . $year . ', ' . $semester . ', SYSDATE(), "SYSTEM")';
 
-                    mysqli_query($conn, $sql);
+                    if (mysqli_query($conn, $sql)) {
+                        $sql = 'UPDATE MAPPING_STUDENT_PLAN SET PLAN_STATUS = 0
+                            WHERE STUDENT_ID = ' . $_SESSION["USER_ID"];
+                            if (mysqli_query($conn, $sql)) {
+                                echo ("<script = 'javascript'>alert('บันทึกแผนการเรียนสำเร็จ') 
+                                    window.location.href='career-advice.php?career=student_module';</script>");
+                            }
+                    } else {
+                        echo ("<script = 'javascript'>alert('บันทึกแผนการไม่เรียนสำเร็จ กรุณาตรวจสอบอีกครั้ง') 
+                            window.location.href='javascript:history.back()';</script>");
+                    }
                 } else {
                     $sql = 'UPDATE MAPPING_STUDENT_MODULE SET MODULE_ID = ';
                     if (isset($_POST[$var])) {
@@ -30,13 +40,18 @@
                     $sql .= ' WHERE STUDENT_ID = ' . $_SESSION["USER_ID"] . ' AND MODULE_NO = ' . $no . ' 
                         AND MODULE_YEAR = ' . $year . ' AND MODULE_SEMESTER = ' . $semester;
 
-                    mysqli_query($conn, $sql);
+                    if (mysqli_query($conn, $sql)) {
+                        if (mysqli_query($conn, $sql)) {
+                            echo ("<script = 'javascript'>alert('อัพเดตแผนการเรียนสำเร็จ') 
+                                window.location.href='career-advice.php?career=student_module';</script>");
+                        }
+                    } else {
+                        echo ("<script = 'javascript'>alert('อัพเดตแผนการไม่เรียนสำเร็จ กรุณาตรวจสอบอีกครั้ง') 
+                            window.location.href='javascript:history.back()';</script>");
+                    }
                 }
                 echo '<br>';
             }
         }
     }
-
-    echo ("<script = 'javascript'>alert('บันทึกแผนการเรียนสำเร็จ') 
-				window.location.href='career-advice.php?career=student_module';</script>");
 ?>

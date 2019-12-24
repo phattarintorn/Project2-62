@@ -19,7 +19,9 @@ if ($i === 0) {
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
 	$gender = $_POST["gender"];
-	if (isset($_POST["branch"])) {
+	if (isset($_POST["plan"])) {
+		$plan = $_POST["plan"];
+		$type = $_POST["type"];
 		$branch = $_POST["branch"];
 		$advisor = $_POST["advisor"];
 		$gpa = $_POST["gpa"];
@@ -34,7 +36,7 @@ if ($i === 0) {
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	if (isset($_POST["branch"])) {
+	if (isset($_POST["plan"])) {
 		$sql = "INSERT INTO M_USER(USER_USERNAME, USER_PASSWORD, USER_FIRSTNAME, USER_LASTNAME, USER_GENDER, USER_GPA, USER_GPAX, USER_TEL, USER_EMAIL, USER_STATUS) 
 		VALUES ('" . $username . "','" . $password . "','" . $firstname . "','" . $lastname . "','" . $gender . "','" . $gpa . "','" . $gpax . "', '" . $tel . "','" . $email . "','" . $status . "')";
 
@@ -43,8 +45,15 @@ if ($i === 0) {
 			$sql = "INSERT INTO MAPPING_STUDENT_DATA (STUDENT_ID, BRANCH_ID, ADVISOR_ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY)
 			VALUES (" . $last_id . ", " . $branch . ", " . $advisor . ", SYSDATE(), 'SYSTEM', SYSDATE(), 'SYSTEM')";
 			if (mysqli_query($conn, $sql)) {
-				echo ("<script = 'javascript'>alert('เพิ่มข้อมูลสำเร็จ กรุณาเข้าสู่ระบบ') 
-					window.location.href='page-login.php';</script>");
+				$sql = "INSERT INTO MAPPING_STUDENT_PLAN (STUDENT_ID, STUDENT_PLAN, PLAN_TYPE, PLAN_STATUS)
+				VALUES (" . $last_id . ", '" . $plan . "', '" . $type . "', 0)";
+				if (mysqli_query($conn, $sql)) {
+					echo ("<script = 'javascript'>alert('เพิ่มข้อมูลสำเร็จ กรุณาเข้าสู่ระบบ') 
+						window.location.href='page-login.php';</script>");
+				} else {
+					echo ("<script = 'javascript'>alert('ไม่สามารถเพิ่มข้อมูลได้ กรุณาตรวจสอบข้อมูล!!' . mysqli_error($conn) ) 
+						window.location.href='page-login.php';</script>");
+				}
 			} else {
 				echo ("<script = 'javascript'>alert('ไม่สามารถเพิ่มข้อมูลได้ กรุณาตรวจสอบข้อมูล!!' . mysqli_error($conn) ) 
 					window.location.href='page-login.php';</script>");
