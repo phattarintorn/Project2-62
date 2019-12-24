@@ -45,7 +45,7 @@
               </a>
               <br><br>
               <a href="career-advice.php?career=add_module">
-                <i class="mdi-book-plus"></i> เพิ่มรายวิชา
+                <i class="mdi-book-plus"></i> ชุดวิชา
               </a>
               <?php
             } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {

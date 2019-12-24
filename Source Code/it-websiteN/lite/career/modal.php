@@ -113,3 +113,85 @@ include("db/db.php");
 <!-- ------------------------------------------------------------------------------------------- -->
 
 
+!-- Modal AddModule -->
+<div class="modal fade" id="AddModule" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มชุดวิชา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=insert_module" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+                รหัสชุดวิชา
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="module_code" class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                ชื่อชุดวิชา
+              </div>
+              <div class="col-md-12">
+              <input type="text" name="module_name" class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group" id='course'>
+              <div class="col-md-2">
+                จำนวนรายวิชา
+              </div>
+              <div class="col-md-2">
+              <input type="number" name="count" id="count" class="form-control" onchange="add_course()" min='0' max='10' value='0'>
+              </div>
+            </div>
+            <div id='add_div'></div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+
+<script>
+function add_course() {
+  $('#count_course').remove();
+  $('#add_div').empty();
+  var x = document.getElementById("count");
+  let num = x.value;
+  if(num!=0){
+  let str ='';
+  
+  str = '<div class="row form-group" id="count_course">';
+  str += '<div class="col-md-12" align="center">';
+  str += 'รายวิชา';
+  str += '</div>';
+  str += '</div>';
+  $('#course').after(str);
+  
+  for(let i=0;i<num;i++){
+    let strCourse ='';
+    strCourse = '<div class="row form-group" id="">';
+    strCourse += '<div class="col-md-3" ">';
+    strCourse += '<input type="text" name="course_code'+i+'" class="form-control" placeholder="รหัสวิชา" required >';
+    strCourse += '</div>';
+    strCourse += '<div class="col-md-9" ">';
+    strCourse += '<input type="text" name="course_name'+i+'" class="form-control" placeholder="ชื่อวิชา" required >';
+    strCourse += '</div>';
+    strCourse += '</div>';
+
+    $('#add_div').append(strCourse);
+  }
+  }
+}
+</script>
