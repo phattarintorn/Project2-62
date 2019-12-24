@@ -58,16 +58,40 @@
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="เพศ">wc</i></span>
                       <select id="gender" name="gender" required class="form-control"  size="">
-                        <option value="" >--กรุณาเลือกเพศ--</option>
+                        <option value="" >-- กรุณาเลือกเพศ --</option>
                         <option value="M"><h5>ชาย</h5></option>
                         <option value="F"><h5>หญิง</h5></option>
                       </select>
                     </div>
-                    <br> 
+                    <br>
                     <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="หลักสูตร">assignment</i></span>
+                      <span class="input-group-addon"><i class="material-icons" title="แผนการเรียน">assignment</i></span>
+                      <select id="plan" name="plan" required class="form-control"  size="">
+                        <option value="" >-- กรุณาเลือกแผนการเรียน --</option>
+                        <option value="GENERAL"><h5>แผนการเรียนทั่วไป</h5></option>
+                        <option value="LIFE"><h5>แผนการเรียนตลอดชีวิต</h5></option>
+                      </select>
+                      <button  type="button" class="btn btn-link" title="แผนการเรียน คือ ?" data-toggle="modal" data-target="#EX">
+                        <i class="mdi mdi-help"></i><small> คือ?</small>
+                      </button>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons" title="แผนการเรียน">list</i></span>
+                      <select id="type" name="type" required class="form-control"  size="">
+                        <option value="" >-- กรุณาเลือกหลักสูตรการเรียน --</option>
+                        <option value="MAJOR"><h5>หลักสูตรเอก</h5></option>
+                        <option value="MINOR"><h5>หลักสูตรโท</h5></option>
+                      </select>
+                      <button  type="button" class="btn btn-link" title="หลักสูตรการเรียน คือ ?" data-toggle="modal" data-target="#EX">
+                        <i class="mdi mdi-help"></i><small> คือ?</small>
+                      </button>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons" title="หลักสูตร">class</i></span>
                       <select id="branch" name="branch" required class="form-control"  size="">
-                        <option value="" >--กรุณาเลือกหลักสูตร--</option>
+                        <option value="" >-- กรุณาเลือกหลักสูตร --</option>
                         <?php
                         include("db/db.php"); 
                         if ($conn->connect_error) {
@@ -91,7 +115,7 @@
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>
                       <select id="advisor" name="advisor" required class="form-control"  size="">
-                        <option value="" >--กรุณาเลือกชื่ออาจารย์ที่ปรึกษา--</option>
+                        <option value="" >-- กรุณาเลือกชื่ออาจารย์ที่ปรึกษา --</option>
                         <?php
                         include("db/db.php"); 
                         if ($conn->connect_error) {
@@ -232,3 +256,7 @@
   <script src="../js/check_logined.js"></script> -->
 </body>
 </html>
+
+<script>
+
+</script>

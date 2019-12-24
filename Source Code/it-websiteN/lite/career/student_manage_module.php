@@ -18,7 +18,8 @@
     </div>
 </div>
 <script>
-    let major = [
+
+    var major = [
         [
             {
                 value : 0,
@@ -291,7 +292,7 @@
         ],
     ]
 
-    let minor = [
+    var minor = [
         [
             {
                 value : 0,
@@ -564,13 +565,13 @@
         ],
     ]
 
-    function select_module() {
+    function select_module(obj) {
         $.ajax({
             url: "career/student_select_module.php",
             method: "POST",
             dataType: "JSON",
             success: function(response) {
-                generate_module(response, minor)
+                generate_module(response, obj)
             },
             error: function(err) {
                 console.log(err.responseText)
@@ -643,8 +644,6 @@
 
     }
 
-    select_module()
-
     $(document).ready(function(){
         $('select').on('change', function(event) {
             var prev = $(this).data('previous');
@@ -658,3 +657,19 @@
     });
 
 </script>
+
+<?php
+    echo '<script>';
+
+    $sql = 'SELECT * FROM MAPPING_STUDENT_PLAN WHERE STUDENT_ID = ' . $_SESSION["USER_ID"];
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+
+    if ($row["PLAN_TYPE"] == 'MAJOR') {
+        echo 'select_module(major)';
+    } else {
+        echo 'select_module(minor)';
+    }
+
+    echo '</script>';
+?>
