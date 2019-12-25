@@ -113,7 +113,6 @@ include("db/db.php");
 <!-- ------------------------------------------------------------------------------------------- -->
 
 
-!-- Modal AddModule -->
 <div class="modal fade" id="AddModule" role="dialog">
   <div class="modal-dialog modal-lg">
     <!-- Modal content-->
