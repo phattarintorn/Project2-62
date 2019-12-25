@@ -54,7 +54,7 @@ if ($file_career_character == "") {
 		if (mysqli_query($conn, $sql)) {
 			$career_id = $conn->insert_id;
 			$date =  date('y-m-d H:i:s');
-			printf($career_id);
+			//printf($career_id);
 			for ($i=1; $i <= $count_career; $i++){
 				if (isset($_POST["choice_module".$i])) {
 					$module_id = $_POST["choice_module".$i];
