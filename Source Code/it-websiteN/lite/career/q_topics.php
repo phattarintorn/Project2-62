@@ -150,7 +150,6 @@ function AddQ(topics,selObj,restore){ //v3.0
 							<input type="hidden" name="q_day" value="<?php date_default_timezone_set('asia/bangkok'); echo date('y-m-d H:i:s'); ?>">
 							<center>
 								<button type="submit" value="submit" name="submit" class="btn btn-success">ต่อไป</button>
-								<button type="submit" class="btn btn-danger">ยกเลิก</button>
 							</center>
 							<br>
 						</div>

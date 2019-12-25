@@ -16,7 +16,11 @@ if (isset($_POST["q1_group"])) {
 			if (mysqli_query($conn, $sql)) {
 				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
 					window.location.href='career-advice.php?career=check_Qresult&q_group=".$q_group."';</script>"); 
-			} 
-		}
+			}
+		}else{
+				echo ("<script = 'javascript'>alert('โปรดเลือกคำถาม') 
+				window.location.href='career-advice.php?career=check_Qresult&q_group=".$q_group."';</script>"); 
+
+		} 
 	}
 }
