@@ -8,8 +8,6 @@ if (isset($_POST["q2_group"])) {
 	$career = $_POST["career"];
   
 
-
-
 	$q_no = $q_no * 2;
 	for ($i=1; $i <= $q_no; $i++) { 
 

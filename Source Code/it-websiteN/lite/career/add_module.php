@@ -44,10 +44,10 @@
                       echo '<td><left>'.$row['MODULE_NAME'].'</left></td>';
                       echo '<td><center>
                       <a title="รายละเอียดชุดวิชา" class="btn-link ti-clipboard" href="career-advice.php?career=detail_module&module_id='.$row['MODULE_ID'].'"> </a>
-                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=edit_career&module_id='.$row['MODULE_ID'].'"></a>';
+                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=edit_module&module_id='.$row['MODULE_ID'].'"></a>';
 					  echo '</center></td>'; 
 					  echo "</tr>";
-
+					
                     }   
                   } ?>
                 </tbody>

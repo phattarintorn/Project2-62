@@ -86,7 +86,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 										if ($i == "1") {
 
 										}else{
-											echo '<center><small>*** หมายเหตุ *** กรุณาอย่าเลือกรูปแบบซ้ำกับหัวข้อก่อนหน้า</small></center>';
+											echo '<center><small><font color="red">*** หมายเหตุ *** กรุณาอย่าเลือกรูปแบบซ้ำกับหัวข้อก่อนหน้า</font></small></center>';
 										}
 										?>
 										
