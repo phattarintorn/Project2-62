@@ -665,11 +665,13 @@
     $result = $conn->query($sql);
     $row = $result->fetch_assoc();
 
-    if ($row["PLAN_TYPE"] == 'MAJOR') {
-        echo 'select_module(major)';
-    } else {
-        echo 'select_module(minor)';
-    }
+    if ($row["STUDENT_PLAN"] == 'GENERAL') {
+        if ($row["PLAN_TYPE"] == 'MAJOR') {
+            echo 'select_module(major)';
+        } else if ($row["PLAN_TYPE"] == 'MINOR') {
+            echo 'select_module(minor)';
+        }
+    } 
 
     echo '</script>';
 ?>
