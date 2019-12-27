@@ -241,21 +241,21 @@ if ($result->num_rows > 0)
 							</div>
 							</div>
 							';
-						}else{
+						} else if ($row["USER_STATUS"] == "STUDENT") {
 							echo '
 							<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">รหัสนักศึกษา:</label>
+							<label for="text-input" class=" form-control-label">รหัสนักศึกษา : </label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_USERNAME"].'
+							<input type="text" name="user_name_show" class="form-control" value="'.$row["USER_USERNAME"].'" disabled>
 							<input type="hidden" name="user_name" class="form-control" value="'.$row["USER_USERNAME"].'" >
 							</div>
 							</div>
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">ชื่อ</label>
+							<label for="text-input" class=" form-control-label">ชื่อ : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="firstname" class="form-control" value="'.$row["USER_FIRSTNAME"].'">
@@ -263,7 +263,7 @@ if ($result->num_rows > 0)
 							</div>
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">นามสกุล</label>
+							<label for="text-input" class=" form-control-label">นามสกุล : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="lastname" class="form-control" value="'.$row["USER_LASTNAME"].'">
@@ -271,7 +271,7 @@ if ($result->num_rows > 0)
 							</div>
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">อีเมล</label>
+							<label for="text-input" class=" form-control-label">อีเมล : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="email" class="form-control" value="'.$row["USER_EMAIL"].'">
@@ -279,24 +279,28 @@ if ($result->num_rows > 0)
 							</div>';?>
 
 							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เพศ:</label>
+								<div class="col col-md-3">
+									<label for="text-input" class=" form-control-label">เพศ : </label>
+								</div>
+								<div class="col col-md-5">
+									<select id="gender" name="gender" required class="form-control"  size="">
+										<?php
+											if ($row["USER_GENDER"] == "M") {
+												echo '<option value="M" selected><h5>ชาย</h5></option>
+													<option value="F"><h5>หญิง</h5></option>';
+											} else if ($row["USER_GENDER"] == "F") {
+												echo '<option value="M"><h5>ชาย</h5></option>
+													<option value="F" selected><h5>หญิง</h5></option>';
+											}
+										?>
+									</select>
+								</div>
 							</div>
-							<div class="col col-md-5">
-							<?php
-								if($row["USER_GENDER"] == "M")
-								{
-									echo 'ชาย';
-								} else {
-									echo 'หญิง';
-								}
-							?>
-							</div>
-							</div>
+							
 							<?php echo '						
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์</label>
+							<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์ : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="tel" class="form-control" value="'.$row["USER_TEL"].'">
@@ -304,36 +308,31 @@ if ($result->num_rows > 0)
 							</div>'; ?>
 							
 							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>
-							</div>
-							<div class="col col-md-5">
-							<?php
-							$sql = "SELECT u.USER_FIRSTNAME, u.USER_LASTNAME FROM m_user as u
-							LEFT JOIN mapping_student_data as mdata
-							ON u.USER_ID = mdata.ADVISOR_ID
-							WHERE student_ID = ".$id;
+								<div class="col col-md-3">
+									<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา : </label>
+								</div>
+								<div class="col col-md-5">
+									<?php
+										$sql = "SELECT u.USER_FIRSTNAME, u.USER_LASTNAME FROM m_user as u
+										LEFT JOIN mapping_student_data as mdata ON u.USER_ID = mdata.ADVISOR_ID
+										WHERE student_ID = ".$id;
 
-							$result = $conn->query($sql);
-							if ($result->num_rows > 0) 
-							{  
-							  while($row2 = $result->fetch_assoc()) 
-							  {   ?>
-								<?php 
-								
-								echo $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"];?>
-								
-								<?php
-							  }
-							}
-							?>
-							</div>
+										$result = $conn->query($sql);
+										
+										if ($result->num_rows > 0) {  
+											while ($row2 = $result->fetch_assoc()) {
+												echo '<input type="text" name="advisor_name_show" class="form-control" 
+													value="'. $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"] .'" disabled>';
+											}
+										}
+									?>
+								</div>
 							</div>
 
 							<?php echo '
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม</label>
+							<label for="text-input" class=" form-control-label">GPA : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="gpa" class="form-control" value="'.$row["USER_GPA"].'">
@@ -341,35 +340,33 @@ if ($result->num_rows > 0)
 							</div>
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เกรดเฉลี่ยร่วม</label>
+							<label for="text-input" class=" form-control-label">GPAX : </label>
 							</div>
 							<div class="col col-md-5">
 							<input type="text" name="gpax" class="form-control" value="'.$row["USER_GPAX"].'">
 							</div>
 							</div>
-							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">สถานะ</label>
-							</div>
-							<div class="col col-md-5">
-							'.$row["USER_STATUS"].'
-							<input type="hidden" name="status" class="form-control" value="'.$row["USER_STATUS"].'" >
-							</div>
-							</div>
+							<input type="hidden" id="status" name="status" value="'.$row["USER_STATUS"].'">
 							';
 						}
 					}
 					?>
-        </form>
-        <center>
-            <button type="submit" form="edituser_profile" class="btn btn-success ">บันทึก</button>
-            <a href="career-advice.php?career=user_profile">
-                <button class="btn btn-danger">ยกเลิก</i></button></a>
-            </a>
-        </center>
-        <br><br>
-
-
+		</form>
+		<br>
+		<div class="row form-group">
+			<div class="col col-md-4">
+			</div>
+			<div class="col col-md-2">
+            	<button type="submit" form="edituser_profile" class="btn btn-success " style = "width:10vw;">บันทึก</button>
+			</div>
+			<div class="col col-md-2">
+				<a href="career-advice.php?career=user_profile">
+					<button class="btn btn-danger" style = "width:10vw;">ยกเลิก</i></button></a>
+				</a>
+			</div>
+			<div class="col col-md-4">
+			</div>
+		</div>
     </div>
 </div>
 </div>

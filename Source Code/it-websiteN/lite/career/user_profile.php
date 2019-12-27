@@ -5,8 +5,6 @@ if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 }
 
-$username = $_SESSION["USER_USERNAME"];
-
 if (isset($_SESSION["USER_ID"])) {
 	$sql = "SELECT * FROM M_USER AS u
 	LEFT JOIN MAPPING_STUDENT_DATA AS sdata
@@ -219,7 +217,7 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">รหัสนักศึกษา:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_USERNAME"] . '
 													</div>
 													</div>
@@ -227,92 +225,103 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">ชื่อ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_FIRSTNAME"] . '
 													</div>
-													</div>
-
-													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">นามสกุล:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_LASTNAME"] . '
+													</div>
+													</div>
+													<div class="row form-group">
+													<div class="col col-md-3">
+													<label for="text-input" class=" form-control-label">เพศ:</label>
+													</div>
+													<div class="col col-md-3">';
+
+													if($row["USER_GENDER"] == "M") {
+														echo 'ชาย';
+													} else if($row["USER_GENDER"] == "F") {
+														echo 'หญิง';
+													}
+
+												echo'
+													</div>
+													<div class="col col-md-3">
+													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
+													</div>
+													<div class="col col-md-3">
+													' . $row["USER_TEL"] . '
 													</div>
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">อีเมล:</label>
 													</div>
-													<div class="col col-md-5">
-													' . $row["USER_EMAIL"] . '
-													</div>
-													</div>
-													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
-													</div>
-													<div class="col col-md-5">
-													' . $row["USER_TEL"] . '
+													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>';?>
 
 													<div class="row form-group">
-													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เพศ:</label>
-													</div>
-													<div class="col col-md-5">
-													<?php
-														if($row["USER_GENDER"] == "M")
-														{
-															echo 'ชาย';
-														} else {
-															echo 'หญิง';
-														}
-													?>
-													</div>
+														<div class="col col-md-3">
+															<label for="text-input" class=" form-control-label">หลักสูตร:</label>
+														</div>
+														<div class="col col-md-3">
+															<?php
+																$sql = "SELECT * FROM MAPPING_STUDENT_DATA AS SD
+																LEFT JOIN M_BRANCH AS B ON SD.BRANCH_ID = B.BRANCH_ID
+																WHERE STUDENT_ID = ".$_SESSION["USER_ID"];
+
+																$result = $conn->query($sql);
+																$row2 = $result->fetch_assoc();
+
+																echo $row2["BRANCH_NAME"];
+															?>
+														</div>
 													</div>
 													
 													<div class="row form-group">
-													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>
-													</div>
-													<div class="col col-md-5">
-													<?php
-													
-													$sql = "SELECT u.USER_FIRSTNAME, u.USER_LASTNAME FROM m_user as u
-													LEFT JOIN mapping_student_data as mdata
-													ON u.USER_ID = mdata.ADVISOR_ID
-													WHERE student_ID = ".$_SESSION["USER_ID"];
+														<div class="col col-md-3">
+															<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>
+														</div>
+														<div class="col col-md-3">
+															<?php
+																$sql = "SELECT U.USER_FIRSTNAME, U.USER_LASTNAME, U.USER_TEL FROM M_USER as U
+																LEFT JOIN MAPPING_STUDENT_DATA as SD ON U.USER_ID = SD.ADVISOR_ID
+																WHERE STUDENT_ID = ".$_SESSION["USER_ID"];
 
-													$result = $conn->query($sql);
-													if ($result->num_rows > 0) 
-													{  
-													  while($row2 = $result->fetch_assoc()) 
-													  {   ?>
-														<?php echo $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"];?>
-														
-														<?php
-													  }
-													}
-													?>
-													</div>
+																$result = $conn->query($sql);
+																$row2 = $result->fetch_assoc();
+																
+																echo $row2["USER_FIRSTNAME"].' '.$row2["USER_LASTNAME"];
+																			
+															?>
+														</div>
+														<div class="col col-md-3">
+															<label for="text-input" class=" form-control-label">เบอร์โทรติดต่อ:</label>
+														</div>
+														<div class="col col-md-3">
+															<?php
+																echo $row2["USER_TEL"];
+															?>
+														</div>
 													</div>
 													
 													<?php echo '
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เกรดเฉลี่ยต่อเทอม:</label>
+													<label for="text-input" class=" form-control-label">GPA:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_GPA"] . '
 													</div>
-													</div>
-													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เกรดเฉลี่ยร่วม:</label>
+													<label for="text-input" class=" form-control-label">GPAX:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_GPAX"] . '
 													</div>
 													</div>
@@ -321,14 +330,19 @@ if (isset($_SESSION["USER_ID"])) {
 										}
 										?>
 						</form>
-						<center>
-							<button type="submit" class="btn btn-success " form="user_profile">แก้ไข</button>
-							<a href="career-advice.php">
-								<button class="btn btn-danger">ยกเลิก</i></button></a>
-							</a>
-						</center><br><br>
-						</center>
-						</center><br><br>
+						<br/>
+						<div class="row form-group">
+							<div class="col col-md-8">
+							</div>
+							<div class="col col-md-2">
+								<button type="submit" class="btn btn-success " form="user_profile" style = "width:100%;">แก้ไข</button>
+							</div>
+							<div class="col col-md-2">
+								<a href="career-advice.php">
+									<button class="btn btn-danger" style = "width:100%;">ยกเลิก</i></button>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

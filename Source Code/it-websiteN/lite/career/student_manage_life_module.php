@@ -17,7 +17,7 @@
 </div>
 
 <script>
-    function generate_module(response, obj) {
+    function generate_module(obj) {
         for (i = 0; i < obj.length; i++) {
             str = '<div class = "row" style = "margin: 20px;">'
             str += '<div class = "col-md-2">'
@@ -35,17 +35,18 @@
             str += '</div>'
 
             $('#form_module').append(str);
-
         }
+    }
 
+    function select_module(obj) {
         str = '<div class = "row" style = "margin: 20px;">'
         str += '<div class = "col-md-2"/>'
         str += '<div class = "col-md-8">'
         str += '<select class="form-control" name = "module" required>'
         str += '<option value = "">-- SELECT MODULE --</option>'
-        for (j = 0; j < response.length; j++) {
-                let value_module = response[j].id
-                let text_module = response[j].code + ' - ' + response[j].name
+        for (j = 0; j < obj.length; j++) {
+                let value_module = obj[j].id
+                let text_module = obj[j].code + ' - ' + obj[j].name
                 str += '<option value = "'+ value_module +'">'+ text_module +'</option>'
         }
         str += '</select>'
@@ -80,6 +81,7 @@
                 "date" => $row["CREATE_DATE"]
             );
         }
+        echo 'generate_module(' . json_encode($data_arr) . ')';
     }
     
     $sql = 'SELECT * FROM M_MODULE WHERE MODULE_ID NOT IN
@@ -97,10 +99,8 @@
                 "name" => $row["MODULE_NAME"],
             );
         }
+        echo 'select_module(' . json_encode($data_response) . ')';
     }
-
-    echo 'generate_module(' . json_encode($data_response) . ', ' . json_encode($data_arr) . ')';
-
     echo '</script>';
 
 ?>
