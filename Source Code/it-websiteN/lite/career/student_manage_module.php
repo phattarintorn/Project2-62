@@ -19,7 +19,7 @@
 </div>
 <script>
 
-    var major = [
+    var MAJOR = [
         [
             {
                 value : 0,
@@ -292,7 +292,7 @@
         ],
     ]
 
-    var minor = [
+    var MINOR = [
         [
             {
                 value : 0,
@@ -654,6 +654,13 @@
                 $('select').not(this).find('option[value="'+value+'"]').hide();
             }
         });
+
+        // select module in database
+        for (i = 0; i < module.length; i++) {
+            let name = 'module_' + module[i].no + '_' + module[i].year + '_' + module[i].semester
+            $('select[name="' + name + '"]').find('option[value="' + module[i].module + '"]').attr("selected",true);
+        }
+
     });
 
 </script>
@@ -666,12 +673,24 @@
     $row = $result->fetch_assoc();
 
     if ($row["STUDENT_PLAN"] == 'GENERAL') {
-        if ($row["PLAN_TYPE"] == 'MAJOR') {
-            echo 'select_module(major)';
-        } else if ($row["PLAN_TYPE"] == 'MINOR') {
-            echo 'select_module(minor)';
+        echo 'select_module(' . $row["PLAN_TYPE"] . ');';
+    }
+
+    $sql = 'SELECT * FROM MAPPING_STUDENT_MODULE WHERE STUDENT_ID = ' . $_SESSION["USER_ID"];
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_array()) {
+            $data_response[] = array(
+                "module" => $row["MODULE_ID"],
+                "no" => $row["MODULE_NO"],
+                "year" => $row["MODULE_YEAR"],
+                "semester" => $row["MODULE_SEMESTER"],
+            );
         }
-    } 
+    }
+
+    echo 'let module = ' . json_encode($data_response) . '';
 
     echo '</script>';
 ?>

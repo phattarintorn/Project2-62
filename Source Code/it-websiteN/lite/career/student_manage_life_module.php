@@ -18,36 +18,44 @@
 
 <script>
     function generate_module(response, obj) {
-        for (i = 0; i <= obj.length; i++) {
+        for (i = 0; i < obj.length; i++) {
             str = '<div class = "row" style = "margin: 20px;">'
             str += '<div class = "col-md-2">'
+            let datetime = obj[i].date
+            let date = datetime.split(" ");
+            str += date[0]
             str += '</div>'
             str += '<div class = "col-md-8">'
-            if (i == obj.length) {
-                str += '<select class="form-control" name = "module" required>'
-                str += '<option value = "">-- SELECT MODULE --</option>'
-                for (j = 0; j < response.length; j++) {
-                        let value_module = response[j].id
-                        let text_module = response[j].code + ' - ' + response[j].name
-                        str += '<option value = "'+ value_module +'">'+ text_module +'</option>'
-                }
-                str += '</select>'
-            } else {
-                str += '<label>'
-                str += obj[i].code + ' - ' + obj[i].name
-                str += '</label>'
-            }
+            str += '<label>'
+            str += obj[i].code + ' - ' + obj[i].name
+            str += '</label>'
             str += '</div>'
             str += '<div class = "col-md-2">'
-            if (i == obj.length) {
-                str += '<button class="btn btn-success" style = "width:100%;">บันทึก</button></a>' 
-            }
             str += '</div>'
             str += '</div>'
 
             $('#form_module').append(str);
 
         }
+
+        str = '<div class = "row" style = "margin: 20px;">'
+        str += '<div class = "col-md-2"/>'
+        str += '<div class = "col-md-8">'
+        str += '<select class="form-control" name = "module" required>'
+        str += '<option value = "">-- SELECT MODULE --</option>'
+        for (j = 0; j < response.length; j++) {
+                let value_module = response[j].id
+                let text_module = response[j].code + ' - ' + response[j].name
+                str += '<option value = "'+ value_module +'">'+ text_module +'</option>'
+        }
+        str += '</select>'
+        str += '</div>'
+        str += '<div class = "col-md-2">'
+        str += '<button class="btn btn-success" style = "width:100%;">บันทึก</button></a>' 
+        str += '</div>'
+        str += '</div>'
+
+        $('#form_module').append(str);
     }
 
 </script>
@@ -69,6 +77,7 @@
                 "id" => $row["MODULE_ID"],
                 "code" => $row["MODULE_CODE"],
                 "name" => $row["MODULE_NAME"],
+                "date" => $row["CREATE_DATE"]
             );
         }
     }
