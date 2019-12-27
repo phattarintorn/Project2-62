@@ -40,7 +40,7 @@
                 </div>
                 <div class = "row card-body" style = "padding: 20px;">
                     <?php
-                            echo '<div class = "col-md-12 text-left">';
+                            echo '<div class = "col-md-12 text-left" style=" overflow-y: scroll; height:51.5vh" >';
                             $sql = "SELECT * FROM m_module WHERE MODULE_ID";
                             $result = $conn->query($sql);
                               if ($result->num_rows > 0) 

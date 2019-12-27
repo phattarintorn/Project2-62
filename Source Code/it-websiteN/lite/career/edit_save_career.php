@@ -30,7 +30,7 @@ if ($file_career_character == "") {
                     ('" .$career_id."','".$module_id."','".$date."','" .$session_name."')";
                     if (mysqli_query($conn, $sql_m)) {
                         echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-                        window.location.href='career-advice.php?career=add_career';</script>");
+                        window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                     }
                 }
             }
@@ -84,7 +84,7 @@ if ($file_career_character == "") {
                         ('" .$career_id."','".$module_id."','".$date."','" .$session_name."')";
                         if (mysqli_query($conn, $sql_m)) {
                             echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-                                window.location.href='career-advice.php?career=add_career';</script>");
+                                window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                         }
                     }
                 }

@@ -66,7 +66,7 @@ include("db/db.php");
               <div class="col-md-12">
                 Module
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12" style=" overflow-y: scroll; height:50vh" >
                 <?php
                   $sql = "SELECT * FROM m_module WHERE MODULE_ID";
                   $result = $conn->query($sql);
@@ -111,7 +111,6 @@ include("db/db.php");
   </div>
 </h5>
 <!-- ------------------------------------------------------------------------------------------- -->
-
 
 <div class="modal fade" id="AddModule" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -193,4 +192,96 @@ function add_course() {
   }
   }
 }
+</script>
+
+<!-- ------------------------------------------------------------------------------------------- -->
+<div class="modal fade" id="AddCourse" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มชุดวิชา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=insert_course" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+                รหัสรายวิชา
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="course_code" class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                ชื่อรายวิชา
+              </div>
+              <div class="col-md-12">
+              <input type="text" name="course_name" class="form-control" required>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+<div class="modal fade" id="EditCourse" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขรายวิชา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=edit_save_course" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+        <input type="hidden" id="course_id" name="course_id" >
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+                รหัสรายวิชา
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="course_code" id="course_code" class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                ชื่อรายวิชา
+              </div>
+              <div class="col-md-12">
+              <input type="text" name="course_name" id="course_name" class="form-control" required>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+<script>
+  $('#EditCourse').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) 
+    var id = button.data('whatever')
+    var modal = $(this)
+    console.log(id);
+    $('#course_id').val(id)
+    $('#course_code').val($('#code'+id).text())
+    $('#course_name').val($('#name'+id).text())
+  })
 </script>

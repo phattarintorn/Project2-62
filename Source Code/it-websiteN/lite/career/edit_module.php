@@ -39,12 +39,9 @@
                 </div>
                 <div class = "row card-body" style = "padding: 20px;">
                     <?php
-                            echo '<div class = "col-md-12 text-left">';
-                            $sql = "SELECT * FROM mapping_module_course AS MAP
-                            LEFT JOIN M_COURSE AS M ON MAP.COURSE_ID = M.COURSE_ID
-                            WHERE MAP.MODULE_ID = $MODULE_ID ";
+                            echo '<div class = "col-md-12 text-left" style=" overflow-y: scroll; height:51.5vh" >';
+                            $sql = "SELECT * FROM m_course WHERE COURSE_ID";
                             $result = $conn->query($sql);
-
                               if ($result->num_rows > 0) 
                               { $i=0;
                                 while($row = $result->fetch_assoc()) 
@@ -52,16 +49,17 @@
                                   $i = $i+1;
                                   echo ' 
                                   <div class="row ">
-                                    <div class="col-md-3 center-block">
-                                        <input type="text" name="course_code" class="form-control" value="'.$row["COURSE_CODE"].'">
+                                    <div class="col-md-1 center-block">
+                                      <input type="checkbox" name="choice_course'.$i.'" id="choice_course'.$i.'" value="'. $row["COURSE_ID"].'"/>
+                                      <label for="choice_course'.$i.'" ></label></br>
                                     </div>';
                                   echo '<div class="col">';
-                                  echo '<input type="text" name="course_name" class="form-control" value="'.$row["COURSE_NAME"].'">';
+                                  echo $row["COURSE_CODE"]." ".$row["COURSE_NAME"];
                                   echo '</div>';  
                                   echo '</div>';  
                                 }
                                 $count = $i;
-                                echo '<input type="hidden" id="count_career" name="count_career" value="'.$count.'">';
+                                echo '<input type="hidden" id="count_course" name="count_course" value="'.$count.'">';
                               }
                             echo '</div>';                       
                     ?>
@@ -74,27 +72,27 @@
 </div>
 </form>
 <div class="col-md-2">
-	<button class="btn btn-secondary " onclick="window.location='career-advice.php?career=add_career'">กลับ</button>
+	<button class="btn btn-secondary " onclick="window.location='career-advice.php?career=add_module'">กลับ</button>
 </div>    
 <?php 
-    // $sql = "SELECT * FROM MAPPING_CAREER_MODULE AS MAPP
-    // LEFT JOIN M_MODULE AS M ON MAPP.MODULE_ID = M.MODULE_ID
-    // WHERE MAPP.CAREER_ID = $CAREER_ID ";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //        for($j = 1;$j<=$count;$j++)
-    //        {
-    //            echo ("<script = 'javascript'>var module_id = document.getElementById('choice_module".$j."').value
+    $sql = "SELECT * FROM mapping_module_course AS MAP
+    LEFT JOIN M_COURSE AS M ON MAP.COURSE_ID = M.COURSE_ID
+    WHERE MAP.MODULE_ID = $MODULE_ID ";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+           for($j = 1;$j<=$count;$j++)
+           {
+               echo ("<script = 'javascript'>var course_id = document.getElementById('choice_course".$j."').value
 
-    //                 if('".$row["MODULE_ID"]."'== module_id)
-    //                 {
-    //                     document.getElementById('choice_module".$j."').checked = true;
-    //                 }
-    //            </script>");
-    //        }
-    //     }
-    // }
-    // echo ("<script = 'javascript'>alert('บันทึกสำเร็จ'".$count.") 
-    //     </script>");
+                    if('".$row["COURSE_ID"]."'== course_id)
+                    {
+                        document.getElementById('choice_course".$j."').checked = true;
+                    }
+               </script>");
+           }
+        }
+    }
+    echo ("<script = 'javascript'>alert('บันทึกสำเร็จ'".$count.") 
+        </script>");
 ?>

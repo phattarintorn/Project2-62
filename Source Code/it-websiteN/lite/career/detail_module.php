@@ -43,7 +43,6 @@
                             LEFT JOIN M_COURSE AS M ON MAP.COURSE_ID = M.COURSE_ID
                             WHERE MAP.MODULE_ID = $MODULE_ID ";
                             $result = $conn->query($sql);
-
                             if ($result->num_rows > 0) {
                                 while($row = $result->fetch_assoc()) {
                                     echo '<br>';
@@ -52,6 +51,8 @@
                                     echo $row["COURSE_NAME"];
                                     echo '<br>';
                                 }
+                            }else{
+                                echo 'ไม่มีรายวิชา';
                             }
                             echo '</div>';                       
                     ?>
