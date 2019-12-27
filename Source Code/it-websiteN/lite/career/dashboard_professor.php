@@ -29,15 +29,16 @@ $advisor_id = $_SESSION["USER_ID"];
           {
             $q = $row['Question'];
           }
+          echo '<span>มี</span>
+                <span class="badge badge-pill badge-success"><?php echo $q ?></span> 
+                <span>แบบสอบถามในระบบ</span>';
         }
         else
         {
-          
+          echo '<span>ไม่มีแบบสอบถามที่เปิดใช้งานในระบบ</span>';
         } 
         ?>
-        <span>มี</span>
-        <span class="badge badge-pill badge-success"><?php echo $q ?></span> 
-        <span>แบบสอบถามในระบบ</span>
+        
       </div> 
     </div>  
   </div> 
