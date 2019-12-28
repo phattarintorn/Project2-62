@@ -40,7 +40,7 @@
                   <form action="page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons">person</i></span>
-                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสอาจารย์ " required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสอาจารย์ " pattern="[A-Z0-9]{8}" required maxlength="8">
                     </div>
                     <br>
                     <div class="input-group">
@@ -65,7 +65,7 @@
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons">call</i></span>
-                      <input id="tel" type="text" class="form-control" name="tel" placeholder="หมายเลขโทรศัพท์" required>
+                      <input id="tel" type="text" class="form-control" name="tel" placeholder="หมายเลขโทรศัพท์" pattern="[0-9]{10}"required>
                     </div>
                     <br>
                     <div class="input-group">

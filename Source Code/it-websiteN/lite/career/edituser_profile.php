@@ -7,8 +7,7 @@ if ($conn->connect_error) {
 $id = $_REQUEST['id'];
 
 $sql = "SELECT * FROM M_USER AS u
-LEFT JOIN MAPPING_STUDENT_DATA AS sdata
-ON u.USER_ID = sdata.STUDENT_ID
+LEFT JOIN MAPPING_STUDENT_DATA AS sdata ON u.USER_ID = sdata.STUDENT_ID
 WHERE USER_ID =".$id;
 $result = $conn->query($sql);
 if ($result->num_rows > 0) 
@@ -33,10 +32,10 @@ if ($result->num_rows > 0)
 							<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">รหัสแอดมิน:</label>
+							<label for="text-input" class=" form-control-label">รหัสแอดมิน : </label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_USERNAME"].'
+							<input type="text" name="user_name_show" class="form-control" value="'.$row["USER_USERNAME"].'" disabled>
 							<input type="hidden" name="user_name" class="form-control" value="'.$row["USER_USERNAME"].'" >
 							</div>
 							</div>
@@ -74,27 +73,31 @@ if ($result->num_rows > 0)
 							</div>';?>
 
 							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เพศ:</label>
+								<div class="col col-md-3">
+									<label for="text-input" class=" form-control-label">เพศ : </label>
+								</div>
+								<div class="col col-md-5">
+									<select id="gender" name="gender" required class="form-control"  size="">
+										<?php
+											if ($row["USER_GENDER"] == "M") {
+												echo '<option value="M" selected><h5>ชาย</h5></option>
+													<option value="F"><h5>หญิง</h5></option>';
+											} else if ($row["USER_GENDER"] == "F") {
+												echo '<option value="M"><h5>ชาย</h5></option>
+													<option value="F" selected><h5>หญิง</h5></option>';
+											}
+										?>
+									</select>
+								</div>
 							</div>
-							<div class="col col-md-5">
-							<?php
-								if($row["USER_GENDER"] == "M")
-								{
-									echo 'ชาย';
-								} else {
-									echo 'หญิง';
-								}
-							?>
-							</div>
-							</div>
+							
 							<?php echo '
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">สถานะ</label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_STATUS"].'
+							<input type="text" name="status_show" class="form-control" value="'.$row["USER_STATUS"].'" disabled>
 							<input type="hidden" name="status" class="form-control" value="'.$row["USER_STATUS"].'" >
 							</div>
 							</div>
@@ -104,10 +107,10 @@ if ($result->num_rows > 0)
 							<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">รหัสอาจารย์:</label>
+							<label for="text-input" class=" form-control-label">รหัสอาจารย์ : </label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_USERNAME"].'
+							<input type="text" name="user_name_show" class="form-control" value="'.$row["USER_USERNAME"].'" disabled>
 							<input type="hidden" name="user_name" class="form-control" value="'.$row["USER_USERNAME"].'" >
 							</div>
 							</div>
@@ -145,27 +148,31 @@ if ($result->num_rows > 0)
 							</div>';?>
 
 							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เพศ:</label>
+								<div class="col col-md-3">
+									<label for="text-input" class=" form-control-label">เพศ : </label>
+								</div>
+								<div class="col col-md-5">
+									<select id="gender" name="gender" required class="form-control"  size="">
+										<?php
+											if ($row["USER_GENDER"] == "M") {
+												echo '<option value="M" selected><h5>ชาย</h5></option>
+													<option value="F"><h5>หญิง</h5></option>';
+											} else if ($row["USER_GENDER"] == "F") {
+												echo '<option value="M"><h5>ชาย</h5></option>
+													<option value="F" selected><h5>หญิง</h5></option>';
+											}
+										?>
+									</select>
+								</div>
 							</div>
-							<div class="col col-md-5">
-							<?php
-								if($row["USER_GENDER"] == "M")
-								{
-									echo 'ชาย';
-								} else {
-									echo 'หญิง';
-								}
-							?>
-							</div>
-							</div>
+							
 							<?php echo '
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">สถานะ</label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_STATUS"].'
+							<input type="text" name="status_show" class="form-control" value="'.$row["USER_STATUS"].'" disabled>
 							<input type="hidden" name="status" class="form-control" value="'.$row["USER_STATUS"].'" >
 							</div>
 							</div>
@@ -175,10 +182,10 @@ if ($result->num_rows > 0)
 							<input type="hidden" id="id" name="id" value="'.$row["USER_ID"].'">
 							<div class="row form-group">
 							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">รหัสเจ้าหน้าที่:</label>
+							<label for="text-input" class=" form-control-label">รหัสเจ้าหน้าที่ : </label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_USERNAME"].'
+							<input type="text" name="user_name_show" class="form-control" value="'.$row["USER_USERNAME"].'" disabled>
 							<input type="hidden" name="user_name" class="form-control" value="'.$row["USER_USERNAME"].'" >
 							</div>
 							</div>
@@ -216,27 +223,31 @@ if ($result->num_rows > 0)
 							</div>';?>
 
 							<div class="row form-group">
-							<div class="col col-md-3">
-							<label for="text-input" class=" form-control-label">เพศ:</label>
+								<div class="col col-md-3">
+									<label for="text-input" class=" form-control-label">เพศ : </label>
+								</div>
+								<div class="col col-md-5">
+									<select id="gender" name="gender" required class="form-control"  size="">
+										<?php
+											if ($row["USER_GENDER"] == "M") {
+												echo '<option value="M" selected><h5>ชาย</h5></option>
+													<option value="F"><h5>หญิง</h5></option>';
+											} else if ($row["USER_GENDER"] == "F") {
+												echo '<option value="M"><h5>ชาย</h5></option>
+													<option value="F" selected><h5>หญิง</h5></option>';
+											}
+										?>
+									</select>
+								</div>
 							</div>
-							<div class="col col-md-5">
-							<?php
-								if($row["USER_GENDER"] == "M")
-								{
-									echo 'ชาย';
-								} else {
-									echo 'หญิง';
-								}
-							?>
-							</div>
-							</div>
+							
 							<?php echo '
 							<div class="row form-group">
 							<div class="col col-md-3">
 							<label for="text-input" class=" form-control-label">สถานะ</label>
 							</div>
 							<div class="col col-md-5">
-							'.$row["USER_STATUS"].'
+							<input type="text" name="status_show" class="form-control" value="'.$row["USER_STATUS"].'" disabled>
 							<input type="hidden" name="status" class="form-control" value="'.$row["USER_STATUS"].'" >
 							</div>
 							</div>

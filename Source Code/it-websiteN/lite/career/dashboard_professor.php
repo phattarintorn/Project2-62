@@ -30,8 +30,9 @@ $advisor_id = $_SESSION["USER_ID"];
             $q = $row['Question'];
           }
           echo '<span>มี</span>
-                <span class="badge badge-pill badge-success"><?php echo $q ?></span> 
-                <span>แบบสอบถามในระบบ</span>';
+                <span class="badge badge-pill badge-success">';
+                ?> <?php echo $q ?></span> 
+                <?php echo '<span>แบบสอบถามในระบบ</span>';
         }
         else
         {

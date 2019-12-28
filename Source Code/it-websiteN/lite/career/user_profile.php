@@ -31,32 +31,31 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">รหัสแอดมิน:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_USERNAME"] . '
 													</div>
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">ชื่อ:	</label>
+													<label for="text-input" class=" form-control-label">ชื่อ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_FIRSTNAME"] . '
 													</div>
-													</div>
-													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">นามสกุล:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_LASTNAME"] . '
 													</div>
 													</div>';?>
-
+													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
+													
 													<?php
 														if($row["USER_GENDER"] == "M")
 														{
@@ -66,14 +65,12 @@ if (isset($_SESSION["USER_ID"])) {
 														}
 													?>
 													</div>
-													</div>
-
-													<?php echo'
-													<div class="row form-group">
+													
+													<?php echo'					
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_TEL"] . '
 													</div>
 													</div>
@@ -93,7 +90,7 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">รหัสอาจารย์:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_USERNAME"] . '
 													</div>
 													</div>
@@ -101,24 +98,23 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">ชื่อ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_FIRSTNAME"] . '
 													</div>
-													</div>
-													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">นามสกุล:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_LASTNAME"] . '
 													</div>
 													</div>';?>
-
+													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
+													
 													<?php
 														if($row["USER_GENDER"] == "M")
 														{
@@ -128,14 +124,12 @@ if (isset($_SESSION["USER_ID"])) {
 														}
 													?>
 													</div>
-													</div>
 													
-													<?php echo'													
-													<div class="row form-group">
+													<?php echo'					
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_TEL"] . '
 													</div>
 													</div>
@@ -155,7 +149,7 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">รหัสเจ้าหน้าที่:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_USERNAME"] . '
 													</div>
 													</div>
@@ -163,24 +157,23 @@ if (isset($_SESSION["USER_ID"])) {
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">ชื่อ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_FIRSTNAME"] . '
 													</div>
-													</div>
-													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">นามสกุล:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_LASTNAME"] . '
 													</div>
 													</div>';?>
-
+													
 													<div class="row form-group">
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">เพศ:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
+													
 													<?php
 														if($row["USER_GENDER"] == "M")
 														{
@@ -190,14 +183,12 @@ if (isset($_SESSION["USER_ID"])) {
 														}
 													?>
 													</div>
-													</div>
 													
-													<?php echo'													
-													<div class="row form-group">
+													<?php echo'					
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
 													</div>
-													<div class="col col-md-5">
+													<div class="col col-md-3">
 													' . $row["USER_TEL"] . '
 													</div>
 													</div>
