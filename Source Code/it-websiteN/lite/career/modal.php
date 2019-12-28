@@ -200,7 +200,7 @@ function add_course() {
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">เพิ่มชุดวิชา</h4>
+        <h4 class="modal-title">เพิ่มรายวิชา</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
