@@ -75,10 +75,11 @@ if ($i === 0) {
 		}
 	}
 
-} else {
+}
+ else {
 	echo ("	<script = 'javascript'>
 				alert('Username มีอยู่ในระบบอยู่แล้ว หากลืมรหัสผ่าน กรุณาติดต่อเจ้าหน้าที่')
-				window.location.href='page-register.php';
+				window.location.href='page-registerstudent.php';
 			</script>
 		");
 }
