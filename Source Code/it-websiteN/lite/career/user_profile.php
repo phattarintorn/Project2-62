@@ -316,13 +316,13 @@ if (isset($_SESSION["USER_ID"])) {
 													<label for="text-input" class=" form-control-label">GPA:</label>
 													</div>
 													<div class="col col-md-3">
-													' . $row["USER_GPA"] . '
+													' . number_format((float)$row["USER_GPA"], 2, '.', '') . '
 													</div>
 													<div class="col col-md-3">
 													<label for="text-input" class=" form-control-label">GPAX:</label>
 													</div>
 													<div class="col col-md-3">
-													' . $row["USER_GPAX"] . '
+													' . number_format((float)$row["USER_GPAX"], 2, '.', '') . '
 													</div>
 													</div>
 													';

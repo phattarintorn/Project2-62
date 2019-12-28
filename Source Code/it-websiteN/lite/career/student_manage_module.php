@@ -688,9 +688,11 @@
                 "semester" => $row["MODULE_SEMESTER"],
             );
         }
+        
+        echo 'let module = ' . json_encode($data_response) . '';
+
     }
 
-    echo 'let module = ' . json_encode($data_response) . '';
 
     echo '</script>';
 ?>

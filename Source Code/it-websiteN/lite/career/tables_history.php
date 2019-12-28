@@ -6,7 +6,6 @@
     <div class="row">
       <div class="col-md-12">
         <a href="index.php?page=page1">
-          <!-- <button type="button" class="btn btn-success btn-sm"></button> -->
         </a>
       </div>
 
@@ -20,69 +19,57 @@
               <thead>
                 <tr>
                   <?php
-                  if ($_SESSION["USER_STATUS"] == "PERSONNEL") {
-                    echo '
-                    <th><center>วันที่สร้างแบบทดสอบ</center></th>
-                    <th><center>กลุ่มแบบทดสอบ</center></th>
-                    <th><center>หมวด</center></th>
-                    <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>';
-                  // $sql = "SELECT * FROM `question` WHERE `q_id` "; 
-                    $sql = "SELECT * FROM M_GROUP_QUESTION GROUP BY QUESTION_GROUP "; 
-                    $result = $conn->query($sql);
+                    if ($_SESSION["USER_STATUS"] == "PERSONNEL") {
+                      echo '
+                      <th><center>วันที่สร้างแบบทดสอบ</center></th>
+                      <th><center>กลุ่มแบบทดสอบ</center></th>
+                      <th><center>หมวด</center></th>
+                      <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>';
+                      $sql = "SELECT * FROM M_GROUP_QUESTION GROUP BY QUESTION_GROUP "; 
+                      $result = $conn->query($sql);
 
-                    include("tablesform_q.php");
+                      include("tablesform_q.php");
 
-                  } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {
-                    // <th><center>วันที่สร้างแบบทดสอบ</center></th>
-                    echo '
-                    <th><center>กลุ่มแบบทดสอบ</center></th>
-                    <th><center>หมวด</center></th>
-                    <th><center>ทำแบบทดสอบเมื่อ</center></th>
-                    <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>';
-                    // $sql = "SELECT * FROM `test_form` WHERE `tested_status` = 0 GROUP BY `form_group`";
+                    } elseif ($_SESSION["USER_STATUS"] == "STUDENT") {
+                      echo '
+                      <th><center>กลุ่มแบบทดสอบ</center></th>
+                      <th><center>ทำแบบทดสอบเมื่อ</center></th>
+                      <th></th>
+                      </tr>
+                      </thead>
+                      <tbody>';
 
-                    $sql = "SELECT * FROM MAPPING_STUDENT_LOG AS L
-                      LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
-                      LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-                      WHERE G.QUESTION_STATUS = 0 AND L.STUDENT_ID = " . $_SESSION["USER_ID"] . "
-                      GROUP BY G.QUESTION_GROUP"; 
+                      $sql = "SELECT G.QUESTION_GROUP, L.CREATE_DATE FROM MAPPING_STUDENT_LOG AS L
+                        LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+                        LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+                        WHERE G.QUESTION_STATUS = 0 AND L.STUDENT_ID = " . $_SESSION["USER_ID"] . "
+                        GROUP BY L.CREATE_DATE"; 
 
-                    // $sql = "SELECT * FROM `question` WHERE `status_using`=0 ORDER BY `question`.`q_day` DESC"; 
+                      $result = $conn->query($sql);
 
-                    $result = $conn->query($sql);
-                    if ($result->num_rows > 0) 
-                    { 
-                      while($row = $result->fetch_assoc()) 
-                      {  
-                        if ($row["STUDENT_ID"] == $_SESSION["USER_ID"]) {
-                          echo '<tr>';
-                          echo '<td align="center">';
-                          echo $row["QUESTION_GROUP"];  
-                          echo '</td>';
-                          echo '<td align="center">';
-                          echo $row["QUESTION_PART"];  
-                          echo '</td>';
-                          echo '<td align="center">';
-                          echo $row["UPDATE_DATE"];  
-                          echo '</td>';
-                          echo '</td>';
-                          echo '<td align="center">';
-                          echo '<a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=tables_history2&q_group='.$row['QUESTION_GROUP'].'"></a>'; 
-                          echo '</td>';
-                          echo '</tr>';
-                        }
-                      }    
+                      if ($result->num_rows > 0) { 
+                        while($row = $result->fetch_assoc()) {  
+                            echo '<tr>';
+                            echo '<td align="center">';
+                            echo $row["QUESTION_GROUP"];  
+                            echo '</td>';
+                            echo '<td align="center">';
+                            echo $row["CREATE_DATE"];  
+                            echo '</td>';
+                            echo '</td>';
+                            echo '<td align="center">';
+                            echo '<a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=tables_history2&q_group='.$row['QUESTION_GROUP'].'&date='.$row['CREATE_DATE'].'"></a>'; 
+                            echo '</td>';
+                            echo '</tr>';
+                        }    
+                      }
+
                     }
-
-                  } else {
-                  }
-                  $conn->close(); 
+                    
+                    $conn->close(); 
                   ?>
                 </tbody>
               </table>
