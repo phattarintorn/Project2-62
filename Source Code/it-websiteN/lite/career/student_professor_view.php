@@ -40,7 +40,7 @@ if ($result->num_rows > 0)
               <?php echo $row["USER_STATUS"]; ?>
             </div> -->
 
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">รหัสนักศึกษา : </label>
             </div>
             <div class="col col-md-3">
@@ -52,7 +52,7 @@ if ($result->num_rows > 0)
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">ชื่อ : </label>
             </div>
             <div class="col col-md-4">
@@ -63,7 +63,7 @@ if ($result->num_rows > 0)
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">นามสกุล : </label>
             </div>
             <div class="col col-md-3">
@@ -73,7 +73,7 @@ if ($result->num_rows > 0)
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">เบอร์โทร : </label>
             </div>
             <div class="col col-md-4">
@@ -83,7 +83,7 @@ if ($result->num_rows > 0)
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">อีเมล : </label>
             </div>
             <div class="col col-md-4">
@@ -93,7 +93,7 @@ if ($result->num_rows > 0)
           <div class="row form-group">
             <div class="col col-md-1">
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">หลักสูตร : </label>
             </div>
             <div class="col col-md-4">
@@ -233,46 +233,7 @@ if ($result->num_rows > 0)
             $result = $conn->query($sql);
             if ($result->num_rows > 0) 
             { 
-              $i = 0;
-              $sumMax = 0;
-              // $side = $row["part"];
-              // $type = $row["type"];
-              echo '
-              <div class="card">
-              <div class="card-header">
-              <strong class="card-title"><u></u> วัดด้านทักษะ</strong>
-              </div>
-              <div class="card-body">
-              <table class="table">
-              <thead>
-              <tr>
-              <th scope="col" width="20%"><center>อันดับที่</center></th>
-              <th scope="col" width="60%"><center>อาชีพ</center></th>
-              <th scope="col" width="20%"><center>ร้อยละ</center></th>
-              <tbody>  
-              ';
-              while($row = $result->fetch_assoc()) 
-              {
-                $i = $i +1;  
-                echo "<tr>";
-                if ($i <= "5") {
-                 echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-                 echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["img"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
-                 $Max_scoreS = ($row['raw'] / $sum_rawS)*100;
-                 echo '<td><br><br><h3>' .number_format($Max_scoreS, 2, '.', ' '). '</h3></td>';
-               }
-
-             }
-             echo '
-             </tbody> 
-             </tr>
-             </thead>
-             </table>
-             </div>
-             </div>
-             ';
-             include("student_professor_view_dashboardS.php");
-
+              include("student_professor_view_dashboardS.php");
            }else{
             echo '
             <div class="row form-group">
@@ -308,43 +269,6 @@ if ($result->num_rows > 0)
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           { 
-            $i = 0;
-            $sumMax = 0;
-
-            echo '
-            <div class="card">
-            <div class="card-header">
-            <strong class="card-title"><u></u> วัดด้านจิตวิทยา</strong>
-            </div>
-            <div class="card-body">
-            <table class="table">
-            <thead>
-            <tr>
-            <th scope="col" width="20%"><center>อันดับที่</center></th>
-            <th scope="col" width="60%"><center>อาชีพ</center></th>
-            <th scope="col" width="20%"><center>ร้อยละ</center></th>
-            <tbody>  
-            ';
-            while($row = $result->fetch_assoc()) 
-            {
-              $i = $i +1;  
-              echo "<tr>";
-              if ($i <= "5") {
-               echo '<td><center><br><br><h3>' .$i. '</h3></center></td>';
-               echo '<td><center><img style="width:35%;height:45%" src="images/career/character/'.$row["img"].'" title="'.$row["career"].'"><br>'.$row['career'].'</center></td>';
-               $Max_scoreS = ($row['raw'] / $sum_rawP)*100;
-               echo '<td><br><br><h3>' .number_format($Max_scoreS, 2, '.', ' '). '</h3></td>';
-             }
-
-           }
-           echo '
-           </tbody> 
-           </tr>
-           </thead>
-           </table>
-           </div>
-           </div>
-           ';
            include("student_professor_view_dashboardP.php");
          }else{
           echo '
