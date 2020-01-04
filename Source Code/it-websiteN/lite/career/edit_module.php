@@ -26,10 +26,21 @@
                             echo '<div align="left"><a>ชื่อชุดวิชา</a></div>';
                             echo '<input type="text" name="module_name" class="form-control" value="'.$row["MODULE_NAME"].'">';
                             echo '<br>';
+                            echo '<br>';
+                            echo '<div align="left"><a>เทอม</a></div>';
+                            echo '<input type="checkbox" name="semester1" id="semester1" value="1"/>
+                                    <label for="semester1" > เทอม 1 </label></br>';
+                            echo '<br>';
+                            echo '<input type="checkbox" name="semester2" id="semester2" value="2"/>
+                                    <label for="semester2" > เทอม 2 </label></br>';
+                            echo '<br>';
+                            echo '<input type="checkbox" name="semester3" id="semester3" value="3"/>
+                                    <label for="semester3" > เทอม 3 </label></br>';
                             echo '</div>';
                         }
                     }
                 ?>
+
             </div>
         </div>
         <div class = "col-md-9">
@@ -60,7 +71,7 @@
                                 }
                                 $count = $i;
                                 echo '<input type="hidden" id="count_course" name="count_course" value="'.$count.'">';
-                              }
+                                }
                             echo '</div>';                       
                     ?>
                 </div>
@@ -95,4 +106,24 @@
     }
     echo ("<script = 'javascript'>alert('บันทึกสำเร็จ'".$count.") 
         </script>");
+?>
+
+<?php 
+    $sql_s = "SELECT * FROM mapping_module_semester WHERE MODULE_ID = $MODULE_ID ORDER BY MODULE_SEMESTER ASC ";
+    $results = $conn->query($sql_s);
+    if ($results->num_rows > 0) {
+        while($rows = $results->fetch_assoc()) {
+           for($s=1;$s<=3;$s++)
+           {
+               echo ("<script = 'javascript'>var semester = document.getElementById('semester".$s."').value
+
+                    if('".$rows["MODULE_SEMESTER"]."'== semester)
+                    {
+                        document.getElementById('semester".$s."').checked = true;
+                    }
+               </script>");
+           }
+        }
+    }
+
 ?>
