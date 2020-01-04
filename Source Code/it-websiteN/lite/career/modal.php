@@ -156,15 +156,6 @@ include("db/db.php");
                 <label for="semester3" >เทอม 3</label></br>
               </div>
             </div>
-            <div class="row form-group" id='course'>
-              <div class="col-md-2">
-                จำนวนรายวิชา
-              </div>
-              <div class="col-md-2">
-              <input type="number" name="count" id="count" class="form-control" onchange="add_course()" min='0' max='10' value='0'>
-              </div>
-            </div>
-            <div id='add_div'></div>
           </div> 
             <div class="modal-footer">
               <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
@@ -176,8 +167,55 @@ include("db/db.php");
     </div>
   </div>
 </h5>
-<!-- --------------------------------------------------------------------------------------------->
 
+<!-- ------------------------------------------------------------------------------------------- -->
+<div class="modal fade" id="AddCourse" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มรายวิชา</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=insert_course" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+          <div class="col-md-12">
+          <div class="row form-group" id='course'>
+              <div class="col-md-2">
+                จำนวนรายวิชา
+              </div>
+              <div class="col-md-2">
+              <input type="number" name="count" id="count" class="form-control" onchange="add_course()" min='1' max='10' value='1'>
+              </div>
+            </div>
+            <div class="row form-group" id="count_course">
+              <div class="col-md-12" align="center">
+              รายวิชา
+              </div>
+            </div>
+            <div id='add_div'>
+              <div class="row form-group">
+              <div class="col-md-3" >
+              <input type="text" name="course_code0" class="form-control" placeholder="รหัสวิชา" required >
+              </div>
+              <div class="col-md-9">
+              <input type="text" name="course_name0" class="form-control" placeholder="ชื่อวิชา" required >
+              </div>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+
+<!-- --------------------------------------------------------------------------------------------->
 <script>
 function add_course() {
   $('#count_course').remove();
@@ -210,46 +248,6 @@ function add_course() {
   }
 }
 </script>
-
-<!-- ------------------------------------------------------------------------------------------- -->
-<div class="modal fade" id="AddCourse" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">เพิ่มรายวิชา</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form action="career-advice.php?career=insert_course" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
-          <div class="col-md-12">
-            <div class="row form-group">
-              <div class="col-md-12">
-                รหัสรายวิชา
-              </div>
-              <div class="col-md-12">
-                <input type="text" name="course_code" class="form-control" required>
-              </div>
-            </div>
-            <div class="row form-group">
-              <div class="col-md-12">
-                ชื่อรายวิชา
-              </div>
-              <div class="col-md-12">
-              <input type="text" name="course_name" class="form-control" required>
-              </div>
-            </div>
-          </div> 
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-              <button type="submit" class="btn btn-info">บันทึก</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</h5>
 <!-- --------------------------------------------------------------------------------------------->
 <div class="modal fade" id="EditCourse" role="dialog">
   <div class="modal-dialog modal-lg">

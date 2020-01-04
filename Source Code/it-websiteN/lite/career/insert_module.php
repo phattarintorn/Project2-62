@@ -26,31 +26,8 @@ if (mysqli_query($conn, $sql)) {
             }     
         }
     }
-
-    if($count!=0){
-        for ($i=0; $i < $count; $i++){
-            if (isset($_POST["course_code".$i]) && isset($_POST["course_name".$i])) {
-                $course_code = $_POST["course_code".$i];
-                $course_name = $_POST["course_name".$i];
-                $sql_c = "INSERT INTO m_course (COURSE_CODE,COURSE_NAME) VALUES
-                    ('" .$course_code."','".$course_name."')";
-                if (mysqli_query($conn, $sql_c)) {
-                    $course_id = $conn->insert_id;
-                    $date =  date('y-m-d H:i:s');
-                    $sql_map = "INSERT INTO mapping_module_course (MODULE_ID,COURSE_ID,CREATE_DATE,CREATE_BY) VALUES
-                    ('" .$module_id."','".$course_id."','".$date."','".$session_name."')";
-                    if(mysqli_query($conn, $sql_map)){
-                        echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-                            window.location.href='career-advice.php?career=add_module';</script>");
-                    }
-                }
-            }
-        }
-    }
-    else{
         echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-            window.location.href='career-advice.php?career=add_module';</script>");
-    }    
+            window.location.href='career-advice.php?career=edit_module&module_id=".$module_id."';</script>");
 }
 	mysqli_close($conn);
 
