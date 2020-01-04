@@ -41,6 +41,8 @@
                         AND MODULE_YEAR = ' . $year . ' AND MODULE_SEMESTER = ' . $semester;
 
                     if (mysqli_query($conn, $sql)) {
+                        $sql = 'UPDATE MAPPING_STUDENT_PLAN SET PLAN_STATUS = 0
+                            WHERE STUDENT_ID = ' . $_SESSION["USER_ID"];
                         if (mysqli_query($conn, $sql)) {
                             echo ("<script = 'javascript'>alert('อัพเดตแผนการเรียนสำเร็จ') 
                                 window.location.href='career-advice.php?career=student_module';</script>");
