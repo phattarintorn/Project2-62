@@ -60,7 +60,7 @@
                 <div class = "card-header">
                     <strong class="card-title">รายวิชา</strong>
                 </div>
-                <div class = "row card-body" style = "padding: 20px;">
+                <div class = "row card-body" style = "padding-left: 20px;padding-bottom: 20px;">
                     <?php
                             echo '<div class = "col-md-12 text-left">';
                             $sql = "SELECT * FROM mapping_module_course AS MAP
