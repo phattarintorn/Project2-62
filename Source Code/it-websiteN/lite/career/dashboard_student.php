@@ -14,7 +14,21 @@
       $img = $row["CAREER_IMAGE"];
       $career = $row["CAREER_NAME"];
       $name = $row["USER_FIRSTNAME"] . ' ' . $row["USER_LASTNAME"];
+      $mail = $row["USER_EMAIL"];
+      $tel = $row["USER_TEL"];
 ?>
+
+<style>
+  .cpadding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .apadding {
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+</style>
+
 <div class = "card">
   <div class = "card-header">
     <strong class = "card-title"> ยินดีต้อนรับนักศึกษา <?php echo $_SESSION["USER_FIRSTNAME"]  ?></strong>
@@ -28,13 +42,14 @@
 
       if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+        $status = $row["PLAN_STATUS"];
         echo '<div class = "row">';
         echo '<div class = "col-md-12">';
-        if ($row["PLAN_STATUS"] == 0) {
+        if ($status == 0) {
           echo '<div class = "alert  alert-danger alert-dismissible fade show" role = "alert">';
           echo '<span>แผนการเรียนของนักศึกษา <u>ยังไม่ผ่าน</u> กรุณาติดต่ออาจารย์ที่ปรึกษา</span>';
           echo '</div>';
-      } else if ($row["PLAN_STATUS"] == 1) {
+      } else if ($status == 1) {
           echo '<div class="alert  alert-success alert-dismissible fade show" role="alert">';
           echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
           echo '<span aria-hidden="true" title="ปิด">&times;</span>';
@@ -47,89 +62,68 @@
       }
     ?>
 
-    <div class = "row">
-      <div class = "col-md-4">
-        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
-          <center>
-            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
-            <?php
-              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) { 
-                $count = 0;
-                while($row = $result->fetch_assoc()) {
-                  $count = $count +1;
-                }
-              } 
-            ?>
-            <h1>
-              <?php echo $count ?>
-            </h1>
-            <hr>
-            <a href="career-advice.php?career=tables_q">
-              ทำแบบสอบถาม
-            </a>
-          </center>
+    <?php include("question_topic.php") ?>
+
+    <div class = "row apadding">
+      <?php if ($status == 1) { ?>
+      <div class = "col-md-3 card cpadding" style=" margin-right: 1vw;">
+        <div class = "card-header">
+          <strong class = "card-title" style = "text-align: left;"> ดาวน์โหลดแผนการเรียน </strong>
+        </div>
+        <div class = "card-body" align = "center" style = "padding : 20px;">
+          <div id="qrcode"></div>
         </div>
       </div>
-
-      <div class = "col-md-4">
-        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
-          <center>
-            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
-            <?php
-              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) { 
-                $count = 0;
-                while($row = $result->fetch_assoc()) {
-                  $count = $count +1;
-                }
-              } 
-            ?>
-            <h1>
-              <?php echo $count ?>
-            </h1>
-            <hr>
-            <a href="career-advice.php?career=tables_q">
-              ทำแบบสอบถาม
-            </a>
-          </center>
+      <?php } ?>
+      <div class = "col-md card cpadding">
+        <div class = "card-header">
+          <strong class = "card-title" style = "text-align: left;">ข้อมูลเบื่องต้น</strong>
         </div>
-      </div>
-
-      <div class = "col-md-4">
-        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
-          <center>
-            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
-            <?php
-              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
-              $result = $conn->query($sql);
-              if ($result->num_rows > 0) { 
-                $count = 0;
-                while($row = $result->fetch_assoc()) {
-                  $count = $count +1;
-                }
-              } 
-            ?>
-            <h1>
-              <?php echo $count ?>
-            </h1>
-            <hr>
-            <a href="career-advice.php?career=tables_q">
-              ทำแบบสอบถาม
-            </a>
-          </center>
+        <div class = "card-body" align = "left" style = "padding : 20px;">
+          <div class = "row apadding">
+            <div class = "col-md-4">
+              <img src = "images/career/character/<?php echo $img ?>"  >
+            </div>
+            <div class = "col-md-3" style = "margin-left: 1vw;">
+              <br/>
+              <div class = "row apadding">อาชีพ : </div>
+              <br/>
+              <br/>
+              <div class = "row apadding">อาจารย์ที่ปรึกษา : </div>
+              <br/>
+              <div class = "row apadding">เมลติดต่อ : </div>
+              <br/>
+              <div class = "row apadding">เบอร์โทรติดต่อ : </div>
+            </div>
+            <div class = "col-md" style = "margin-left: 1vw;">
+              <br/>
+              <div class = "row apadding"><?php echo $career ?></div>
+              <br/>
+              <br/>
+              <div class = "row apadding"><?php echo $name ?></div>
+              <br/>
+              <div class = "row apadding">
+                <?php
+                  if (isset($mail)) {
+                    echo $mail;
+                  } else {
+                    echo "-";
+                  }
+                ?>
+              </div>
+              <br/>
+              <div class = "row apadding">
+                <?php
+                  if (isset($tel)) {
+                    echo $tel;
+                  } else {
+                    echo "-";
+                  }
+                ?>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    <div class = "col-md-4 card"  style="padding-left: 0; padding-right: 0;">
-      <div class = "card-header">
-        <strong class = "card-title" style = "text-align: left;"> ดาวน์โหลดแผนการเรียน </strong>
-      </div>
-      <div class = "card-body" align = "center" style = "padding : 20px;">
-        <div id="qrcode"></div>
       </div>
     </div>
 <?php
@@ -145,8 +139,13 @@
   let part = "http://it2.sut.ac.th/project62_g2/it-websiteN/lite/"
     part += "career-advice.php?career=student_download_module&STUDENT_ID=<?php echo $_SESSION["USER_ID"] ?>"
 
-  new QRCode(
-    document.getElementById("qrcode"), part
-  );
+  new QRCode(document.getElementById("qrcode"), {
+      text: part,
+      width: 200,
+      height: 200,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+  });
   
 </script>
