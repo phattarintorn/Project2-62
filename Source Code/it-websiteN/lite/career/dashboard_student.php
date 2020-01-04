@@ -47,23 +47,89 @@
       }
     ?>
 
-    <div class = "card" align = "center">
-      <div class = "card-body" style = "padding : 20px;">
-        <div class = "row">
-          <div class = "col-md-4">
-            <img style="width:auto; height:30vh; margin-bottom: 10px;" src="images/career/character/<?php echo $img ?>">
-          </div>
-          <div class = "col-md-2" align = "left">
-            <div class = "row">อาชีพ</div>
-            <br>
-            <div class = "row">อาจารย์ที่ปรึกษา</div>
-          </div>
-          <div class = "col-md-5" align = "left">
-            <div class = "row"><?php echo $career ?></div>
-            <br>
-            <div class = "row"><?php echo $name ?></div>
-          </div>
+    <div class = "row">
+      <div class = "col-md-4">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
+          <center>
+            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
+            <?php
+              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                $count = 0;
+                while($row = $result->fetch_assoc()) {
+                  $count = $count +1;
+                }
+              } 
+            ?>
+            <h1>
+              <?php echo $count ?>
+            </h1>
+            <hr>
+            <a href="career-advice.php?career=tables_q">
+              ทำแบบสอบถาม
+            </a>
+          </center>
         </div>
+      </div>
+
+      <div class = "col-md-4">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
+          <center>
+            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
+            <?php
+              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                $count = 0;
+                while($row = $result->fetch_assoc()) {
+                  $count = $count +1;
+                }
+              } 
+            ?>
+            <h1>
+              <?php echo $count ?>
+            </h1>
+            <hr>
+            <a href="career-advice.php?career=tables_q">
+              ทำแบบสอบถาม
+            </a>
+          </center>
+        </div>
+      </div>
+
+      <div class = "col-md-4">
+        <div class="alert  alert-success alert-dismissible fade show" role="alert" style="line-height: 100%;">
+          <center>
+            <h3><span class="badge badge-pill badge-success">แบบสอบถามทั้งหมด</span></h3>
+            <?php
+              $sql = "SELECT * FROM M_GROUP_QUESTION WHERE QUESTION_STATUS = 0 GROUP BY QUESTION_GROUP";
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) { 
+                $count = 0;
+                while($row = $result->fetch_assoc()) {
+                  $count = $count +1;
+                }
+              } 
+            ?>
+            <h1>
+              <?php echo $count ?>
+            </h1>
+            <hr>
+            <a href="career-advice.php?career=tables_q">
+              ทำแบบสอบถาม
+            </a>
+          </center>
+        </div>
+      </div>
+    </div>
+
+    <div class = "col-md-4 card"  style="padding-left: 0; padding-right: 0;">
+      <div class = "card-header">
+        <strong class = "card-title" style = "text-align: left;"> ดาวน์โหลดแผนการเรียน </strong>
+      </div>
+      <div class = "card-body" align = "center" style = "padding : 20px;">
+        <div id="qrcode"></div>
       </div>
     </div>
 <?php
@@ -74,3 +140,13 @@
 ?>
   </div>
 </div>
+
+<script>
+  let part = "http://it2.sut.ac.th/project62_g2/it-websiteN/lite/"
+    part += "career-advice.php?career=student_download_module&STUDENT_ID=<?php echo $_SESSION["USER_ID"] ?>"
+
+  new QRCode(
+    document.getElementById("qrcode"), part
+  );
+  
+</script>

@@ -25,3 +25,11 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.highcharts.com/highcharts.js"></script>
 <script src="http://code.highcharts.com/modules/exporting.js"></script>  
+
+<!-- html to canvas -->
+<script src = "https://files.codepedia.info/files/uploads/iScripts/html2canvas.js"></script> 
+
+<!-- generate qr code -->
+<script src = "https://davidshimjs.github.io/qrcodejs/qrcode.min.js"></script> 
+<script src = "https://davidshimjs.github.io/qrcodejs/qrcode.js"></script> 
+
