@@ -139,6 +139,23 @@ include("db/db.php");
               <input type="text" name="module_name" class="form-control" required>
               </div>
             </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                เทอม
+              </div>
+              <div class="col-md-4">
+              <input type="checkbox" name="semester1" id="semester1" value="1"/>
+                <label for="semester1" > เทอม 1</label></br>
+              </div>
+              <div class="col-md-4">
+              <input type="checkbox" name="semester2" id="semester2" value="2"/>
+                <label for="semester2" > เทอม 2</label></br> 
+              </div>
+              <div class="col-md-4">
+              <input type="checkbox" name="semester3" id="semester3" value="3"/>
+                <label for="semester3" >เทอม 3</label></br>
+              </div>
+            </div>
             <div class="row form-group" id='course'>
               <div class="col-md-2">
                 จำนวนรายวิชา

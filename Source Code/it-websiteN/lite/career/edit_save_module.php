@@ -15,6 +15,18 @@ $module_id = $_REQUEST["module_id"];
     SET MODULE_CODE = '$module_code', MODULE_NAME = '$module_name' WHERE MODULE_ID = '$module_id'"; 
     if (mysqli_query($conn, $sql_name)) {
         $sql_delete = "DELETE FROM mapping_module_course WHERE MODULE_ID  = $module_id";
+        $sql_delete_s = "DELETE FROM mapping_module_semester WHERE MODULE_ID  = $module_id";
+        if(mysqli_query($conn,$sql_delete_s)){
+            $date_s =  date('y-m-d H:i:s');
+            for ($s=1; $s <= 3; $s++){
+                if (isset($_POST["semester".$s])) {
+                    $semester = $_POST["semester".$s];
+                    $sql_s = "INSERT INTO mapping_module_semester (MODULE_ID,MODULE_SEMESTER,CREATE_DATE,CREATE_BY) VALUES
+                    ('" .$module_id."','".$semester."','".$date_s."','".$session_name."')";
+                    if (mysqli_query($conn, $sql_s)) {}
+                }
+            }
+        }
         if(mysqli_query($conn,$sql_delete)){
             $date =  date('y-m-d H:i:s');
             for ($i=1; $i <= $count_course; $i++){

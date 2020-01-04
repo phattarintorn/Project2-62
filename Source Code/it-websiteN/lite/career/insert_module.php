@@ -16,6 +16,17 @@ $sql = "INSERT INTO m_module (MODULE_CODE,MODULE_NAME) VALUES ('" .$module_code.
 
 if (mysqli_query($conn, $sql)) {
     $module_id = $conn->insert_id;
+    for($j=1; $j <=3 ; $j++){
+        if (isset($_POST["semester".$j])) {
+            $semester = $_POST["semester".$j];
+            $dateTime =  date('y-m-d H:i:s');
+            $sql_s = "INSERT INTO mapping_module_semester (MODULE_ID,MODULE_SEMESTER,CREATE_DATE,CREATE_BY) VALUES
+                    ('" .$module_id."','".$semester."','".$dateTime."','".$session_name."')";
+            if(mysqli_query($conn, $sql_s)){
+            }     
+        }
+    }
+
     if($count!=0){
         for ($i=0; $i < $count; $i++){
             if (isset($_POST["course_code".$i]) && isset($_POST["course_name".$i])) {
@@ -41,10 +52,6 @@ if (mysqli_query($conn, $sql)) {
             window.location.href='career-advice.php?career=add_module';</script>");
     }    
 }
-
-
-
-
 	mysqli_close($conn);
 
 ?>
