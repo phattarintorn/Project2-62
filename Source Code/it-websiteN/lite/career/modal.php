@@ -222,6 +222,7 @@ function add_course() {
   $('#add_div').empty();
   var x = document.getElementById("count");
   let num = x.value;
+  if(num>10){num = 10; document.getElementById("count").value = "10";}
   if(num!=0){
   let str ='';
   
