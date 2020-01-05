@@ -4,7 +4,7 @@
   $sql = "SELECT * FROM MAPPING_STUDENT_DATA AS M
     LEFT JOIN M_USER AS U ON M.ADVISOR_ID = U.USER_ID
     LEFT JOIN M_CAREER AS C ON M.CAREER_ID = C.CAREER_ID
-    WHERE M.STUDENT_ID = " . $_SESSION["USER_ID"];
+    WHERE M.STUDENT_ID = " . $_SESSION["USER_ID"] . " AND M.CAREER_ID <> 0";
 
   $result = $conn->query($sql);
 
@@ -46,7 +46,10 @@
         echo '<div class = "row">';
         echo '<div class = "col-md-12">';
         if ($status == 0) {
-          echo '<div class = "alert  alert-danger alert-dismissible fade show" role = "alert">';
+          echo '<div class = "alert alert-danger alert-dismissible fade show" role = "alert">';
+          echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+          echo '<span aria-hidden="true" title="ปิด">&times;</span>';
+          echo '</button>';
           echo '<span>แผนการเรียนของนักศึกษา <u>ยังไม่ผ่าน</u> กรุณาติดต่ออาจารย์ที่ปรึกษา</span>';
           echo '</div>';
       } else if ($status == 1) {
@@ -61,8 +64,6 @@
         echo '</div>';
       }
     ?>
-
-    <?php include("question_topic.php") ?>
 
     <div class = "row apadding">
       <?php if ($status == 1) { ?>
@@ -82,7 +83,11 @@
         <div class = "card-body" align = "left" style = "padding : 20px;">
           <div class = "row apadding">
             <div class = "col-md-4">
-              <img src = "images/career/character/<?php echo $img ?>"  >
+              <?php
+                if (isset($career)) {
+                  echo '<img src = "images/career/character/' . $img . '">';
+                }
+              ?>
             </div>
             <div class = "col-md-3" style = "margin-left: 1vw;">
               <br/>
@@ -97,10 +102,26 @@
             </div>
             <div class = "col-md" style = "margin-left: 1vw;">
               <br/>
-              <div class = "row apadding"><?php echo $career ?></div>
+              <div class = "row apadding">
+                <?php
+                  if (isset($career)) {
+                    echo $career;
+                  } else {
+                    echo "-";
+                  }
+                ?>
+              </div>
               <br/>
               <br/>
-              <div class = "row apadding"><?php echo $name ?></div>
+              <div class = "row apadding">
+                <?php
+                  if (isset($name)) {
+                    echo $name;
+                  } else {
+                    echo "-";
+                  }
+                ?>
+              </div>
               <br/>
               <div class = "row apadding">
                 <?php
@@ -121,15 +142,29 @@
                   }
                 ?>
               </div>
+              <br/>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <?php include("student_dashboard_topic.php") ?>
+
 <?php
     }
   } else {
-    include("career/dashboard_introduction.php");
+    ?>
+    <div class = "card">
+      <div class = "card-header">
+        <strong class = "card-title"> ยินดีต้อนรับนักศึกษา <?php echo $_SESSION["USER_FIRSTNAME"]  ?></strong>
+      </div>
+      <div class = "card-body" style = "padding : 20px;">
+      <?php
+        include("student_dashboard_topic.php");
+      ?>
+      </div>
+    <?php
   }
 ?>
   </div>
