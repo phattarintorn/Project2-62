@@ -1,3 +1,15 @@
+<style>
+  .cpadding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .apadding {
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+</style>
+
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-header">  
@@ -75,8 +87,25 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-2"> 
-	<a href="career-advice.php?career=tables_history">
-		<button class="btn btn-secondary">กลับ</i></button></a>
-	</a> 
+<div class = "row apadding">
+
+	<div class="col-md-1"> 
+		<a href="javascript:history.back();">
+			<button class="btn btn-secondary" style = "width: 100%;">กลับ</i></button></a>
+		</a> 
+	</div>
+
+	<div class = "col-md-8"></div>
+
+	<?php
+		if (isset($_REQUEST['q_id']) && isset($_REQUEST['q_id2'])) {
+	?>
+		<div class="col-md-3"> 
+			<a href="career-advice.php?career=student_manage_module">
+				<button class="btn btn-secondary" style = "width: 100%;">จัดการแผนการเรียน</i></button></a>
+			</a> 
+		</div>
+	<?php
+		}
+	?>
 </div>

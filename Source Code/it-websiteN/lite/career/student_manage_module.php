@@ -636,7 +636,7 @@
         str += '<button class="btn btn-success" style = "width:100%;">บันทึก</button></a>' 
         str += '</div>'
         str += '<div class = "col-md-2">'
-        str += '<a href="career-advice.php?career=student_manage_module" class="btn btn-warning" style = "width:100%;">ย้อนกลับ</a>'
+        str += '<a href="javascript:history.back();" class="btn btn-warning" style = "width:100%;">ย้อนกลับ</a>'
         str += '</div>'
         str += '</div>'
 

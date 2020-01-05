@@ -1,3 +1,13 @@
+<?php
+    include("db/db.php");
+
+    $sql = "SELECT * FROM MAPPING_STUDENT_PLAN
+        WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
+
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $status = $row["PLAN_STATUS"];
+?>
 <div class = "card">
     <div class = "card-header">
         <div class = "row">
@@ -5,8 +15,11 @@
                 <strong class="card-title">แผนการเรียน</strong>
             </div>
             <div class = "col-md-3">
-                <a href="#" class="btn btn-success" id="btn-Convert-Html2Image" style = "width:100%;">ดาวน์โหลด</a>
-                <!-- <a id="btn-Convert-Html2Image" href="#">Download</a>  -->
+                <?php
+                    if ($status == 1) {
+                        echo '<a href="#" class="btn btn-success" id="btn-Convert-Html2Image" style = "width:100%;">ดาวน์โหลด</a>';
+                    }
+                ?>
             </div>
             <div class = "col-md-3">
                 <a href="career-advice.php?career=student_manage_module" class="btn btn-success" style = "width:100%;">จัดการแผนการเรียน</a>
@@ -15,7 +28,6 @@
     </div>
     <div class = "card-body" id = "html-content-holder" style = "background-color: #FFFFFF;">
         <?php
-            include("db/db.php");
 
             echo '<div class = "row" style = "margin: 20px;">';
 
