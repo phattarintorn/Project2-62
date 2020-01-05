@@ -85,14 +85,12 @@
         // Global variable 
         var getCanvas;  
 
-        // $("#btn-Preview-Image").on('click', function() { 
-            html2canvas(element, {
-                onrendered: function(canvas) { 
-                    $("#previewImage").html(canvas); 
-                    getCanvas = canvas; 
-                } 
-            });
-        // });
+        html2canvas(element, {
+            onrendered: function(canvas) { 
+                $("#previewImage").html(canvas); 
+                getCanvas = canvas; 
+            } 
+        });
 
         $("#btn-Convert-Html2Image").on('click', function() { 
             var imgageData =  
@@ -104,7 +102,7 @@
             /^data:image\/png/, "data:application/octet-stream"); 
             
             $("#btn-Convert-Html2Image").attr( 
-            "download", "GeeksForGeeks.png").attr( 
+            "download", "Module_<?php echo $_SESSION["USER_USERNAME"] ?>.png").attr( 
             "href", newData); 
         }); 
     }); 

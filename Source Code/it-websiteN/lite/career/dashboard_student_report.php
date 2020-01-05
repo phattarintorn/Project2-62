@@ -1,3 +1,15 @@
+<?php
+  include("db/db.php");
+
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $sql = "SELECT * FROM MAPPING_STUDENT_REPORT WHERE STUDENT_ID = " . $_SESSION['USER_ID'];
+  $result = $conn->query($sql);
+
+  if (isset($result->num_rows)) {
+?>
 <div class="col-md-12">
   <div class="card">
     <div class="card-header">
@@ -10,11 +22,6 @@
         <div class="row">
           <div class="col-lg-6">
             <?php
-              include("db/db.php");
-
-              if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-              }
 
               $sql = "SELECT SUM(R.RAW_SCORE) AS RAW, R.CAREER_ID AS ID, C.CAREER_NAME AS CAREER, C.CAREER_IMAGE AS IMAGE,
                 Q.QUESTION_TYPE AS TYPE, SUM(R.TOTAL_SCORE) AS TOTAL FROM MAPPING_STUDENT_REPORT AS R
@@ -129,3 +136,12 @@
     </div> 
   </div> 
 </div>
+<?php
+  } else {
+    echo ("	<script = 'javascript'>
+				alert('ยังไม่เคยทำแบบประเมิณ กรุณาทำแบบประเมิณก่อน')
+				window.location.href='career-advice.php?career=tables_q';
+			</script>
+		");
+  }
+?>
