@@ -1,9 +1,7 @@
 <?php
 include("db/db.php");
 $conn->query("SET NAMES UTF8");
-// if ($conn->connect_error) {
-//   die("Connection failed: " . $conn->connect_error);
-// } 
+
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
@@ -90,9 +88,6 @@ if (!$conn) {
 
           <div class="col-lg-6">
             <?php
-            // $sql = "SELECT COUNT(Mq.QUESTION_ID),Mq.QUESTION_STATUS AS count FROM mapping_student_log AS Mlog
-            // LEFT JOIN MAPPING_QUESTION AS Mq ON Mlog.MAPPING_QUESTION_ID = Mq.MAPPING_QUESTION_ID 
-            // WHERE QUESTION_STATUS = '0'  GROUP BY CREATE_DATE ";
             $sql = "SELECT COUNT(QUESTION_ID) AS count FROM m_group_question";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) 
@@ -112,7 +107,7 @@ if (!$conn) {
                       <?php
                       while($row = $result->fetch_assoc()) 
                       {
-                        // $count = $count +1;
+                    
                         $count = $row["count"];
                       }
                       ?>
@@ -155,7 +150,7 @@ if (!$conn) {
 
         <div class="col-lg-6">
           <?php
-          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_TYPE` ='Q1' ";
+          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_PART` ='ด้านทักษะ' ";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           {  
@@ -174,7 +169,7 @@ if (!$conn) {
                     <?php
                     while($row = $result->fetch_assoc()) 
                     {
-                      $count = $count +1;
+                      $count = $row["count"];
                     }
                     ?>
                     <h1><?php echo $count ?></h1> 
@@ -207,7 +202,7 @@ if (!$conn) {
 
         <div class="col-lg-6">
           <?php
-          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_TYPE` ='Q2' ";
+          $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE  `QUESTION_PART` ='ด้านจิตวิทยา' ";
           $result = $conn->query($sql);
           if ($result->num_rows > 0) 
           {  
@@ -226,7 +221,7 @@ if (!$conn) {
                     <?php
                     while($row = $result->fetch_assoc()) 
                     {
-                      $count = $count +1;
+                      $count = $row["count"];
                     }
                     ?>
                     <h1><?php echo $count ?></h1> 
