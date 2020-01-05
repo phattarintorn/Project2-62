@@ -136,11 +136,11 @@
 </div>
 
 <script>
-  let part = "http://it2.sut.ac.th/project62_g2/it-websiteN/lite/"
-    part += "career-advice.php?career=student_download_module&STUDENT_ID=<?php echo $_SESSION["USER_ID"] ?>"
+  let path = "http://it2.sut.ac.th/project62_g2/it-websiteN/lite/"
+    path += "career-advice.php?career=student_download_module&STUDENT_ID=<?php echo $_SESSION["USER_ID"] ?>"
 
   new QRCode(document.getElementById("qrcode"), {
-      text: part,
+      text: path,
       width: 200,
       height: 200,
       colorDark : "#000000",

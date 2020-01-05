@@ -612,12 +612,13 @@
                             str += '<option value = "'+ value_module +'">'+ text_module +'</option>'
                         }
                     }
-
                     str += '</select>'
+                    str += '<input type = "hidden" id = "input_'+ name +'" name = "input_'+ name +'" value = ""/>'
                 } else {
-                    str += '<select class="form-control" name = "'+ name +'">'
+                    str += '<select class="form-control" name = "'+ name +'" disabled>'
                     str += '<option value = "'+ value +'">'+ text +'</option>'
                     str += '</select>'
+                    str += '<input type = "hidden" id = "input_'+ name +'" name = "input_'+ name +'" value = "'+ value +'"/>'
                 }
                 
                 str += '</div>'
@@ -646,19 +647,23 @@
 
     $(document).ready(function(){
         $('select').on('change', function(event) {
-            var prev = $(this).data('previous');
-            $('select').not(this).find('option[value="'+prev+'"]').show();    
-            var value = $(this).val();
+            let prev = $(this).data('previous');
+            $('select').not(this).find('option[value="' + prev + '"]').show();    
+            let value = $(this).val();
             if (value != '') {
-                $(this).data('previous',value); 
-                $('select').not(this).find('option[value="'+value+'"]').hide();
+                $(this).data('previous', value); 
+                $('select').not(this).find('option[value="' + value + '"]').hide();
             }
+            let key = '#input_' + $(this).attr('name');
+            $(key).val(value);
         });
 
         // select module in database
         for (i = 0; i < module.length; i++) {
-            let name = 'module_' + module[i].no + '_' + module[i].year + '_' + module[i].semester
+            let name = 'module_' + module[i].no + '_' + module[i].year + '_' + module[i].semester;
             $('select[name="' + name + '"]').find('option[value="' + module[i].module + '"]').attr("selected",true);
+            let key = '#input_' + name;
+            $(key).val(module[i].module);
         }
 
     });
