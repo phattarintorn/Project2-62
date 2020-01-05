@@ -60,6 +60,13 @@ $id = $_REQUEST['id'];
                         }
                     }
                 }
+            ?>
+        </form>
+                <center>
+                    <input type="submit" name="btncancel" form="status_plan" class="btn btn-danger" value="ไม่ผ่าน">
+                    <button type="submit" form="status_plan" class="btn btn-success">ผ่าน</button>
+                </center>
+            <?php
             } else {
 
                 $sql = 'SELECT * FROM MAPPING_LIFE_MODULE AS LM
@@ -73,16 +80,12 @@ $id = $_REQUEST['id'];
                         echo '<div class = "row" style = "margin: 20px;">';
                         echo '<div class = "col-md-10">';
                         echo $row["MODULE_CODE"] . ' - ' . $row["MODULE_NAME"] . '</div>' . '</div>';
-                    } 
+                    }
                 }
             }
             ?>
-        </form>
     </div>
     <br>
-    <center>
-        <button type="submit" class="btn btn-danger">ไม่ผ่าน</button>
-        <button type="submit" form="status_plan" class="btn btn-success">ผ่าน</button>
-    </center>
+
     <br>
 </div>

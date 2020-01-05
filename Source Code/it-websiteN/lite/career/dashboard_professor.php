@@ -83,8 +83,7 @@ $advisor_id = $_SESSION["USER_ID"];
 
   <div class="col-lg-12">
     <?php
-    $sql = "SELECT SUM(sr.RAW_SCORE)
-    FROM m_user 
+    $sql = "SELECT SUM(sr.RAW_SCORE) FROM m_user 
     LEFT JOIN mapping_student_report AS sr ON m_user.USER_ID = sr.STUDENT_ID
     LEFT JOIN mapping_student_data ON m_user.USER_ID = mapping_student_data.STUDENT_ID
     WHERE mapping_student_data.ADVISOR_ID = $advisor_id
