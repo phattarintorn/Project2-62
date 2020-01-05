@@ -160,9 +160,9 @@
         <strong class = "card-title"> ยินดีต้อนรับนักศึกษา <?php echo $_SESSION["USER_FIRSTNAME"]  ?></strong>
       </div>
       <div class = "card-body" style = "padding : 20px;">
-      <?php
-        include("student_dashboard_topic.php");
-      ?>
+        <?php
+          include("student_dashboard.php");
+        ?>
       </div>
     <?php
   }

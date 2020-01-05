@@ -48,7 +48,7 @@
         </h3>
         <small>สร้างเมื่อ <?php echo $date ?></small>
         <hr> 
-        <a title="ทำแบบทดสอบ" href="career-advice.php?career=check_formtest&q_group=<?php echo $group; ?>">
+        <a title="ทำแบบทดสอบ" href="career-advice.php?career=check_formtest&QUESTION_GROUP=<?php echo $group; ?>">
             ทำแบบสอบถาม
         </a> 
         </center>
@@ -81,7 +81,7 @@
             <?php echo $plan ?>
         </h1>
         <hr>
-        <a title="จัดการแผนการเรียน" href="career-advice.php?career=tables_q">
+        <a title="จัดการแผนการเรียน" href="career-advice.php?career=student_module">
             จัดการแผนการเรียน
         </a>
         </center>
