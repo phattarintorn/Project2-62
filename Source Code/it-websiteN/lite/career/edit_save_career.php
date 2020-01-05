@@ -32,6 +32,9 @@ if ($file_career_character == "") {
                         echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
                         window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                     }
+                }else{
+                    echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
+                    window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
                 }
             }
         }
@@ -86,6 +89,9 @@ if ($file_career_character == "") {
                             echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
                                 window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                         }
+                    }else{
+                        echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
+                        window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
                     }
                 }
             }

@@ -77,7 +77,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 										รูปแบบการตอบแบบสอบถาม<?php echo ' '.$i ?>
 									</div>
 									<div class="col-md-5">
-										<select class="form-control" name="q_type<?php echo $i;?>" required>	
+										<select class="form-control" id="q_type<?php echo $i;?>" name="q_type<?php echo $i;?>" required>	
 											<option disabled selected value="">--โปรดเลือก--</option>
 											<option value="ความคิดเห็น">ถามระดับความคิดเห็น</option>
 											<option value="เปรียบเทียบ">ถามเปรียบเทียบ</option>
@@ -86,7 +86,7 @@ function AddQ(topics,selObj,restore){ //v3.0
 										if ($i == "1") {
 
 										}else{
-											echo '<center><small><font color="red">*** หมายเหตุ *** กรุณาอย่าเลือกรูปแบบซ้ำกับหัวข้อก่อนหน้า</font></small></center>';
+											echo '<script>$("#q_type2").prop("disabled", true);</script>';
 										}
 										?>
 										
@@ -159,3 +159,18 @@ function AddQ(topics,selObj,restore){ //v3.0
 		</div>
 	</div>
 </form>
+<script>
+
+$("#q_type1").change(function()
+	{
+		$("#q_type2").prop("disabled", false);
+		if($("#q_type1").val() == "ความคิดเห็น"){
+			$("#q_type2").children().remove();
+			$("#q_type2").append('<option  value="เปรียบเทียบ">ถามเปรียบเทียบ</option>');
+		}else if ($("#q_type1").val() == "เปรียบเทียบ"){
+			$("#q_type2").children().remove();
+			$("#q_type2").append('	<option value="ความคิดเห็น">ถามระดับความคิดเห็น</option>');
+		}
+	}
+)
+</script>

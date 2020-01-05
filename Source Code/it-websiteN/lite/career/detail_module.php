@@ -76,6 +76,7 @@
                                     echo '<br>';
                                 }
                             }else{
+                                echo '</br>';
                                 echo 'ไม่มีรายวิชา';
                             }
                             echo '</div>';                       
@@ -87,8 +88,4 @@
 </div>	
 <div class="col-md-2">
 	<button class="btn btn-secondary " onclick="window.location='career-advice.php?career=add_module'">กลับ</button>
-    <?php 
-        // echo'<button class="btn btn-danger " onclick="window.location="career-advice.php?career=edit_module&module_id='.$MODULE_ID .'"">แก้ไข</button>';
-        // echo'<button class="btn btn-danger " onclick=\"window.location="career-advice.php?career=edit_module&module_id='.$MODULE_ID.'"\">แก้ไข</button>';
-    ?>
 </div>

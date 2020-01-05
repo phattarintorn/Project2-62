@@ -25,7 +25,6 @@ for($i=1; $i<$line; $i++)
 		}else{
 			$choose_no = '2';
 		}
-		 
 		$sql = "INSERT INTO m_group_question(QUESTION_GROUP,QUESTION_CHOICE,QUESTION_PART,QUESTION_TYPE,QUESTION_CHOOSE,CREATE_DATE,CREATE_BY,UPDATE_DATE,UPDATE_BY) 
 		VALUES ('".$q_group."','".$q_choise."','".$q_part."','".$q_type."','".$choose_no."','".$q_day."','".$session_name."','".$q_day."','".$session_name."')";
 
