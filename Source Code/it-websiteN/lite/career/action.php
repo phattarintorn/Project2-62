@@ -76,7 +76,7 @@
 	</div>
 </div>
 <div class="col-md-2"> 
-	<a href="career-advice.php?career=tables_history">
+	<a href="javascript:history.back();">
 		<button class="btn btn-secondary">กลับ</i></button></a>
 	</a> 
 </div>

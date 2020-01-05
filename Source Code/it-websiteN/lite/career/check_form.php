@@ -31,7 +31,7 @@
 ?> 
 
 <div class="col-md-2"> 
-	<a href="career-advice.php?career=tables_history2&q_group=<?php echo $QUESTION_GROUP ?>">
+	<a href="javascript:history.back();">
 		<button class="btn btn-secondary">กลับ</i></button></a>
 	</a> 
 </div>

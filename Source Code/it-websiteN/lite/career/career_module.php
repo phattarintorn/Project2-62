@@ -32,7 +32,7 @@
             echo '<div class = "col-md-9">';
             echo '<div class = "card" align = "center">';
             echo '<div class = "card-header">';
-            echo '<strong class="card-title">แผนการเรียน</strong>';
+            echo '<strong class="card-title">ชุดวิชาบังคับ</strong>';
             echo '</div>';
             echo '<div class = "row card-body" style = "padding: 20px;">';
 

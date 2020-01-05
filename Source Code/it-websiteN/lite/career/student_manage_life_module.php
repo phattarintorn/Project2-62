@@ -81,7 +81,7 @@
                 "date" => $row["CREATE_DATE"]
             );
         }
-        echo 'generate_module(' . json_encode($data_arr) . ')';
+        echo 'generate_module(' . json_encode($data_arr) . ');';
     }
     
     $sql = 'SELECT * FROM M_MODULE WHERE MODULE_ID NOT IN
