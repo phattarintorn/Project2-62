@@ -4,7 +4,7 @@ $advisor_id = $_SESSION["USER_ID"];
 ?>
 <br>
 
-<div class="col-lg-12">
+<div class="card col-lg-12" style = "padding-left: 0; padding-right: 0;">
   <div class="card-header">
     <strong class="card-title">แจ้งเตือน</strong>
   </div>
