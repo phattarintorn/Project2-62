@@ -5,7 +5,7 @@ $user_id = $_SESSION["USER_ID"];
 $form_date = $_REQUEST['form_date'];
 
 if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
-	$q_id = $_REQUEST['q_id']; 
+	$q_id = $_REQUEST['q_id'];
 
 	// $sql = "SELECT COUNT(form_id) AS count, `form_type`,`form_side`,`form_group`,`form_date`,`career`,SUM(`choice_form`) AS sum FROM test_form WHERE `q_id` = '$q_id' GROUP BY `career` ORDER BY `sum` DESC";
 
@@ -87,9 +87,17 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 
 	}
 
+	$sql = "SELECT Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
+		LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+		WHERE R.STUDENT_ID = $user_id AND R.CREATE_DATE = '$form_date'
+		GROUP BY R.CAREER_ID LIMIT 1";
+
+	$result = $conn->query($sql);
+	$row2 = $result->fetch_assoc();
+
 	if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 		echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=action&q_id=".$q_id."&q_id2=".$q_id2."&form_date=".$form_date."&form_type=".$form_type."&form_type2=".$form_type2."&form_side=".$form_part."&form_side2=".$form_part2."';
+				window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row2['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';
 			</script>");
 	}
 }
@@ -130,11 +138,20 @@ if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
 			mysqli_query($conn, $sql);
 
 		}
+		
+		$sql = "SELECT Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
+			LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+			WHERE R.STUDENT_ID = $user_id AND R.CREATE_DATE = '$form_date'
+			GROUP BY R.CAREER_ID LIMIT 1";
+
+		$result = $conn->query($sql);
+		$row2 = $result->fetch_assoc();
 
 		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score . ", TOP_SCORE = " . $top_score . " WHERE QUESTION_ID = $q_id AND STUDENT_ID = $user_id";
+
 		if (mysqli_query($conn, $sql)) {
 			echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=action&q_id=".$q_id."&form_date=".$form_date."&form_type=".$form_type."&form_side=".$form_part."';</script>");
+				window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row2['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
 		} 
 	}
 }
@@ -175,11 +192,19 @@ if (isset($_REQUEST["q_id2"])  && !isset($_REQUEST["q_id"])) {
 
 		}	 
 
+		$sql = "SELECT Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
+			LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
+			WHERE R.STUDENT_ID = $user_id AND R.CREATE_DATE = '$form_date'
+			GROUP BY R.CAREER_ID LIMIT 1";
+
+		$result = $conn->query($sql);
+		$row2 = $result->fetch_assoc();
+
 		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score2 . ", TOP_SCORE = " . $top_score2 . " WHERE QUESTION_ID = $q_id2 AND STUDENT_ID = $user_id";
 		
 		if (mysqli_query($conn, $sql)) {
 			echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=action&q_id2=".$q_id2."&form_date=".$form_date."&form_type2=".$form_type2."&form_side2=".$form_part2."';</script>");
+				window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row2['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
 		} 
 
 	}
