@@ -10,6 +10,39 @@ $advisor_id = $_SESSION["USER_ID"];
   </div>
   <br>
   <div class="row">
+
+  <div class="col-lg-12">
+    <?php
+    $sql = "SELECT std_data.STUDENT_ID FROM mapping_student_data AS std_data
+    LEFT JOIN mapping_student_plan AS std_p ON std_p.STUDENT_ID = std_data.STUDENT_ID
+    WHERE std_data.ADVISOR_ID = $advisor_id AND std_p.PLAN_STATUS = 0
+    GROUP BY std_p.STUDENT_ID";
+    
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) 
+    {  
+      $count = 0; 
+      ?> 
+      <div class="col-md-12" title="แจ้งเตือน"> 
+        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+          <?php
+          
+          while($row = $result->fetch_assoc()) 
+          {
+            $count = $count +1;
+          }
+          
+          ?>
+          <span>มีนักศึกษา</span>
+          <span class="badge badge-pill badge-danger"><?php echo $count ?></span>
+          <span>คน ในที่ปรึกษาของท่าน <u>ยังไม่ผ่าน</u> การยืนยันแผนการเรียน</span>
+        </div>  
+      </div>  
+      <?php  
+    }
+    ?>
+  </div>
+
    <div class="col-lg-12">
     <div class="col-md-12" title="แจ้งเตือน"> 
       <div class="alert  alert-success alert-dismissible fade show" role="alert">
@@ -46,42 +79,6 @@ $advisor_id = $_SESSION["USER_ID"];
 
   <div class="col-lg-12">
     <?php
-    $sql = "SELECT std_data.STUDENT_ID FROM mapping_student_data AS std_data
-    LEFT JOIN mapping_student_plan AS std_p ON std_p.STUDENT_ID = std_data.STUDENT_ID
-    WHERE std_data.ADVISOR_ID = $advisor_id AND std_p.PLAN_STATUS = 0
-    GROUP BY std_p.STUDENT_ID";
-    
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) 
-    {  
-      $count = 0; 
-      ?> 
-      <div class="col-md-12" title="แจ้งเตือน"> 
-        <div class="alert  alert-danger alert-dismissible fade show" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true" title="ปิด">&times;</span>
-          </button>
-          <?php
-          
-          while($row = $result->fetch_assoc()) 
-          {
-            $count = $count +1;
-          }
-          
-          ?>
-          <span>มีนักศึกษา</span>
-          <span class="badge badge-pill badge-danger"><?php echo $count ?></span>
-          <span>คน ในที่ปรึกษาของท่าน <u>ยังไม่ผ่าน</u> การยืนยันแผนการเรียน</span>
-        </div>  
-      </div>  
-      <?php  
-    }
-    ?>
-  </div>
-
-
-  <div class="col-lg-12">
-    <?php
     $sql = "SELECT SUM(sr.RAW_SCORE) AS sum FROM mapping_student_data AS sd
     LEFT JOIN mapping_student_report AS sr ON sd.STUDENT_ID = sr.STUDENT_ID
     WHERE sd.ADVISOR_ID = $advisor_id AND sr.RAW_SCORE IS NOT NULL
@@ -93,7 +90,7 @@ $advisor_id = $_SESSION["USER_ID"];
       $count = 0; 
       ?> 
       <div class="col-md-12" title="แจ้งเตือน"> 
-        <div class="alert  alert-warning alert-dismissible fade show" role="alert">
+        <div class="alert  alert-info alert-dismissible fade show" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true" title="ปิด">&times;</span>
           </button>
@@ -106,7 +103,7 @@ $advisor_id = $_SESSION["USER_ID"];
           
           ?>
           <span>มีนักศึกษา</span>
-          <span class="badge badge-pill badge-warning"><?php echo $count ?></span>
+          <span class="badge badge-pill badge-info"><?php echo $count ?></span>
           <span>คน ในที่ปรึกษาของท่าน <u>ทำแบบสอบถามแล้ว</u>  </span>
         </div> 
       </div>  

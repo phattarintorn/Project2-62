@@ -40,7 +40,7 @@
                   <form action="page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons">person</i></span>
-                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสอาจารย์ " pattern="[A-Z0-9]{8}" required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username"  placeholder="รหัสอาจารย์ " pattern="[A-Z0-9]{6}" required>
                     </div>
                     <br>
                     <div class="input-group">
@@ -88,8 +88,7 @@
                     </div>
                     <br>
                     <div class="text-center">
-                     <button class="btn btn-info">เพิ่มบัญชีบุคลากร</button>
-                     
+                     <input type="submit" class="btn btn-info" name="btnadd" value="เพิ่มบุคลากร">
                      <div class="register-link m-t-15 text-center">
                      <p> <center><a href="career-advice.php?career=tables_user">กลับ</a></p></center>
                      </form>

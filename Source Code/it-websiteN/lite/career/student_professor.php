@@ -49,7 +49,11 @@
                       echo '<td>'.$row['USER_GPA'].'</td>';
                       echo '<td>'.$row['USER_GPAX'].'</td>';
                       if ($row['PLAN_STATUS'] == 0) {
-                        echo '<td align="center">ยังไม่ผ่าน</td>';
+                        if ($row['STUDENT_PLAN'] == 'LIFE'){
+                          echo '<td align="center">ตลอดชีวิต</td>';
+                        } else {
+                          echo '<td align="center">ยังไม่ผ่าน</td>';
+                        }
                       } else {
                         echo '<td align="center">ผ่านแล้ว</td>';
                       }

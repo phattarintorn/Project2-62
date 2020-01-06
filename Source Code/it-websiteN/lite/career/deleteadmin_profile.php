@@ -1,15 +1,15 @@
 <?php
 include("db/db.php");  
-$Deleteid = $_GET["id"];
+$del = $_GET["id"];
 
 $conn->query("SET NAMES UTF8");
-$sql="DELETE FROM M_USER WHERE USER_ID = $Deleteid"; 
+$sql="UPDATE M_USER SET STATUS_USER = 1 WHERE USER_ID = $del"; 
 
 if ($conn->query($sql)) {
-	echo ("<script = 'javascript'>alert('ระบบทำการลบผู้ใช้สำเร็จ') 
+	echo ("<script = 'javascript'>alert('ระบบทำการปิดสถานะผู้ใช้สำเร็จ') 
 		window.location.href='career-advice.php?career=tables_user';</script>");
 } else { 
-	echo ("<script = 'javascript'>alert('ระบบทำการลบผู้ใช้ ผิดพลาด!!') 
+	echo ("<script = 'javascript'>alert('ระบบทำการปิดสถานะผู้ใช้ ผิดพลาด!!') 
 		window.location.href='career-advice.php?career=tables_user';</script>");
 }
 ?> 

@@ -24,15 +24,14 @@
                 <tr>
                   <th>รหัสผู้ใช้</th>
                   <th>ชื่อ</th>
-                  <th>เพศ</th>
                   <th>สถานะ</th>
                   <th>อีเมล</th>
+                  <th>การใช้งาน</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <?php
-                // if (isset($_SESSION["levels_train"])) {
                 if ($_SESSION["USER_STATUS"] == "ADMIN") {
                   $sql = "SELECT * FROM M_USER 
                   WHERE USER_STATUS = 'PERSONNEL' OR USER_STATUS = 'PROFESSOR' OR USER_STATUS = 'STUDENT'
@@ -45,11 +44,7 @@
                       echo "<tr>";
                       echo '<td>'.$row['USER_USERNAME'].'</td>';
                       echo '<td>'.$row['USER_FIRSTNAME'].' ' .$row['USER_LASTNAME'].'</td>';
-                      if($row["USER_GENDER"] == "M"){
-                        echo '<td>ชาย</td>';
-                      } else {
-                        echo '<td>หญิง</td>';
-                      }
+                      
                       if($row["USER_STATUS"] == "PROFESSOR") {
                         echo '<td>อาจารย์</td>';
                       } elseif($row["USER_STATUS"] == "PERSONNEL") {
@@ -58,9 +53,14 @@
                         echo '<td>นักศึกษา</td>';
                       }
                       echo '<td>'.$row['USER_EMAIL'].'</td>';
-                      echo '<td>
+                      if($row["STATUS_USER"] == 0){
+                        echo '<td>ใช้งาน</td>';
+                      } else {
+                        echo '<td>ไม่ใช้งาน</td>';
+                      }
+                      echo '<td> 
                       <a title="แก้ไข"  class="btn-link ti-write" href="career-advice.php?career=edituser_ad&id='.$row['USER_ID'].'"></a>
-                      <a title="ลบ"  class="btn-link ti-trash" href="career-advice.php?career=deleteadmin_profile&id='.$row['USER_ID'].'"> </a>
+                      <a title="ปิดการใช้งาน"  class="btn-link ti-trash" href="career-advice.php?career=deleteadmin_profile&id='.$row['USER_ID'].'"> </a>
                       </td>';
                       echo "</tr>"; 
                     }   

@@ -74,8 +74,10 @@ $id = $_REQUEST['id'];
                 WHERE STUDENT_ID = ' . $id;
                 $result = $conn->query($sql);
 
+                echo '<br>';
+
                 if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_array()) {
+                    while ($row = $result->fetch_array()) {               
                         echo '<input type="hidden" id="id" name="id" value="' . $row["STUDENT_ID"] . '">';
                         echo '<div class = "row" style = "margin: 20px;">';
                         echo '<div class = "col-md-10">';

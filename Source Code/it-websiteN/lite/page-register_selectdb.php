@@ -14,7 +14,6 @@ while($fetch = mysqli_fetch_array($result)){
 }
 
 if ($i === 0) {
-	//$username = $_POST["username"];
 	$password = $_POST["password"];
 	$firstname = $_POST["firstname"];
 	$lastname = $_POST["lastname"];
@@ -74,15 +73,16 @@ if ($i === 0) {
 				window.location.href='page-register.php';</script>");
 		}
 	}
-
-}
- else {
+} elseif(isset($_POST['btnadd'])) {
 	echo ("	<script = 'javascript'>
 				alert('Username มีอยู่ในระบบอยู่แล้ว หากลืมรหัสผ่าน กรุณาติดต่อเจ้าหน้าที่')
-				window.location.href='page-registerstudent.php';
-			</script>
-		");
+				window.location.href='page-register.php';
+			</script>");
+} else {
+	echo ("	<script = 'javascript'>
+	alert('Username มีอยู่ในระบบอยู่แล้ว หากลืมรหัสผ่าน กรุณาติดต่อเจ้าหน้าที่')
+	window.location.href='page-registerstudent.php';
+	</script>");
 }
 
 mysqli_close($conn);
-?>
