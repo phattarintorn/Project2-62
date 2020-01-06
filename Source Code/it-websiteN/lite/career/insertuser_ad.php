@@ -62,16 +62,16 @@ if ($status == "STUDENT") {
 	UPDATE_DATE = SYSDATE(),
 	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
 }else{
-	$sql = "UPDATE M_USER SET 
+	$sql = "UPDATE M_USER 
+	INNER JOIN SET 
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
 	USER_GENDER ='" .$gender."',
 	USER_TEL ='" .$tel."',
-	USER_EMAIL ='" .$email."',
-	UPDATE_DATE = SYSDATE(),
-	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
+	USER_EMAIL ='" .$email."' WHERE USER_ID=" . $id;
 }
-//cho $sql;
+
+
 
 if (mysqli_query($conn, $sql)) {
 	echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
