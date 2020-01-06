@@ -27,6 +27,7 @@
 					</thead>
 					<tbody>
 						<?php
+						$count = 0;
 						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 
@@ -35,7 +36,6 @@
 							while($row = $result->fetch_assoc()) 
 							{  
 								$i = $i + 1;
-								$count = 0;
 								echo '<tr>'; 
 								if ($row["CAREER_ID_1"] != "") {
 									echo'
@@ -46,11 +46,10 @@
 									echo $row["QUESTION_NO"];
 									echo '</td>';  
 									echo '<td align="left">';
-									echo $row["QUESTION_DETAIL_1"];
+									echo $row["QUESTION_DETAIL_1"]." ".$count;
 									echo '</td>';
-									
 								}else{  
-									$count++;
+									$count = 1;
 									echo '
 									<input type="hidden" name="q1_group" value="'.$row["QUESTION_GROUP"].'">
 									<input type="hidden" name="q_id" value="'.$row["QUESTION_ID"].'">
