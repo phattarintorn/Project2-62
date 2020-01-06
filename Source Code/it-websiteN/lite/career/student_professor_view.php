@@ -96,7 +96,7 @@ if ($result->num_rows > 0)
             <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">หลักสูตร : </label>
             </div>
-            <div class="col col-md-4">
+            <div class="col col-md-8">
               <?php echo $row["BRANCH_NAME"]; ?>
             </div>
           </div>

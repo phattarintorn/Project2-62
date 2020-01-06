@@ -45,7 +45,7 @@
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสผ่าน">lock</i></span>
-                      <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน" required maxlength="10">
+                      <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน" pattern="[0-9]{8,16}" required>
                     </div>
                     <br>
                     <div class="input-group">

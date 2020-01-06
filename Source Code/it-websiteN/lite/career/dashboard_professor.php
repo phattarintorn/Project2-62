@@ -4,7 +4,7 @@ $advisor_id = $_SESSION["USER_ID"];
 ?>
 <br>
 
-<div class="col-lg-12">
+<div class="card col-lg-12" style = "padding-left: 0; padding-right: 0;">
   <div class="card-header">
     <strong class="card-title">แจ้งเตือน</strong>
   </div>
@@ -47,8 +47,7 @@ $advisor_id = $_SESSION["USER_ID"];
   <div class="col-lg-12">
     <?php
     $sql = "SELECT std_data.STUDENT_ID FROM mapping_student_data AS std_data
-    LEFT JOIN mapping_student_plan AS std_p 
-    ON std_p.STUDENT_ID = std_data.STUDENT_ID
+    LEFT JOIN mapping_student_plan AS std_p ON std_p.STUDENT_ID = std_data.STUDENT_ID
     WHERE std_data.ADVISOR_ID = $advisor_id AND std_p.PLAN_STATUS = 0
     GROUP BY std_p.STUDENT_ID";
     
@@ -83,12 +82,10 @@ $advisor_id = $_SESSION["USER_ID"];
 
   <div class="col-lg-12">
     <?php
-    $sql = "SELECT SUM(sr.RAW_SCORE)
-    FROM m_user 
-    LEFT JOIN mapping_student_report AS sr ON m_user.USER_ID = sr.STUDENT_ID
-    LEFT JOIN mapping_student_data ON m_user.USER_ID = mapping_student_data.STUDENT_ID
-    WHERE mapping_student_data.ADVISOR_ID = $advisor_id
-    GROUP BY m_user.USER_ID";
+    $sql = "SELECT SUM(sr.RAW_SCORE) AS sum FROM mapping_student_data AS sd
+    LEFT JOIN mapping_student_report AS sr ON sd.STUDENT_ID = sr.STUDENT_ID
+    WHERE sd.ADVISOR_ID = $advisor_id AND sr.RAW_SCORE IS NOT NULL
+    GROUP BY sd.STUDENT_ID";
     
     $result = $conn->query($sql);
     if ($result->num_rows > 0) 

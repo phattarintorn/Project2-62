@@ -96,7 +96,7 @@
             /^data:image\/png/, "data:application/octet-stream"); 
             
             $("#btn-Convert-Html2Image").attr( 
-            "download", "GeeksForGeeks.png").attr( 
+            "download", "Module_<?php echo $_SESSION["USER_USERNAME"] ?>.png").attr( 
             "href", newData); 
         }); 
     }); 

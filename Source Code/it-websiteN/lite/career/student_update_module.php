@@ -7,7 +7,7 @@
     for ($year = 1; $year <= 4; $year++) {
         for ($semester = 1; $semester <= 3; $semester++) {
             for($no = 1; $no <= 4; $no++) {
-                $var = 'module_' . $no .'_' . $year . '_' .$semester;
+                $var = 'input_module_' . $no .'_' . $year . '_' .$semester;
 
                 if ($result->num_rows == 0) {
                     $sql = 'INSERT INTO MAPPING_STUDENT_MODULE (STUDENT_ID, MODULE_ID, MODULE_NO, MODULE_YEAR,';

@@ -11,7 +11,7 @@
           <div class="card-header">
             <strong class="card-title">แบบสอบถามทั้งหมด</strong>
           </div>
-          <div class="card-body">
+          <div class="card-body" style = "padding: 15px;">
             <?php
             if ($_SESSION["USER_STATUS"] == "PERSONNEL") {
               ?>
