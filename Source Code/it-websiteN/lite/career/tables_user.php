@@ -46,17 +46,17 @@
                       echo '<td>'.$row['USER_FIRSTNAME'].' ' .$row['USER_LASTNAME'].'</td>';
                       
                       if($row["USER_STATUS"] == "PROFESSOR") {
-                        echo '<td>อาจารย์</td>';
+                        echo '<td><center>อาจารย์</center></td>';
                       } elseif($row["USER_STATUS"] == "PERSONNEL") {
-                        echo '<td>เจ้าหน้าที่</td>';
+                        echo '<td><center>เจ้าหน้าที่</center></td>';
                       } else {
-                        echo '<td>นักศึกษา</td>';
+                        echo '<td><center>นักศึกษา</center></td>';
                       }
                       echo '<td>'.$row['USER_EMAIL'].'</td>';
                       if($row["STATUS_USER"] == 0){
-                        echo '<td>ใช้งาน</td>';
+                        echo '<td><center>ใช้งาน</center></td>';
                       } else {
-                        echo '<td>ไม่ใช้งาน</td>';
+                        echo '<td><center>ไม่ใช้งาน</center></td>';
                       }
                       echo '<td> 
                       <a title="แก้ไข"  class="btn-link ti-write" href="career-advice.php?career=edituser_ad&id='.$row['USER_ID'].'"></a>

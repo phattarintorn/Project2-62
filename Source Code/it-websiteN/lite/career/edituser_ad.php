@@ -331,8 +331,14 @@ if ($result->num_rows > 0) {
 											$result = $conn->query($sql);
 											if ($result->num_rows > 0) {
 												while ($row2 = $result->fetch_assoc()) {
+													if($row["ADVISOR_ID"] == $row2["USER_ID"]) {
+														$sel = "selected";
+													} else {
+														$sel = "";
+													}
 											?>
-													<option value="<?php echo $row2["USER_ID"]; ?>"><?php echo $row2["USER_FIRSTNAME"] . ' ' . $row2["USER_LASTNAME"]; ?></option>
+													<option value="<?php echo $row2["USER_ID"]; ?>" <?php echo $sel;?>>
+													<?php echo $row2["USER_FIRSTNAME"] . ' ' . $row2["USER_LASTNAME"]; ?></option>
 											<?php
 												}
 											}
@@ -343,7 +349,7 @@ if ($result->num_rows > 0) {
 
 								<div class="row form-group">
 									<div class="col col-md-3">
-										<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา : </label>
+										<label for="text-input" class=" form-control-label">หลักสูตร : </label>
 									</div>
 									<div class="col col-md-5">
 										<select id="branch" name="branch" required class="form-control" size="">
@@ -353,8 +359,14 @@ if ($result->num_rows > 0) {
 											$result = $conn->query($sql);
 											if ($result->num_rows > 0) {
 												while ($row3 = $result->fetch_assoc()) {
+													if($row["BRANCH_ID"] == $row3["BRANCH_ID"]) {
+														$sel = "selected";
+													} else {
+														$sel = "";
+													}
 											?>
-													<option value="<?php echo $row3["BRANCH_ID"]; ?>"><?php echo ("[ " . $row3["BRANCH_INITIAL"] . " ] " . $row3["BRANCH_NAME"]); ?></option>
+													<option value="<?php echo $row3["BRANCH_ID"]; ?>" <?php echo $sel;?>>
+													<?php echo ("[ " . $row3["BRANCH_INITIAL"] . " ] " . $row3["BRANCH_NAME"]); ?></option>
 											<?php
 												}
 											}
