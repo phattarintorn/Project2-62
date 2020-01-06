@@ -301,3 +301,4 @@ function add_course() {
     $('#course_name').val($('#name'+id).text())
   })
 </script>
+

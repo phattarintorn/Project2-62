@@ -7,6 +7,9 @@
   <?php include('header.php')?>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -71,7 +74,7 @@
                         <option value="GENERAL"><h5>แผนการเรียนทั่วไป</h5></option>
                         <option value="LIFE"><h5>แผนการเรียนตลอดชีวิต</h5></option>
                       </select>
-                      <button  type="button" class="btn btn-link" title="แผนการเรียน คือ ?" data-toggle="modal" data-target="#EX">
+                      <button  type="button" class="btn btn-link" title="แผนการเรียน คือ ?" data-toggle="modal" data-target="#PLAN">
                         <i class="mdi mdi-help"></i><small> คือ?</small>
                       </button>
                     </div>
@@ -83,7 +86,7 @@
                         <option value="MAJOR"><h5>หลักสูตรเอก</h5></option>
                         <option value="MINOR"><h5>หลักสูตรโท</h5></option>
                       </select>
-                      <button  type="button" class="btn btn-link" title="หลักสูตรการเรียน คือ ?" data-toggle="modal" data-target="#EX">
+                      <button  type="button" class="btn btn-link" title="หลักสูตรการเรียน คือ ?" data-toggle="modal" data-target="#MAJOR">
                         <i class="mdi mdi-help"></i><small> คือ?</small>
                       </button>
                     </div>
@@ -255,8 +258,94 @@
 <!-- <script src="../js/login.js"></script>
   <script src="../js/check_logined.js"></script> -->
 </body>
+
+<!-- Modal PLAN -->
+<div class="modal fade" id="PLAN" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">รายละเอียด : แผนการเรียน</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <center>
+              <div class="col-md-12">
+                <h4>แผนการเรียนทั่วไป</h4>
+              </div>
+              <div class="col-md-12">
+                </br>
+                <h5 align="left"><p>&nbsp;&nbsp;&nbsp;&nbsp;โครงสร้างของเนื้อหาวิชา หรือประสบการณ์ต่างๆ หรือศาสตร์ต่างๆ ที่กำหนดให้ผู้เรียนได้ศึกษาหาความรู้ทั้ง</p>
+                <p>ภาคทฤษฎี ภาคปฏิบัติ รวมทั้งการมีส่วนร่วมกิจกรรมเสริมสร้างประสบการณ์ ตามแผนการศึกษาในสาขาวิชานั้นๆ</p></h5>
+                </br>
+              </div>
+              <hr>
+              <div class="col-md-12">
+                <h4>แผนการเรียนตลอดชีวิต</h4>
+              </div>
+              <div class="col-md-12">
+                </br>
+                <h5 align="left"><p>&nbsp;&nbsp;&nbsp;&nbsp;จัดขึ้นเพื่อสนองความต้องการและความจำเป็นของบุคคลต่อเนื่องจากฐานความรู้เดิม และเพื่อเสริมเติมเต็มและ</p>
+                  <p>พัฒนาศักยภาพของผู้เรียน โดยไม่แบ่งเป็นระดับชั้นในรูปของกิจกรรมการเรียนรู้หรือหลักสูตรการเรียนรู้ ประเภท</p> 
+                  <p>มีหน่วยกิตและไม่มีหน่วยกิตซึ่งมิใช่การศึกษาตามระบบปกติ</p></h5>
+                </br>
+              </div> 
+            </div>
+          </center>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal MAJOR -->
+<div class="modal fade" id="MAJOR" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">รายละเอียด : หลักสูตรการเรียน</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <center>
+              <div class="col-md-12">
+                <h4>หลักสูตรเอก</h4>
+              </div>
+              <div class="col-md-12">
+                </br>
+                <h5 align="left">สาขาหลักที่เข้าไปเรียน และจะจบมาโดยระบุไว้ในใบปริญญาว่า จบสาขาอะไร พอดูในส่วนวิชาเอก บางทีก็จะมี</h5>
+                <h5 align="left">&nbsp; -   วิชาเอกบังคับ (เอกสาขานั้นต้องเรียนให้ครบทุกตัวที่กำหนด)</h5>
+                <h5 align="left">&nbsp; -   วิชาเอกเลือก  (สามารถเลือกลงตามสนใจได้ โดยกำหนดหน่วยกิตไว้ว่า ต้องผ่านกี่หน่วยถึงครบหลักสูตร)</h5>
+                </br>
+              </div>
+              <hr>
+              <div class="col-md-12">
+                <h4>หลักสูตรโท</h4>
+              </div>
+              <div class="col-md-12">
+                </br>
+                <h5 align="left" ><p>ความสนใจรอง เป็นหลักสูตรเล็กๆ ตามแต่มหาวิทยาลัยจะระบุ อาจจะมีเงื่อนไขเล็กๆ เช่น ไม่สามารถเลือกวิชาโท</p><p>ที่อยู่ในหมวดวิชาเอกได้ ตัวอย่างเช่น</p></h5>
+                <h5 align="left"><p>&nbsp; -  วิชาเอกเป็นเทคโนโลยีสารสนเทศแล้ว วิชาโท ไม่สามารถลงในกลุ่มเทคโนโลยีสารสนเทศได้ ต้องไปลงวิชาโท</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;ในหมวดอื่นแทน อาจจะเป็น ภาษา บริหาร นิติศาสตร์ พัฒนามนุษย์ ก็ได้</p></h5>
+                </br>
+              </div> 
+            </div>
+          </center>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </html>
 
-<script>
 
-</script>
+
+
+
