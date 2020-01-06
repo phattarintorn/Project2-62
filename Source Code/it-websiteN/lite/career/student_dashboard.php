@@ -11,7 +11,7 @@
 
 <div class = "row apadding" style = "padding-bottom: 20px;">
     <h4 style="padding-left: 1.5vw;">
-        เป็นระบบแบบทำสอบเพื่อค้นหาอาชีพที่เหมาะสมกับคุณ และสามารถจัดแผนการเรียนตามที่คุณต้องการได้
+        เป็นระบบทำแบบทดสอบเพื่อค้นหาอาชีพที่เหมาะสมกับคุณ และสามารถจัดแผนการเรียนตามที่คุณต้องการได้
     </h4>
     <br/>
 </div>
@@ -24,12 +24,12 @@
                     <h1> 1. </h1>
                 </div>
                 <div class = "col-md-7">
-                    <h1> ทำแบบประเมิน </h1> 
+                    <h1> ทำแบบทดสอบ </h1> 
                     <h4 style="padding-left: 1.5vw;"> เพื่อค้นหาอาชีพที่เหมาะสมกับคุณ</h4>
                 </div>
                 <div class = "col-md-3" align = "center" style = "padding-top: 1.5em;">
-                    <a title="ทำแบบประเมิน" href="career-advice.php?career=tables_q">
-                        <h1> ทำแบบประเมิน </h1>
+                    <a title="ทำแบบทดสอบ" href="career-advice.php?career=tables_q">
+                        <h1> ทำแบบทดสอบ </h1>
                     </a>
                 </div>
             </div>
