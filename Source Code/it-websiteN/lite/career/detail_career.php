@@ -18,7 +18,7 @@
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                             echo '<div class = "card-body" style = "padding: 15px;">';
-                            echo '<img style="width:35%; height:45%; margin-bottom: 10px;" src="images/career/character/' . $row["CAREER_IMAGE"] . '">';
+                            echo '<img style="width:65%; height:75%; margin-bottom: 10px;" src="images/career/character/' . $row["CAREER_IMAGE"] . '">';
                             echo '<br>';
                             echo $row["CAREER_NAME"];
                             echo '</div>';

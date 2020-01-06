@@ -10,6 +10,7 @@ if (!$conn) {
 $career_name = $_POST["career_name"];
 $count_career = $_POST["count_career"];
 $session_name = $_SESSION["USER_USERNAME"];
+$check = 0;
 
 $file_career_character = pathinfo(basename($_FILES['career_character']['name']),PATHINFO_EXTENSION);
 
@@ -61,16 +62,22 @@ if ($file_career_character == "") {
 					$sql_m = "INSERT INTO mapping_career_module (CAREER_ID,MODULE_ID,CREATE_DATE,CREATE_BY) VALUES
 					 ('" .$career_id."','".$module_id."','".$date."','" .$session_name."')";
 					if (mysqli_query($conn, $sql_m)) {
+						$check = 1;
 						echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-							window.location.href='career-advice.php?career=add_career';</script>");
+							window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
 					}
+				}
+			}
+			if($check==0){
+				$sql_del = "DELETE FROM m_career WHERE CAREER_id = $career_id ";
+				if (mysqli_query($conn, $sql_del)) {
+					echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
+						window.location.href='career-advice.php?career=add_career';</script>");
 				}
 			}
 		}
 	}
-
 }
-
 	mysqli_close($conn);
 
 ?>

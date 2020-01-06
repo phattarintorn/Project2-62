@@ -11,6 +11,7 @@ $career_name = $_POST["career_name"];
 $count_career = $_POST["count_career"];
 $session_name = $_SESSION["USER_USERNAME"];
 $career_id = $_REQUEST["career_id"];
+$check = 0;
 printf($career_id);
 
 $file_career_character = pathinfo(basename($_FILES['career_character']['name']),PATHINFO_EXTENSION);
@@ -29,13 +30,15 @@ if ($file_career_character == "") {
                     $sql_m = "INSERT INTO mapping_career_module (CAREER_ID,MODULE_ID,CREATE_DATE,CREATE_BY) VALUES
                     ('" .$career_id."','".$module_id."','".$date."','" .$session_name."')";
                     if (mysqli_query($conn, $sql_m)) {
+                        $check = 1;
                         echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
                         window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                     }
-                }else{
-                    echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
-                    window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
                 }
+            }
+            if($check==0){
+                echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
+                window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
             }
         }
     }
@@ -72,7 +75,6 @@ if ($file_career_character == "") {
 			echo '<br>';
 			echo '</center>';
 		} 
-        
         $sql = "UPDATE m_career
         SET CAREER_NAME = '$career_name',CAREER_IMAGE = '$career_character'
         WHERE CAREER_ID = '$career_id'";
@@ -86,13 +88,15 @@ if ($file_career_character == "") {
                         $sql_m = "INSERT INTO mapping_career_module (CAREER_ID,MODULE_ID,CREATE_DATE,CREATE_BY) VALUES
                         ('" .$career_id."','".$module_id."','".$date."','" .$session_name."')";
                         if (mysqli_query($conn, $sql_m)) {
+                            $check = 1 ;
                             echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
                                 window.location.href='career-advice.php?career=detail_career&career_id=".$career_id."';</script>");
                         }
-                    }else{
-                        echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
-                        window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
                     }
+                }
+                if($check==0){
+                    echo ("<script = 'javascript'>alert('โปรดเลือก Module') 
+                    window.location.href='career-advice.php?career=edit_career&career_id=".$career_id."';</script>");
                 }
             }
         }
