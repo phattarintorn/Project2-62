@@ -16,39 +16,8 @@ if (!$conn) {
     <div class="col-md-12">
       <div class="animated fadeIn">
         <br> 
-
-        <div class="row">
-          <div class="col-lg-6">
-            <?php
-            
-            $sql = "SELECT COUNT(`USER_ID`) as id FROM `m_user`";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) 
-            { 
-              while($row = $result->fetch_assoc()) 
-              {
-                ?>
-
-                <div class="col-md-12"> 
-                  <div class="alert  alert-info alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <center>
-                      <br>
-                      <p><h3><span class="badge badge-pill badge-info">จำนวนสมาชิกในระบบ</span></h3></p>
-                      <p><h3>สมาชิกทั้งหมด</h3></p>
-                      <p><h1><?php echo $row["id"] ?></h1></p>
-                    </center>
-                  </div> 
-                </div>  
-                <?php 
-              }
-            } 
-            ?>
-          </div> 
-
-          <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-6">
             <div class="col-md-12"> 
               <div class="alert  alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -85,7 +54,6 @@ if (!$conn) {
               </div> 
             </div>  
           </div> 
-
           <div class="col-lg-6">
             <?php
             $sql = "SELECT COUNT(QUESTION_ID) AS count FROM m_group_question";
@@ -95,7 +63,7 @@ if (!$conn) {
               $count = 0; 
               ?> 
               <div class="col-md-12"> 
-                <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert  alert-success alert-dismissible fade show" role="alert">
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -147,7 +115,6 @@ if (!$conn) {
           }
           ?>
         </div> 
-
         <div class="col-lg-6">
           <?php
           $sql = "SELECT COUNT(`QUESTION_ID`) AS count FROM `m_group_question` WHERE `QUESTION_PART` ='ด้านทักษะ' ";
@@ -209,7 +176,7 @@ if (!$conn) {
             $count = 0; 
             ?> 
             <div class="col-md-12"> 
-              <div class="alert  alert-success alert-dismissible fade show" role="alert">
+              <div class="alert  alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -233,7 +200,7 @@ if (!$conn) {
           } else {
             ?> 
             <div class="col-md-12"> 
-              <div class="alert  alert-success alert-dismissible fade show" role="alert">
+              <div class="alert  alert-warning alert-dismissible fade show" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -252,6 +219,34 @@ if (!$conn) {
           ?>
         </div> 
 
+        <div class="col-lg-6">
+            <?php
+            $sql = "SELECT COUNT(`USER_ID`) as id FROM `m_user`";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) 
+            { 
+              while($row = $result->fetch_assoc()) 
+              {
+                ?>
+
+                <div class="col-md-12"> 
+                  <div class="alert  alert-info alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <center>
+                      <br>
+                      <p><h3><span class="badge badge-pill badge-info">จำนวนสมาชิกในระบบ</span></h3></p>
+                      <p><h3>สมาชิกทั้งหมด</h3></p>
+                      <p><h1><?php echo $row["id"] ?></h1></p>
+                    </center>
+                  </div> 
+                </div>  
+                <?php 
+              }
+            } 
+            ?>
+          </div> 
         <div class="col-lg-6">
           <?php
           $sql = "SELECT COUNT(`career_id`) as `career_id` FROM `m_career`";
