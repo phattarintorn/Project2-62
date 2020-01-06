@@ -157,7 +157,6 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 	}
 
 	if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"])) {
-		// echo ("<script = 'javascript'> window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&q_id2=".$q_idq2."&form_date=".$form_date."'; </script>");
 		echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
 			window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';
 		</script>");
@@ -169,7 +168,7 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 	$user_idq1 = $_POST["user_idq1"];
 	$q_idq1 = $_POST["q_idq1"]; 
 	$q_group = $_POST["q_group"]; 
-	$form_type = 'ความคิดเห็น'; 
+	$form_type1 = 'ความคิดเห็น'; 
 	$form_side1 = $_POST["q_typeq1"];
 	$q1_no = $_POST["q1_no"];
 

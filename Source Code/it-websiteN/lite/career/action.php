@@ -10,8 +10,7 @@
   }
 </style>
 
-<?php 
-
+<?php
 	include('db/db.php'); 
 
 	$QUESTION_GROUP = $_REQUEST["QUESTION_GROUP"];
@@ -44,15 +43,13 @@
 									if ($row["QUESTION_PART"] == "ด้านทักษะ") {
 										include('report_dashboard_career_skill.php');
 									}
-									if ($row["QUESTION_PART"] == "จิตวิทยา") {
+									if ($row["QUESTION_PART"] == "ด้านจิตวิทยา") {
 										include('report_dashboard_career_psychology.php');
 									}
 								}
 							}
 						}
 					?>
-						<!-- <?php include('report_dashboard_career_skill.php'); ?>
-						<?php include('report_dashboard_career_psychology.php'); ?> -->
 				</div>
 			</form>
 		</div>
@@ -61,15 +58,15 @@
 <div class = "row apadding">
 
 	<div class="col-md-1"> 
-		<a href="javascript:history.back();">
+		<a href="career-advice.php?career=tables_history">
 			<button class="btn btn-secondary" style = "width: 100%;">กลับ</i></button></a>
 		</a> 
 	</div>
 
 	<div class = "col-md-8"></div>
 
-	<div class="col-md-3"> 
-		<a href="career-advice.php?career=student_manage_module">
+	<div class="col-md-3">
+		<a href="career-advice.php?career=student_module">
 			<button class="btn btn-secondary" style = "width: 100%;">จัดการแผนการเรียน</i></button></a>
 		</a> 
 	</div>

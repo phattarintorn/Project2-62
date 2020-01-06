@@ -5,9 +5,8 @@ $user_id = $_SESSION["USER_ID"];
 $form_date = $_REQUEST['form_date'];
 
 if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
+	
 	$q_id = $_REQUEST['q_id'];
-
-	// $sql = "SELECT COUNT(form_id) AS count, `form_type`,`form_side`,`form_group`,`form_date`,`career`,SUM(`choice_form`) AS sum FROM test_form WHERE `q_id` = '$q_id' GROUP BY `career` ORDER BY `sum` DESC";
 
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
 		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
@@ -48,8 +47,6 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 
 	$q_id2 = $_REQUEST['q_id2'];  
 
-	// $sql = "SELECT COUNT(form_id) AS count2, `form_type`,`form_side`,`form_group`,`form_date`,`career`,SUM(`q2_raw_score`) AS sum2 FROM test_form WHERE `q_id` = '$q_id2' GROUP BY `career` ORDER BY `sum2` DESC";
-	
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
 	LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
 	LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
@@ -103,10 +100,9 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 }
 
 if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
+
 	$q_id = $_REQUEST['q_id']; 
 
-	// $sql = "SELECT COUNT(form_id) AS count, `form_type`,`form_side`,`form_group`,`form_date`,`career`,SUM(`choice_form`) AS sum FROM test_form WHERE `q_id` = '$q_id' GROUP BY `career` ORDER BY `sum` DESC";
-	
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
 		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
 		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
