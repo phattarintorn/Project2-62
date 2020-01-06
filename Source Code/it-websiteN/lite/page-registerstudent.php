@@ -40,12 +40,12 @@
                   <form action="../lite/page-register_selectdb.php" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสนักศึกษา">person</i></span>
-                      <input id="username" type="text" class="form-control" name="username" placeholder="รหัสนักศึกษา " pattern="[A-Z0-9]{8}" required maxlength="8">
+                      <input id="username" type="text" class="form-control" name="username" placeholder="รหัสนักศึกษา Ex. B5970000" pattern="[A-Z0-9]{8}" required maxlength="8">
                     </div>
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="รหัสผ่าน">lock</i></span>
-                      <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่าน" pattern="[0-9]{8,16}" required>
+                      <input id="password" type="password" class="form-control" name="password" placeholder="รหัสผ่านอย่างน้อย 8-16 ตัว เป็นตัวเลขเท่านั้น" pattern="[0-9]{8,16}" required>
                     </div>
                     <br>
                     <div class="input-group">
