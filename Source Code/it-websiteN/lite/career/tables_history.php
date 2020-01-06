@@ -14,7 +14,7 @@
           <div class="card-header">
             <strong class="card-title">ประวัติการทำแบบสอบถาม</strong>
           </div>
-          <div class="card-body">
+          <div class="card-body" style = "padding: 15px;">
             <table id="bootstrap-data-table" class="table table-striped table-bordered">
               <thead>
                 <tr>
@@ -38,11 +38,12 @@
                       <th><center>กลุ่มแบบทดสอบ</center></th>
                       <th><center>ทำแบบทดสอบเมื่อ</center></th>
                       <th></th>
+                      <th></th>
                       </tr>
                       </thead>
                       <tbody>';
 
-                      $sql = "SELECT G.QUESTION_GROUP, L.CREATE_DATE FROM MAPPING_STUDENT_LOG AS L
+                      $sql = "SELECT G.QUESTION_ID, G.QUESTION_GROUP, L.CREATE_DATE FROM MAPPING_STUDENT_LOG AS L
                         LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
                         LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
                         WHERE G.QUESTION_STATUS = 0 AND L.STUDENT_ID = " . $_SESSION["USER_ID"] . "
@@ -56,13 +57,21 @@
                             echo '<td align="center">';
                             echo $row["QUESTION_GROUP"];  
                             echo '</td>';
+
                             echo '<td align="center">';
                             echo $row["CREATE_DATE"];  
                             echo '</td>';
+                            
                             echo '</td>';
+
                             echo '<td align="center">';
-                            echo '<a title="ดูรายละเอียด"  class="btn-link ti-bookmark-alt" href="career-advice.php?career=tables_history2&q_group='.$row['QUESTION_GROUP'].'&date='.$row['CREATE_DATE'].'"></a>'; 
+                            echo '<a title="ดูประวัติ"  class="btn-link ti-write" href="career-advice.php?career=check_form&QUESTION_GROUP='.$row['QUESTION_GROUP'].'&CREATE_DATE='.$row['CREATE_DATE'].'"></a>';  
                             echo '</td>';
+
+                            echo '<td align="center">'; 
+                            echo '<a title="ดูรายงาน"  class="btn-link ti-book" href="career-advice.php?career=action&QUESTION_GROUP='.$row['QUESTION_GROUP'].'&CREATE_DATE='.$row['CREATE_DATE'].'"></a>';  
+                            echo '</td>';
+
                             echo '</tr>';
                         }    
                       }

@@ -1,13 +1,9 @@
 <div class="row form-group">
-  <div class="col-md-12"> 
-    <?php 
-    echo '<hr>';
-    echo '<center><strong><h4>ประวัติการทำแบบทดสอบ</h4></strong></center>';
-    ?>
+  <div class="col-md-12">
+    <center><strong><h4>ประวัติการทำแบบทดสอบ</h4></strong></center>
   </div>
   <div class="col-md-2">
     <br>
-
     <center>คำชี้แจง</center>  
   </div> 
   <div class="col-md-10"> 
@@ -26,7 +22,7 @@
             <strong class="card-title">แบบทดสอบ : ด้านความชอบ ความถนัด และมีความสมารถด้านนั้นๆ เป็นพื้นฐาน</strong>
           </div>
           <div class="card-body">
-            <table class="table table-striped" style="width:100%">
+            <table class="table table-striped" style="width:100%; margin-bottom: 0;">
               <thead>
                 <th rowspan="3"><center>ข้อ</center></th>
                 <th rowspan="3"><center>เกณฑ์</center></th>

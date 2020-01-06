@@ -10,6 +10,15 @@
   }
 </style>
 
+<?php 
+
+	include('db/db.php'); 
+
+	$QUESTION_GROUP = $_REQUEST["QUESTION_GROUP"];
+	$CREATE_DATE = $_REQUEST["CREATE_DATE"];
+	
+?>
+
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-header">  
@@ -18,70 +27,32 @@
 		<div class="card-body card-block">
 			<form action="career-advice.php?career=insertuser" method="post" enctype="multipart/form-data" class="form-horizontal"> 
 				<div class="content mt-3">
-					
-					<?php  
-					include("db/db.php"); 
+					<?php
+						$sql = "SELECT * FROM MAPPING_STUDENT_REPORT AS R
+							LEFT JOIN M_GROUP_QUESTION AS G ON R.QUESTION_ID = G.QUESTION_ID
+							WHERE STUDENT_ID = " . $_SESSION['USER_ID'] . " AND G.QUESTION_GROUP = $QUESTION_GROUP
+							AND R.CREATE_DATE = '$CREATE_DATE' GROUP BY QUESTION_PART";
 
-					if (isset($_REQUEST['q_id']) && !isset($_REQUEST['q_id2'])) {
-						$q_id = $_REQUEST['q_id'];
-						$_SESSION_id = $_SESSION["USER_ID"];
-						$form_date = $_REQUEST['form_date']; 
-						$form_type = $_REQUEST['form_type']; 
-						$form_side = $_REQUEST['form_side']; 
+						$result = $conn->query($sql);
 
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_skill.php"); //ได้แล้ว 
+						if ($result->num_rows > 0) {
+							while($row = $result->fetch_assoc()) {
+								if ($result->num_rows == 2) {
+										include('report_dashboard_career_skill.php');
+										include('report_dashboard_career_psychology.php');
+									} else {
+									if ($row["QUESTION_PART"] == "ด้านทักษะ") {
+										include('report_dashboard_career_skill.php');
+									}
+									if ($row["QUESTION_PART"] == "จิตวิทยา") {
+										include('report_dashboard_career_psychology.php');
+									}
+								}
+							}
 						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
-						}
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_skill.php"); //ได้แล้ว 
-						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
-						}
-					} 
-
-					if (isset($_REQUEST['q_id']) && isset($_REQUEST['q_id2'])) {
-						$q_id = $_REQUEST['q_id'];
-						$q_id2 = $_REQUEST['q_id2'];
-						$_SESSION_id = $_SESSION["USER_ID"];
-						$form_date = $_REQUEST['form_date']; 
-						$form_type = $_REQUEST['form_type']; 
-						$form_type2 = $_REQUEST['form_type2']; 
-						$form_side = $_REQUEST['form_side']; 
-						$form_side2 = $_REQUEST['form_side2']; 
-
-
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_skiil.php");   //ได้แล้ว 
-						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
-						}
-						if ($form_side == 'ด้านทักษะ' && $form_type == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_skiil.php");   
-						}
-						if ($form_side == 'ด้านจิตวิทยา' && $form_type == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_psychology.php"); //ได้แล้ว 
-						}
-						//--------------------------------------------------------//
-						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_skill2.php");   //ได้แล้ว 
-						}
-						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'ความคิดเห็น') {
-							include("career/dashboard_highcharts_psychology2.php"); //ได้แล้ว 
-						}
-						if ($form_side2 == 'ด้านทักษะ' && $form_type2 == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_skill2.php"); //ได้แล้ว
-						}
-						if ($form_side2 == 'ด้านจิตวิทยา' && $form_type2 == 'เปรียบเทียบ') {
-							include("career/dashboard_highcharts_psychology2.php"); //ได้แล้ว 
-						}
-					} 
-					
-					?> 
+					?>
+						<!-- <?php include('report_dashboard_career_skill.php'); ?>
+						<?php include('report_dashboard_career_psychology.php'); ?> -->
 				</div>
 			</form>
 		</div>
@@ -97,15 +68,9 @@
 
 	<div class = "col-md-8"></div>
 
-	<?php
-		if (isset($_REQUEST['q_id']) && isset($_REQUEST['q_id2'])) {
-	?>
-		<div class="col-md-3"> 
-			<a href="career-advice.php?career=student_manage_module">
-				<button class="btn btn-secondary" style = "width: 100%;">จัดการแผนการเรียน</i></button></a>
-			</a> 
-		</div>
-	<?php
-		}
-	?>
+	<div class="col-md-3"> 
+		<a href="career-advice.php?career=student_manage_module">
+			<button class="btn btn-secondary" style = "width: 100%;">จัดการแผนการเรียน</i></button></a>
+		</a> 
+	</div>
 </div>
