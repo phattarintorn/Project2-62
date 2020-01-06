@@ -63,7 +63,7 @@ if ($status == "STUDENT") {
 	UPDATE_BY = '".$session."' WHERE USER_ID=" . $id;
 }else{
 	$sql = "UPDATE M_USER 
-	INNER JOIN SET 
+	SET 
 	USER_FIRSTNAME ='" .$firstname."',
 	USER_LASTNAME ='" .$lastname."',
 	USER_GENDER ='" .$gender."',
