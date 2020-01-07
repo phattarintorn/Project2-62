@@ -91,29 +91,6 @@
                       </button>
                     </div>
                     <br>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="material-icons" title="หลักสูตร">class</i></span>
-                      <select id="branch" name="branch" required class="form-control"  size="">
-                        <option value="" >-- กรุณาเลือกหลักสูตร --</option>
-                        <?php
-                        include("db/db.php"); 
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT * FROM M_BRANCH";
-                        $result = $conn->query($sql);
-                        if ($result->num_rows > 0) 
-                        {  
-                          while($row = $result->fetch_assoc()) 
-                          {   
-                            ?>
-                            <option value="<?php echo $row["BRANCH_ID"];?>"><?php echo ("[ " . $row["BRANCH_INITIAL"] . " ] " . $row["BRANCH_NAME"]);?></option>  
-                            <?php
-                          }
-                        }   
-                        ?>
-                      </select>
-                    </div>
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>

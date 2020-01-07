@@ -21,7 +21,6 @@ if ($i === 0) {
 	if (isset($_POST["plan"])) {
 		$plan = $_POST["plan"];
 		$type = $_POST["type"];
-		$branch = $_POST["branch"];
 		$advisor = $_POST["advisor"];
 		$gpa = $_POST["gpa"];
 		$gpax = $_POST["gpax"];
@@ -41,8 +40,8 @@ if ($i === 0) {
 
 		if (mysqli_query($conn, $sql)) {
 			$last_id = mysqli_insert_id($conn);
-			$sql = "INSERT INTO MAPPING_STUDENT_DATA (STUDENT_ID, BRANCH_ID, ADVISOR_ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY)
-			VALUES (" . $last_id . ", " . $branch . ", " . $advisor . ", SYSDATE(), 'SYSTEM', SYSDATE(), 'SYSTEM')";
+			$sql = "INSERT INTO MAPPING_STUDENT_DATA (STUDENT_ID, ADVISOR_ID, CREATE_DATE, CREATE_BY, UPDATE_DATE, UPDATE_BY)
+			VALUES (" . $last_id . ", " . $advisor . ", SYSDATE(), 'SYSTEM', SYSDATE(), 'SYSTEM')";
 			if (mysqli_query($conn, $sql)) {
 				$sql = "INSERT INTO MAPPING_STUDENT_PLAN (STUDENT_ID, STUDENT_PLAN, PLAN_TYPE, PLAN_STATUS)
 				VALUES (" . $last_id . ", '" . $plan . "', '" . $type . "', 0)";

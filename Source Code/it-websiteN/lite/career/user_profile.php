@@ -255,24 +255,6 @@ if (isset($_SESSION["USER_ID"])) {
 													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>';?>
-
-													<div class="row form-group">
-														<div class="col col-md-3">
-															<label for="text-input" class=" form-control-label">หลักสูตร:</label>
-														</div>
-														<div class="col col-md-3">
-															<?php
-																$sql = "SELECT * FROM MAPPING_STUDENT_DATA AS SD
-																LEFT JOIN M_BRANCH AS B ON SD.BRANCH_ID = B.BRANCH_ID
-																WHERE STUDENT_ID = ".$_SESSION["USER_ID"];
-
-																$result = $conn->query($sql);
-																$row2 = $result->fetch_assoc();
-
-																echo $row2["BRANCH_NAME"];
-															?>
-														</div>
-													</div>
 													
 													<div class="row form-group">
 														<div class="col col-md-3">

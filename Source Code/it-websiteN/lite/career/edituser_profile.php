@@ -320,29 +320,6 @@ if ($result->num_rows > 0)
 
 							<div class="row form-group">
 								<div class="col col-md-3">
-									<label for="text-input" class=" form-control-label">หลักสูตร : </label>
-								</div>
-								<div class="col col-md-5">
-									<?php
-										$sql = "SELECT b.BRANCH_NAME FROM m_user as u
-										LEFT JOIN mapping_student_data as mdata ON u.USER_ID = mdata.STUDENT_ID
-										LEFT JOIN m_branch as b ON mdata.BRANCH_ID = b.BRANCH_ID
-										WHERE student_ID = ".$id;
-
-										$result = $conn->query($sql);
-										
-										if ($result->num_rows > 0) {  
-											while ($row2 = $result->fetch_assoc()) {
-												echo '<input type="text" name="branch_name_show" class="form-control" 
-													value="'. $row2["BRANCH_NAME"].' " disabled>';
-											}
-										}
-									?>
-								</div>
-							</div>
-
-							<div class="row form-group">
-								<div class="col col-md-3">
 									<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา : </label>
 								</div>
 								<div class="col col-md-5">

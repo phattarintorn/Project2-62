@@ -37,7 +37,6 @@ if ($status == "ADMIN") {
 	$advisors = $_POST["advisors"];
 	$gpa = $_POST["gpa"];
 	$gpax = $_POST["gpax"];
-	$branch = $_POST["branch"];
 }
 
 
@@ -55,7 +54,6 @@ if ($status == "STUDENT") {
 	USER_GENDER ='" .$gender."',
 	USER_TEL ='" .$tel."',
 	ADVISOR_ID ='" .$advisors."',
-	BRANCH_ID ='".$branch."',
 	USER_GPA ='" .$gpa."',
 	USER_GPAX ='" .$gpax."',
 	USER_EMAIL ='" .$email."',
