@@ -88,7 +88,6 @@
                       </button>
                     </div>
                     <br>
-                    <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="ชื่ออาจารย์ที่ปรึกษา">perm_contact_calendar</i></span>
                       <select id="advisor" name="advisor" required class="form-control"  size="">
