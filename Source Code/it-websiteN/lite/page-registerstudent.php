@@ -5,12 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <?php include('header.php')?>
-
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 </head>
 <body>
   <header class="topbar">
@@ -23,7 +21,6 @@
       </div>
     </nav>
   </header>
-
   <div class="container">
     <br><br>
     <div class="row align-center">
@@ -269,9 +266,6 @@
               </div> 
             </div>
           </center>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
         </form>
       </div>
     </div>
@@ -312,16 +306,9 @@
               </div> 
             </div>
           </center>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
         </form>
       </div>
     </div>
   </div>
 </html>
-
-
-
-
 
