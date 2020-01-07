@@ -30,7 +30,8 @@
 					</thead>
 					<tbody>
 						<?php 
-						
+						$count_C1 = 0;
+						$count_C2 = 0;
 						$sql = "SELECT * FROM m_group_question AS Mq LEFT JOIN mapping_question AS map ON Mq.QUESTION_ID = map.QUESTION_ID  WHERE  Mq.QUESTION_GROUP = '".$q_group."' AND Mq.QUESTION_TYPE = '".$q_type."'";
 						$result = $conn->query($sql);
 						if ($result->num_rows > 0) 
@@ -42,8 +43,6 @@
 								$i = $i + 1;
 								$question_no = $row["QUESTION_NO"];	
 								$question_num = $question_no;
-								$count_C1 = 0;
-								$count_C2 = 0;
 								echo '<tr>'; 
 								if ($row["CAREER_ID_1"] != "") {
 									if ($row["QUESTION_NO"] == $question_no) {  
