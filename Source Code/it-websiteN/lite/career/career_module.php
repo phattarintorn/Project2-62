@@ -73,4 +73,36 @@
         }
     }
 
+    if (isset($_REQUEST["CAREER_ID"])) {
+        echo '<div class = "row apadding">';
+        echo '<div class="col-md-1">';
+        echo '<a href="javascript:history.back();">';
+        echo '<button class="btn btn-secondary" style = "width: 100%;">กลับ</button></a>';
+        echo '</a>';
+        echo '</div>';
+        echo '<div class = "col-md-8"></div>';
+        echo '<div class="col-md-3">';
+        echo '<button class="btn btn-secondary" id = "test" style = "width: 100%;">จัดการแผนการเรียน</button></a>';
+        echo '</div>';
+        echo '</div>';
+    }
+
 ?>
+
+<script>
+    $(document).ready(function(){
+        $('#test').on('click', function() {
+            <?php
+                if (isset($_REQUEST["CAREER_ID"])) {
+                    $sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $_REQUEST["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
+                    
+                    if (mysqli_query($conn, $sql)) {
+                        ?> 
+                            window.location.href = "career-advice.php?career=student_module"
+                        <?php
+                    }
+                }
+            ?>
+        })
+    })
+</script>
