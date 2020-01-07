@@ -34,7 +34,6 @@
               </thead>
               <tbody>
                 <?php
-                // $sql = "SELECT * FROM question,q2 WHERE question.q_id = q2.q_id AND question.q_group =".$q_group;
                 
                 $sql = "SELECT * FROM MAPPING_QUESTION AS Q
                 LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
@@ -89,6 +88,7 @@
                 } 
                 ?>
               </tbody>
+              <input type="hidden" id="count2" name="count2" value="<?php echo $i ?>">
             </table>
           </div>
         </div>

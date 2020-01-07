@@ -8,6 +8,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 	$q_group = $_POST["q_group"];
 	$form_type1 = $_POST["q_typeq1"];
 	$q1_no = $_POST["q1_no"];
+	$total_score = $_POST["count1"] * 5;
 
 	for ($i=1; $i <= $q1_no ; $i++) {
 		$mapp_id = $_POST["q_idq1_$i"];
@@ -42,7 +43,6 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 	{
 		$i = 0;
 		$top_score = 0;
-		$total_score = 0;
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -52,9 +52,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 			
 			if ($i <= "5") {
 				$top_score = $top_score +  $row["SUM"];
-			} 
-
-			$total_score = $total_score +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 			VALUES ($q_idq1, $user_idq1, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
@@ -73,6 +71,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 	$q_group = $_POST["q_group"];
 	$form_type2 = $_POST["q_typeq2"];
 	$q2_no = $_POST["q2_no"];
+	$total_score2 = $_POST["count2"];
 
 	for ($i=1; $i <= $q2_no  ; $i++) {  
 		$mapp_id2 = $_POST["q_idq2_$i"];
@@ -119,7 +118,6 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 	{
 		$i2 = 0;
 		$top_score2 = 0;
-		$total_score2 = 0;
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -129,9 +127,7 @@ if (isset($_POST["user_idq1"]) && isset($_POST["user_idq2"]) ) {
 
 			if ($i2 <= "5") {
 				$top_score2 = $top_score2 +  $row["SUM"];
-			} 
-
-			$total_score2 = $total_score2 +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 				VALUES ($q_idq2, $user_idq2, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
@@ -171,6 +167,7 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 	$form_type1 = 'ความคิดเห็น'; 
 	$form_side1 = $_POST["q_typeq1"];
 	$q1_no = $_POST["q1_no"];
+	$total_score = $_POST["count1"] * 5;
 
 	for ($i=1; $i <= $q1_no ; $i++) {
 		$mapp_id = $_POST["q_idq1_$i"];
@@ -202,7 +199,7 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 				mysqli_query($conn, $sql);
 				
 				echo ("<script = 'javascript'>
-						window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."';
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."&total_score=" . $total_score . "';
 					</script>");
 			} else {
 				echo ("<script = 'javascript'>
@@ -222,6 +219,7 @@ if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 	$form_type2 = 'เปรียบเทียบ'; 
 	$form_side2 = $_POST["q_typeq2"];
 	$q2_no = $_POST["q2_no"];
+	$total_score2 = $_POST["count2"] * 5;
 
 	for ($i=1; $i <= $q2_no  ; $i++) {  
 		$mapp_id2 = $_POST["q_idq2_$i"];
@@ -265,7 +263,7 @@ if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 				mysqli_query($conn, $sql);
 
 				echo ("<script = 'javascript'>
-						window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."';
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."&total_score=" . $total_score2 . "';
 					</script>");
 			} else {
 				echo ("<script = 'javascript'>

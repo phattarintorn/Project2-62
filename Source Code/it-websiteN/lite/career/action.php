@@ -35,19 +35,7 @@
 						$result = $conn->query($sql);
 
 						if ($result->num_rows > 0) {
-							while($row = $result->fetch_assoc()) {
-								if ($result->num_rows == 2) {
-										include('report_dashboard_career_skill.php');
-										include('report_dashboard_career_psychology.php');
-									} else {
-									if ($row["QUESTION_PART"] == "ด้านทักษะ") {
-										include('report_dashboard_career_skill.php');
-									}
-									if ($row["QUESTION_PART"] == "ด้านจิตวิทยา") {
-										include('report_dashboard_career_psychology.php');
-									}
-								}
-							}
+							include('report_dashboard_career.php');
 						}
 					?>
 				</div>

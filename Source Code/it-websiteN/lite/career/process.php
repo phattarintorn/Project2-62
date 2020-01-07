@@ -19,7 +19,7 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 	{
 		$i = 0;
 		$top_score = 0;
-		$total_score = 0;
+		$total_score = $_REQUEST["total_score"];
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -29,9 +29,7 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 			
 			if ($i <= "5") {
 				$top_score = $top_score +  $row["SUM"];
-			} 
-
-			$total_score = $total_score +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 			VALUES ($q_id, $user_id, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
@@ -58,7 +56,7 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 	{
 		$i2 = 0;
 		$top_score2 = 0;
-		$total_score2 = 0;
+		$total_score2 = $_REQUEST["total_score2"];
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -68,9 +66,7 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 
 			if ($i <= "5") {
 				$top_score2 = $top_score2 +  $row["SUM"];
-			} 
-
-			$total_score2 = $total_score2 +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 				VALUES ($q_id2, $user_id, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
@@ -114,7 +110,7 @@ if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
 	{
 		$i = 0;
 		$top_score = 0;
-		$total_score = 0;
+		$total_score = $_REQUEST["total_score"];
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -124,9 +120,7 @@ if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
 			
 			if ($i <= "5") {
 				$top_score = $top_score +  $row["SUM"];
-			} 
-
-			$total_score = $total_score +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 				VALUES ($q_id, $user_id, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";
@@ -167,7 +161,7 @@ if (isset($_REQUEST["q_id2"])  && !isset($_REQUEST["q_id"])) {
 	{
 		$i2 = 0;
 		$top_score2 = 0;
-		$total_score2 = 0;
+		$total_score2 = $_REQUEST["total_score2"];
 
 		while($row = $result->fetch_assoc()) 
 		{  
@@ -177,9 +171,7 @@ if (isset($_REQUEST["q_id2"])  && !isset($_REQUEST["q_id"])) {
 
 			if ($i <= "5") {
 				$top_score2 = $top_score2 +  $row["SUM"];
-			} 
-
-			$total_score2 = $total_score2 +  $row["SUM"];
+			}
 
 			$sql = "INSERT INTO MAPPING_STUDENT_REPORT (QUESTION_ID, STUDENT_ID, CAREER_ID, RAW_SCORE, TOP_SCORE, TOTAL_SCORE, CREATE_DATE) 
 				VALUES ($q_id2, $user_id, "  .$row['CAREER_ID'] . ", " . $row['SUM'] . ", 0, 0, '$form_date')";

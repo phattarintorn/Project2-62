@@ -96,14 +96,13 @@
                       <input type="radio" name="choice<?php echo $i ?>" id="choice<?php echo $i ?>_5" value="5"/>
                       <label for="choice<?php echo $i ?>_5"></label>
                     </td>
-
+                  </tr>
                     <?php
                   }
-
                 } 
                 ?>
-
               </tbody>
+              <input type="hidden" id="count1" name="count1" value="<?php echo $i ?>">
             </table>
           </div>
         </div>
