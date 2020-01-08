@@ -37,7 +37,7 @@
                             echo '<div class = "col-md-12 text-left">';
                             $sql = "SELECT * FROM MAPPING_CAREER_MODULE AS MAPP
                             LEFT JOIN M_MODULE AS M ON MAPP.MODULE_ID = M.MODULE_ID
-                            WHERE MAPP.CAREER_ID = $CAREER_ID ";
+                            WHERE MAPP.CAREER_ID = $CAREER_ID AND M.MODULE_STATUS = 0 ";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {

@@ -27,6 +27,7 @@
                   <tr>
                     <th><center>รหัสชุดวิชา</center></th>
                     <th><center>ชื่อชุดวิชา</center></th>
+					<th><center>สถานะ</center></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -41,10 +42,22 @@
 						$i++;
 					  echo "<tr>";
                       echo '<td><left>'.$row['MODULE_CODE'].'</left></td>';
-                      echo '<td><left>'.$row['MODULE_NAME'].'</left></td>';
+					  echo '<td><left>'.$row['MODULE_NAME'].'</left></td>';
+					  if($row["MODULE_STATUS"]=="0"){
+						echo '<td><left>เปิดใช้งาน</left></td>';
+					  }else{
+						echo '<td><left>ปิดใช้งาน</left></td>';
+					  }
                       echo '<td><center>
                       <a title="รายละเอียดชุดวิชา" class="btn-link ti-clipboard" href="career-advice.php?career=detail_module&module_id='.$row['MODULE_ID'].'"> </a>
-                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=edit_module&module_id='.$row['MODULE_ID'].'"></a>';
+                      <a title="แก้ไข" class="btn-link ti-write" href="career-advice.php?career=edit_module&module_id='.$row['MODULE_ID'].'"> </a>';
+					  if ($row["MODULE_STATUS"]=="0") { 
+                        echo '<input type="hidden" name="status_using" value="1">';
+                        echo '<a title="ปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_module&module_id='.$row['MODULE_ID'].'&status_using=1"> </a> ';
+                      }else{
+                        echo '<input type="hidden" name="status_using" value="0">';
+                        echo '<a title="เปิดการใช้"  class="btn-link ti-power-off" href="career-advice.php?career=upsta_module&module_id='.$row['MODULE_ID'].'&status_using=0"> </a> ';
+                      } 
 					  echo '</center></td>'; 
 					  echo "</tr>";
 					

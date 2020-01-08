@@ -68,7 +68,7 @@ include("db/db.php");
               </div>
               <div class="col-md-12" style=" overflow-y: scroll; height:50vh" >
                 <?php
-                  $sql = "SELECT * FROM m_module WHERE MODULE_ID";
+                  $sql = "SELECT * FROM m_module WHERE MODULE_ID AND MODULE_STATUS = 0";
                   $result = $conn->query($sql);
                     if ($result->num_rows > 0) 
                     { $i=0;

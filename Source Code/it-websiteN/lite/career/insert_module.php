@@ -9,7 +9,6 @@ if (!$conn) {
 
 $module_code = $_POST["module_code"];
 $module_name = $_POST["module_name"];
-$count = $_POST["count"];
 $session_name = $_SESSION["USER_USERNAME"];
 
 $sql = "INSERT INTO m_module (MODULE_CODE,MODULE_NAME) VALUES ('" .$module_code."','" .$module_name."')";
