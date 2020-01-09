@@ -11,7 +11,8 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
 		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
 		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id 
+		AND L.CREATE_DATE = '$form_date' GROUP BY L.CAREER_ID ORDER BY SUM DESC";
 	
 	$result = $conn->query($sql);
 
@@ -46,9 +47,10 @@ if (isset($_REQUEST["q_id"])  && isset($_REQUEST["q_id2"])) {
 	$q_id2 = $_REQUEST['q_id2'];  
 
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
-	LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
-	LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id2 GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id2 
+		AND L.CREATE_DATE = '$form_date' GROUP BY L.CAREER_ID ORDER BY SUM DESC";
 	
 	$result = $conn->query($sql);
 	
@@ -100,9 +102,10 @@ if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
 	$q_id = $_REQUEST['q_id']; 
 
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
-		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
-		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+	LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+	LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+	WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id 
+	AND L.CREATE_DATE = '$form_date' GROUP BY L.CAREER_ID ORDER BY SUM DESC";
 	
 	$result = $conn->query($sql);
 
@@ -128,20 +131,23 @@ if (isset($_REQUEST["q_id"])  && !isset($_REQUEST["q_id2"])) {
 			mysqli_query($conn, $sql);
 
 		}
-		
-		$sql = "SELECT Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
+
+		$sql = "SELECT SUM(R.RAW_SCORE) AS SUM, R.CAREER_ID, Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
 			LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
-			WHERE R.STUDENT_ID = $user_id AND R.CREATE_DATE = '$form_date'
-			GROUP BY R.CAREER_ID LIMIT 1";
+			WHERE R.STUDENT_ID = " . $_SESSION["USER_ID"] . " AND R.CREATE_DATE = '$form_date'
+			GROUP BY R.CAREER_ID ORDER BY SUM DESC LIMIT 1";
 
 		$result = $conn->query($sql);
-		$row2 = $result->fetch_assoc();
+		$row = $result->fetch_assoc();
 
 		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score . ", TOP_SCORE = " . $top_score . " WHERE QUESTION_ID = $q_id AND STUDENT_ID = $user_id";
 
 		if (mysqli_query($conn, $sql)) {
-			echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row2['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
+			$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
+			if (mysqli_query($conn, $sql)) {
+				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+					window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
+			}
 		} 
 	}
 }
@@ -151,9 +157,10 @@ if (isset($_REQUEST["q_id2"])  && !isset($_REQUEST["q_id"])) {
 	$q_id2 = $_REQUEST['q_id2']; 
 
 	$sql = "SELECT Q.QUESTION_ID, SUM(L.QUESTION_SCORE) AS SUM, L.CAREER_ID, G.QUESTION_PART, G.QUESTION_TYPE FROM MAPPING_STUDENT_LOG AS L
-		LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
-		LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
-		WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id2 GROUP BY L.CAREER_ID ORDER BY SUM DESC";
+	LEFT JOIN MAPPING_QUESTION AS Q ON L.MAPPING_QUESTION_ID = Q.MAPPING_QUESTION_ID
+	LEFT JOIN M_GROUP_QUESTION AS G ON Q.QUESTION_ID = G.QUESTION_ID
+	WHERE L.STUDENT_ID = $user_id AND Q.QUESTION_ID = $q_id 
+	AND L.CREATE_DATE = '$form_date' GROUP BY L.CAREER_ID ORDER BY SUM DESC";
 
 	$result = $conn->query($sql);
 
@@ -180,19 +187,22 @@ if (isset($_REQUEST["q_id2"])  && !isset($_REQUEST["q_id"])) {
 
 		}	 
 
-		$sql = "SELECT Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
+		$sql = "SELECT SUM(R.RAW_SCORE) AS SUM, R.CAREER_ID, Q.QUESTION_GROUP FROM MAPPING_STUDENT_REPORT AS R
 			LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
-			WHERE R.STUDENT_ID = $user_id AND R.CREATE_DATE = '$form_date'
-			GROUP BY R.CAREER_ID LIMIT 1";
+			WHERE R.STUDENT_ID = " . $_SESSION["USER_ID"] . " AND R.CREATE_DATE = '$form_date'
+			GROUP BY R.CAREER_ID ORDER BY SUM DESC LIMIT 1";
 
 		$result = $conn->query($sql);
 		$row2 = $result->fetch_assoc();
 
 		$sql = "UPDATE MAPPING_STUDENT_REPORT  SET TOTAL_SCORE = " . $total_score2 . ", TOP_SCORE = " . $top_score2 . " WHERE QUESTION_ID = $q_id2 AND STUDENT_ID = $user_id";
-		
+
 		if (mysqli_query($conn, $sql)) {
-			echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
-				window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row2['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
+			$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
+			if (mysqli_query($conn, $sql)) {
+				echo ("<script = 'javascript'>alert('บันทึกสำเร็จ') 
+					window.location.href='career-advice.php?career=action&QUESTION_GROUP=" . $row['QUESTION_GROUP'] . "&CREATE_DATE=" . $form_date . "';</script>");
+			}
 		} 
 
 	}
