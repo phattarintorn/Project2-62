@@ -20,7 +20,8 @@
                   <tr>
                     <th><center>วันที่สร้างแบบทดสอบ</center></th>
                     <th><center>กลุ่มแบบทดสอบ</center></th> 
-                    <th>สถานะ</th>
+                    <th><center>หัวข้อแบบทดสอบ</center></th> 
+                    <th><center>สถานะ</center></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -35,6 +36,7 @@
                       echo "<tr>";
                       echo '<td><center>'.$row['CREATE_DATE'].'</center></td>';
                       echo '<td><center>'.$row['QUESTION_GROUP'].'</center></td>';
+                      echo '<td><center id="code'.$row['QUESTION_GROUP'].'"><a title="แก้ไข" data-toggle="modal" data-target="#EditGroupName" data-whatever="'.$row['QUESTION_GROUP'].'" style="color:skyblue ">'.$row['QUESTION_GROUP_NAME'].'</a></center></td>';  
                       echo '<td>'; 
                       include("checkQstatus_using.php"); 
                       echo '</td>';
@@ -67,14 +69,13 @@
                   <tr>
                     <th width = "30%"><center>วันที่สร้างแบบทดสอบ</center></th>
                     <th width = "20%"><center>กลุ่มแบบทดสอบ</center></th> 
-                    <th width = "20%"><center>หัวข้อ</center></th>
-                    <th width = "20%"><center>รูปแบบ</center></th> 
+                    <th width = "20%"><center>หัวข้อแบบทดสอบ</center></th>
                     <th width = "10%"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql = "SELECT Q.QUESTION_GROUP, Q.QUESTION_PART, Q.CREATE_DATE, Q.QUESTION_TYPE FROM MAPPING_QUESTION AS M 
+                  $sql = "SELECT Q.QUESTION_GROUP,Q.QUESTION_GROUP_NAME, Q.QUESTION_PART, Q.CREATE_DATE, Q.QUESTION_TYPE FROM MAPPING_QUESTION AS M 
                     LEFT JOIN M_GROUP_QUESTION AS Q ON M.QUESTION_ID = Q.QUESTION_ID
                     WHERE Q.QUESTION_STATUS = 0  AND QUESTION_CHOOSE != '' GROUP BY Q.QUESTION_GROUP DESC";
                   
@@ -87,8 +88,7 @@
                       echo "<tr>"; 
                       echo '<td><center>' . $row['CREATE_DATE'] . '</center></td>';
                       echo '<td><center>' . $row['QUESTION_GROUP'] . '</center></td>';
-                      echo '<td><center>' . $row['QUESTION_PART'] . '</center></td>';
-                      echo '<td><center>' . $row['QUESTION_TYPE'] . '</center></td>';
+                      echo '<td><center>' . $row['QUESTION_GROUP_NAME'] . '</center></td>';
                       echo '<td><center>
                       <a title="ทำแบบทดสอบ"  class="btn-link ti-write" href="career-advice.php?career=check_formtest&QUESTION_GROUP='.$row['QUESTION_GROUP'].'"></a>
                       </center></td>'; 

@@ -295,10 +295,51 @@ function add_course() {
     var button = $(event.relatedTarget) 
     var id = button.data('whatever')
     var modal = $(this)
-    console.log(id);
     $('#course_id').val(id)
     $('#course_code').val($('#code'+id).text())
     $('#course_name').val($('#name'+id).text())
+  })
+</script>
+<!-- --------------------------------------------------------------------------------------------->
+<div class="modal fade" id="EditGroupName" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขหัวข้อแบบสอบถาม</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=edit_save_group_name" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+        <input type="hidden" id="group_id" name="group_id" >
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+                หัวข้อแบบสอบถาม
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="group_name" id="group_name" class="form-control" required>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+<script>
+  $('#EditGroupName').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) 
+    var id = button.data('whatever')
+    var modal = $(this)
+    $('#group_id').val(id)
+    $('#group_name').val($('#code'+id).text())
   })
 </script>
 

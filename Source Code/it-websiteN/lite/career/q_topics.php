@@ -45,6 +45,16 @@ function AddQ(topics,selObj,restore){ //v3.0
 									</select>
 								</div>
 							</div> 
+							<div class="row form-group">
+									<div class="col-md-3">
+									</div>
+									<div class="col-md-3">
+										หัวข้อแบบสอบถาม : 
+									</div>
+									<div class="col-md-3">
+										<input type="text" name="group_name" class="form-control" required>
+									</div>
+							</div>
 							<hr>
 							<?php
 
@@ -138,7 +148,6 @@ function AddQ(topics,selObj,restore){ //v3.0
 
 								}else{
 									echo '<input type="hidden" name="q_group'.$i.'" value="1">';
-									
 								}
 								$conn->close(); 
 								?> 
