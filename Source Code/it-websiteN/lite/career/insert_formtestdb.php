@@ -196,11 +196,16 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 				$row = $result->fetch_assoc();
 
 				$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
-				mysqli_query($conn, $sql);
 				
-				echo ("<script = 'javascript'>
-						window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."&total_score=" . $total_score . "';
-					</script>");
+				if(mysqli_query($conn, $sql)){				
+					echo ("<script = 'javascript'>
+							window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."&total_score=" . $total_score . "';
+						</script>");
+				} else {
+					echo ("<script = 'javascript'>
+							console.log('not pass');
+						</script>");
+				}
 			} else {
 				echo ("<script = 'javascript'>
 					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
@@ -260,11 +265,16 @@ if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 				$row = $result->fetch_assoc();
 
 				$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
-				mysqli_query($conn, $sql);
-
-				echo ("<script = 'javascript'>
-						window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."&total_score=" . $total_score2 . "';
-					</script>");
+				
+				if (mysqli_query($conn, $sql)) {
+					echo ("<script = 'javascript'>
+							window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."&total_score=" . $total_score2 . "';
+						</script>");
+				} else {
+					echo ("<script = 'javascript'>
+							console.log('not pass');
+						</script>");
+				}
 			} else {
 				echo ("<script = 'javascript'>
 					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
