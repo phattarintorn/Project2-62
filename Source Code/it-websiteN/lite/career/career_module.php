@@ -55,9 +55,9 @@
 
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
-                        echo $row["MODULE_CODE"];
+                        echo '<a href="career-advice.php?career=detail_module&module_id='.$row['MODULE_ID'].'">'.$row["MODULE_CODE"];
                         echo ' - ';
-                        echo $row["MODULE_NAME"];
+                        echo $row["MODULE_NAME"].'</a>';
                         echo '<br>';
                         echo '<br>';
                     }
