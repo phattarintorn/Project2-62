@@ -44,10 +44,10 @@
                 $sql = "SELECT * FROM MAPPING_CAREER_MODULE AS CM
                     LEFT JOIN M_MODULE AS M ON CM.MODULE_ID = M.MODULE_ID
                     LEFT JOIN MAPPING_MODULE_SEMESTER AS MS ON CM.MODULE_ID = MS.MODULE_ID
-                    WHERE CM.CAREER_ID = $CAREER_ID AND MODULE_SEMESTER = $i";
+                    WHERE CM.CAREER_ID = $CAREER_ID AND MODULE_SEMESTER = $i AND M.MODULE_STATUS = 0";
 
                 $result = $conn->query($sql);
-
+ 
                 echo '<div class = "card-header">';
                 echo '<strong class="card-title">เทอม ' . $i . '</strong>';
                 echo '</div>';
