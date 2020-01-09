@@ -176,8 +176,7 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 		$q1_detailq1 = $_POST["q1_detailq1$i"];
 		$career = $_POST["career$i"];
 		$form_date = $_POST["form_date$i"];
-		if($choice != "")
-		{
+		if($choice != "") {
 			if (!$conn) {
 				die("Connection failed: " . mysqli_connect_error());
 			}
@@ -185,38 +184,22 @@ if (isset($_POST["user_idq1"])  && !isset($_POST["user_idq2"])) {
 			$sql = "INSERT INTO MAPPING_STUDENT_LOG (STUDENT_ID, QUESTION_TYPE, MAPPING_QUESTION_ID, QUESTION_SCORE, QUESTION_SELECTED, CREATE_DATE, CAREER_ID) 
 				VALUES (" .$user_idq1.", '" .$form_type1."', " .$mapp_id.", " .$choice.", " .$choice.", '" . $form_date . "', " . $career . ")";
 
-
-			if (mysqli_query($conn, $sql)) {
-								
-				$sql = "SELECT SUM(RAW_SCORE) AS SUM, CAREER_ID FROM MAPPING_STUDENT_REPORT
-					WHERE STUDENT_ID = " . $_SESSION["USER_ID"] . "
-					GROUP BY CAREER_ID ORDER BY SUM DESC LIMIT 1";
-
-				$result = $conn->query($sql);
-				$row = $result->fetch_assoc();
-
-				$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
-				
-				if(mysqli_query($conn, $sql)){				
-					echo ("<script = 'javascript'>
-							window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."&total_score=" . $total_score . "';
-						</script>");
-				} else {
-					echo ("<script = 'javascript'>
-							console.log('not pass');
-						</script>");
-				}
-			} else {
+			if (mysqli_query($conn, $sql)) {		
 				echo ("<script = 'javascript'>
-					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
-					window.location.href='career-advice.php?career=insert_formtest';
-				</script>");
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq1."&form_date=".$form_date."&total_score=" . $total_score . "';
+					</script>");
 			}
+
+		} else {
+			echo ("<script = 'javascript'>
+				alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+				window.location.href='career-advice.php?career=insert_formtest';
+			</script>");
 		}
 	}
 }
-if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 
+if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 
 	$user_idq2 = $_POST["user_idq2"];
 	$q_idq2 = $_POST["q_idq2"]; 
@@ -256,31 +239,15 @@ if (isset($_POST["user_idq2"])  && !isset($_POST["user_idq1"])) {
 			}
 
 			if (mysqli_query($conn, $sql)) {
-
-				$sql = "SELECT SUM(RAW_SCORE) AS SUM, CAREER_ID FROM MAPPING_STUDENT_REPORT
-					WHERE STUDENT_ID = " . $_SESSION["USER_ID"] . "
-					GROUP BY CAREER_ID ORDER BY SUM DESC LIMIT 1";
-
-				$result = $conn->query($sql);
-				$row = $result->fetch_assoc();
-
-				$sql = "UPDATE MAPPING_STUDENT_DATA  SET CAREER_ID = " . $row["CAREER_ID"] . " WHERE STUDENT_ID = " . $_SESSION["USER_ID"];
-				
-				if (mysqli_query($conn, $sql)) {
-					echo ("<script = 'javascript'>
-							window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."&total_score=" . $total_score2 . "';
-						</script>");
-				} else {
-					echo ("<script = 'javascript'>
-							console.log('not pass');
-						</script>");
-				}
-			} else {
 				echo ("<script = 'javascript'>
-					alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
-					window.location.href='career-advice.php?career=insert_formtest';
-				</script>");
+						window.location.href='career-advice.php?career=process&q_id=".$q_idq2."&form_date=".$form_date."&total_score=" . $total_score2 . "';
+					</script>");
 			}
+		} else {
+			echo ("<script = 'javascript'>
+				alert('เกิดข้อผิดพลาด' . mysqli_error($conn) ) 
+				window.location.href='career-advice.php?career=insert_formtest';
+			</script>");
 		}
 	}
 }
