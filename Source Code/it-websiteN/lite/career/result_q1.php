@@ -46,7 +46,7 @@
 									echo $row["QUESTION_NO"];
 									echo '</td>';  
 									echo '<td align="left">';
-									echo $row["QUESTION_DETAIL_1"]." ".$count;
+									echo $row["QUESTION_DETAIL_1"];
 									echo '</td>';
 								}else{  
 									$count = 1;
