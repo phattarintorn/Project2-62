@@ -44,6 +44,10 @@
                 <i class="mdi mdi-account-convert"></i> อาชีพ
               </a>
               <br><br>
+              <a href="career-advice.php?career=add_branch">
+                <i class="mdi mdi-book-plus"></i> หลักสูตร
+              </a>
+              <br><br>
               <a href="career-advice.php?career=add_module">
                 <i class="mdi mdi-book-plus"></i> ชุดวิชา
               </a>

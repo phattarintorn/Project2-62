@@ -342,4 +342,92 @@ function add_course() {
     $('#group_name').val($('#code'+id).text())
   })
 </script>
-
+<!-- --------------------------------------------------------------------------------------------->
+<div class="modal fade" id="AddBranch" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มหลักสูตร</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=insert_branch" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+                คำย่อ
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="branch_initial"  class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+                ชื่อหลักสูตร
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="branch_name"  class="form-control" required>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+<div class="modal fade" id="EditBranch" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขหลักสูตร</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form action="career-advice.php?career=edit_save_branch" method="POST" class="form-horizontal" enctype="multipart/form-data"> 
+        <input type="hidden" id="branch_id" name="branch_id" >
+          <div class="col-md-12">
+            <div class="row form-group">
+              <div class="col-md-12">
+              คำย่อ
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="branch_initial" id="branch_initial" class="form-control" required>
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-12">
+              ชื่อหลักสูตร
+              </div>
+              <div class="col-md-12">
+                <input type="text" name="branch_name" id="branch_name" class="form-control" required>
+              </div>
+            </div>
+          </div> 
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+              <button type="submit" class="btn btn-info">บันทึก</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</h5>
+<!-- --------------------------------------------------------------------------------------------->
+<script>
+  $('#EditBranch').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) 
+    var id = button.data('whatever')
+    $('#branch_id').val(id)
+    $('#branch_initial').val($('#initial'+id).text())
+    $('#branch_name').val($('#name'+id).text())
+  })
+</script>
