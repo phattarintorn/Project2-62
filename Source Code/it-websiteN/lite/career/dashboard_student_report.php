@@ -27,25 +27,9 @@
         <div class="row">
           <?php
             while($row = $result->fetch_assoc()) {
-              if ($result->num_rows == 2) {
-                echo '<div class="col-lg-6">';
-                include('dashboard_highcharts_psychology.php');
-                echo '</div>';
-
-                echo '<div class="col-lg-6">';
-                include('dashboard_highcharts_skill.php');
-                echo '</div>';
-              } else {
-                if ($row["QUESTION_PART"] == 'ด้านจิตวิทยา') {
-                  echo '<div class="col-lg-12">';
-                  include('dashboard_highcharts_psychology.php');
-                  echo '</div>';
-                } else if ($row["QUESTION_PART"] == 'ด้านทักษะ') {
-                  echo '<div class="col-lg-12">';
-                  include('dashboard_highcharts_skill.php');
-                  echo '</div>';
-                }
-              }
+              echo '<div class="col-lg-12">';
+              include('report_dashboard_highcharts.php');
+              echo '</div>';
             }
           ?>
         </div>
