@@ -206,7 +206,7 @@ if (isset($_SESSION["USER_ID"])) {
 													<input type="hidden" id="id" name="id" value="' . $row["USER_ID"] . '">
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">รหัสนักศึกษา:</label>
+													<label for="text-input" class=" form-control-label">รหัสนักศึกษา :</label>
 													</div>
 													<div class="col col-md-3">
 													' . $row["USER_USERNAME"] . '
@@ -214,13 +214,13 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">ชื่อ:</label>
+													<label for="text-input" class=" form-control-label">ชื่อ :</label>
 													</div>
 													<div class="col col-md-3">
 													' . $row["USER_FIRSTNAME"] . '
 													</div>
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">นามสกุล:</label>
+													<label for="text-input" class=" form-control-label">นามสกุล :</label>
 													</div>
 													<div class="col col-md-3">
 													' . $row["USER_LASTNAME"] . '
@@ -228,7 +228,7 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">เพศ:</label>
+													<label for="text-input" class=" form-control-label">เพศ :</label>
 													</div>
 													<div class="col col-md-3">';
 
@@ -241,7 +241,7 @@ if (isset($_SESSION["USER_ID"])) {
 												echo'
 													</div>
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์:</label>
+													<label for="text-input" class=" form-control-label">หมายเลขโทรศัพท์ :</label>
 													</div>
 													<div class="col col-md-3">
 													' . $row["USER_TEL"] . '
@@ -249,16 +249,35 @@ if (isset($_SESSION["USER_ID"])) {
 													</div>
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">อีเมล:</label>
+													<label for="text-input" class=" form-control-label">อีเมล :</label>
 													</div>
 													<div class="col col-md-3">
 													' . $row["USER_EMAIL"] . '
 													</div>
 													</div>';?>
+
+													<div class="row form-group">
+														<div class="col col-md-3">
+															<label for="text-input" class=" form-control-label">หลักสูตร :</label>
+														</div>
+														<div class="col col-md-3">
+															<?php
+																$sql = "SELECT * FROM MAPPING_STUDENT_DATA AS SD
+																LEFT JOIN M_BRANCH AS B ON SD.BRANCH_ID = B.BRANCH_ID
+																WHERE STUDENT_ID = ".$_SESSION["USER_ID"];
+
+																$result = $conn->query($sql);
+																$row2 = $result->fetch_assoc();
+																
+																echo $row2["BRANCH_NAME"];
+																			
+															?>
+														</div>
+													</div>
 													
 													<div class="row form-group">
 														<div class="col col-md-3">
-															<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา:</label>
+															<label for="text-input" class=" form-control-label">อาจารย์ที่ปรึกษา :</label>
 														</div>
 														<div class="col col-md-3">
 															<?php
@@ -274,7 +293,7 @@ if (isset($_SESSION["USER_ID"])) {
 															?>
 														</div>
 														<div class="col col-md-3">
-															<label for="text-input" class=" form-control-label">เบอร์โทรติดต่อ:</label>
+															<label for="text-input" class=" form-control-label">เบอร์โทรติดต่อ :</label>
 														</div>
 														<div class="col col-md-3">
 															<?php
@@ -286,13 +305,13 @@ if (isset($_SESSION["USER_ID"])) {
 													<?php echo '
 													<div class="row form-group">
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">GPA:</label>
+													<label for="text-input" class=" form-control-label">GPA :</label>
 													</div>
 													<div class="col col-md-3">
 													' . number_format((float)$row["USER_GPA"], 2, '.', '') . '
 													</div>
 													<div class="col col-md-3">
-													<label for="text-input" class=" form-control-label">GPAX:</label>
+													<label for="text-input" class=" form-control-label">GPAX :</label>
 													</div>
 													<div class="col col-md-3">
 													' . number_format((float)$row["USER_GPAX"], 2, '.', '') . '

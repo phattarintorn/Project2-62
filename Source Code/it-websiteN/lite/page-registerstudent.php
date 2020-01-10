@@ -66,6 +66,28 @@
                     <br>
                     <div class="input-group">
                       <span class="input-group-addon"><i class="material-icons" title="แผนการเรียน">assignment</i></span>
+                      <select id="barnch" name="branch" required class="form-control"  size="">
+                        <option value="" >-- กรุณาเลือกหลักสูตร --</option>
+                        <?php
+                          include("db/db.php"); 
+
+                          if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                          }
+
+                          $sql = "SELECT * FROM M_BRANCH";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {  
+                            while($row = $result->fetch_assoc()) {
+                              echo '<option value = "' . $row["BRANCH_ID"] . '"> [ ' . $row["BRANCH_INITIAL"] . ' ] - ' . $row["BRANCH_NAME"] . '</option>';
+                            }
+                          }   
+                        ?>
+                      </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="material-icons" title="แผนการเรียน">assignment</i></span>
                       <select id="plan" name="plan" required class="form-control"  size="">
                         <option value="" >-- กรุณาเลือกแผนการเรียน --</option>
                         <option value="GENERAL"><h5>แผนการเรียนทั่วไป</h5></option>
