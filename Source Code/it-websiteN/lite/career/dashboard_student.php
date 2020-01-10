@@ -82,10 +82,10 @@
         </div>
         <div class = "card-body" align = "left" style = "padding : 20px;">
           <div class = "row apadding">
-            <div class = "col-md-4">
+            <div class = "col-md-4" align = "center">
               <?php
                 if (isset($career)) {
-                  echo '<img src = "images/career/character/' . $img . '">';
+                  echo '<img src = "images/career/character/' . $img . '" style = "width: 11.5em;">';
                 }
               ?>
             </div>

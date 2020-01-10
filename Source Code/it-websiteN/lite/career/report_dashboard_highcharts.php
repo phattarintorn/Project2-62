@@ -4,13 +4,6 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 
 <div class = "card">
-    <div class = "card-header">
-        <div class = "row">
-            <div class = "col-md-12" style = "padding-top: 1vh;">
-                <strong class="card-title">รายงานด้านจิตทักษะ</strong>
-            </div>
-        </div>
-    </div>
     <div class = "card-body" id = "html-content-holder" style = "padding: 20px; background-color: #FFFFFF;">
         <div id="containerSkill" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
