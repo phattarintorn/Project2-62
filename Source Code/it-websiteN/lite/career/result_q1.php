@@ -75,12 +75,12 @@
 					</tbody>
 				</table> 
 
-				<center>
+				<center id='career_Q1' >
 					<div class="row form-group">
 						<div class="col col-md-1"> 
 						</div>
 						<div class="col col-md-2">
-							<label for="text-input" class="form-control-label">อาชีพ</label>
+							<label for="text-input" class="form-control-label" >อาชีพ</label>
 						</div>
 						<div class="col col-md-8">
 							<select class="form-control" name="career" required=""> 
@@ -116,7 +116,7 @@
 		<?php 
 			if($count==0)
 				echo ("<script = 'javascript'>
-					document.getElementById('saveDataQ1').disabled = true;		
+					document.getElementById('career_Q1').remove();
 				</script>");
 		?>
 	</div>
