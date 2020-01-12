@@ -15,7 +15,11 @@
                 </tr>
             </thead>
             <?php
-                $STUDENT_ID = $_SESSION["USER_ID"];
+                if (isset($_REQUEST["id"])) {
+                    $STUDENT_ID = $_REQUEST["id"];
+                } else {
+                    $STUDENT_ID = $_SESSION["USER_ID"];
+                }
 
                 $sql = "SELECT TOTAL_SCORE FROM MAPPING_STUDENT_REPORT
                     WHERE STUDENT_ID = $STUDENT_ID GROUP BY CREATE_DATE";

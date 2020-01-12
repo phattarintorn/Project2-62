@@ -5,7 +5,11 @@
     die("Connection failed: " . $conn->connect_error);
   }
 
-  $STUDENT_ID = $_SESSION["USER_ID"];
+  if (isset($_REQUEST["id"])) {
+    $STUDENT_ID = $_REQUEST["id"];
+  } else {
+    $STUDENT_ID = $_SESSION["USER_ID"];
+  }
 
   $sql = "SELECT * FROM MAPPING_STUDENT_REPORT AS R
     LEFT JOIN M_GROUP_QUESTION AS Q ON R.QUESTION_ID = Q.QUESTION_ID
@@ -39,9 +43,11 @@
 </div>
 <?php
   } else {
-    echo ("<script = 'javascript'>
-				alert('ยังไม่เคยทำแบบประเมิณ กรุณาทำแบบประเมิณก่อน')
-				window.location.href='career-advice.php?career=tables_q';
-			</script>");
+    if (!isset($_REQUEST["id"])){
+      echo ("<script = 'javascript'>
+          alert('ยังไม่เคยทำแบบประเมิณ กรุณาทำแบบประเมิณก่อน')
+          window.location.href='career-advice.php?career=tables_q';
+        </script>");
+    }
   }
 ?>
