@@ -133,12 +133,12 @@
 				<hr>
 
 				<br>
-				<center>
+				<center id='career_Q2'>
 					<div class="row form-group">
 						<div class="col col-md-1"> 
 						</div>
 						<div class="col col-md-2">
-							<label for="text-input" class="form-control-label">อาชีพ</label>
+							<label for="text-input" class="form-control-label" >อาชีพ</label>
 						</div>
 						<div class="col col-md-8">
 							<select class="form-control" name="career" required=""> 
@@ -174,7 +174,9 @@
 		</div>
 		<?php 
 			if($count_C1==0 && $count_C2==0)
-				echo ("<script = 'javascript'>document.getElementById('saveDataQ2').disabled = true;</script>");
+				echo ("<script = 'javascript'>
+					document.getElementById('career_Q2').remove();
+				</script>");
 		?>
 	</div>
 </form> 
