@@ -22,7 +22,7 @@
                 }
 
                 $sql = "SELECT TOTAL_SCORE FROM MAPPING_STUDENT_REPORT
-                    WHERE STUDENT_ID = $STUDENT_ID GROUP BY CREATE_DATE";
+                    WHERE STUDENT_ID = $STUDENT_ID GROUP BY QUESTION_ID, CREATE_DATE";
 
                 $result = $conn->query($sql);
                 $total = 0;
