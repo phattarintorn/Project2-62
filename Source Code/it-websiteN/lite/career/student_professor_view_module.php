@@ -1,6 +1,11 @@
 <?php
 include("db/db.php");
 $id = $_REQUEST['id'];
+
+$sql = 'SELECT * FROM MAPPING_STUDENT_MODULE WHERE STUDENT_ID = ' . $id;
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
 ?>
 <div class="card">
     <div class="card-header">
@@ -91,3 +96,11 @@ $id = $_REQUEST['id'];
 
     <br>
 </div>
+<?php
+} else {
+    echo ("<script = 'javascript'>
+        alert('นักศึกษายังไม่ได้จัดแผนการเรียน')
+        window.location.href='javascript:history.back();';
+    </script>");
+}
+?>
